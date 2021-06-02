@@ -8,7 +8,7 @@ stages:
 
 before_script:
   - cd innovation
-  - npm install
+  - npm ci
 
 .setup:
     script:

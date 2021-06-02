@@ -41,3 +41,12 @@ export const Bars = styled(FaBars)`
         cursor: pointer;
     }
 `
+export const NavMenu = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: -20px;
+
+    @media screen and (max-width: 700px) {
+        display: none;
+    }
+`

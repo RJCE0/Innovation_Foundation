@@ -7,7 +7,7 @@ import {
     NavBtn,
     NavBtnLink
 } from './NavbarElements';
-const Navbar = () => {
+export const Navbar = () => {
     return (
         <>
             <Nav>
@@ -18,16 +18,16 @@ const Navbar = () => {
                 <NavMenu>
                     <NavLink to="/" activeStyle>
                         Home
-            </NavLink>
+                    </NavLink>
                     <NavLink to="/opportunities" activeStyle>
                         Opportunities
-            </NavLink>
+                    </NavLink>
                     <NavLink to="/student-blog" activeStyle>
                         Student Blog
-            </NavLink>
+                    </NavLink>
                     <NavLink to="/contact-us" activeStyle>
                         Contact Us
-            </NavLink>
+                    </NavLink>
                 </NavMenu>
                 <NavBtn>
                     <NavBtnLink to="/login"> Login </NavBtnLink>

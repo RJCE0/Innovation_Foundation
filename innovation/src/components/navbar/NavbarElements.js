@@ -50,3 +50,14 @@ export const NavMenu = styled.div`
         display: none;
     }
 `
+
+export const NavBtn = styled.nav`
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    @media screen and (max-width: 700px) {
+        display: none;
+    }
+`
+

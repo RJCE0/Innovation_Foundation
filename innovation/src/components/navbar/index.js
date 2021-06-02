@@ -7,14 +7,14 @@ import {
     NavBtn,
     NavBtnLink
 } from './NavbarElements';
-export const Navbar = () => {
+export const Navbar = (props) => {
     return (
         <>
             <Nav>
                 <NavLink to="/">
                     <h1> Innovation </h1>
                 </NavLink>
-                <Bars />
+                <Bars onClick={props.toggle} />
                 <NavMenu>
                     <NavLink to="/" activeStyle>
                         Home

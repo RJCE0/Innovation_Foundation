@@ -9,6 +9,7 @@ before_script:
 stages:
   - build
   - test
+  - staging
   - deploy
 
 cache:
@@ -27,7 +28,14 @@ test-job:
     - npm install
     - CI=true npm test
 
+stage-heroku:
+  stage: staging
+  script:
+    - dpl --provider=heroku --app=$HEROKU_STAGE_NAME --api-key=$HEROKU_API_KEY
+
 deploy-heroku:
   stage: deploy
   script:
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+  only:
+    - master

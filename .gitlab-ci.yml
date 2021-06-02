@@ -8,6 +8,7 @@ stages:
 
 before_script:
   - cd innovation
+  - npm install
 
 .setup:
     script:
@@ -18,13 +19,11 @@ before_script:
 build-job:
   stage: build
   script:
-    - npm install
     - npm run build
 
 test-job:
   stage: test
   script:
-    - npm install
     - CI=true npm test
 
 stage-heroku:

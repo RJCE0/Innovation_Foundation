@@ -1,7 +1,7 @@
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Home } from './pages';
-import { OpportunityCard } from './components/opportunity-card'
+import { OpportunityCard } from './components/opportunity-card';
 
 function App() {
   return (

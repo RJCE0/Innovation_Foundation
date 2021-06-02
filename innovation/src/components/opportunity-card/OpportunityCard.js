@@ -1,3 +1,4 @@
+import Card from 'react-bootstrap/Card'
 class OpportunityCard extends React.Component {
     /* Opportunity cards should have a:
         - description
@@ -10,6 +11,6 @@ class OpportunityCard extends React.Component {
     }
 
     render() {
-        return 
+        return null
     }
 }

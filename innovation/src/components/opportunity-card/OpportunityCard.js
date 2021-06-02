@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card'
-class OpportunityCard extends React.Component {
+class opportunityCard extends React.Component {
     /* Opportunity cards should have a:
         - description
         - date

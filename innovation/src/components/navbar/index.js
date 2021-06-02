@@ -4,7 +4,6 @@ import {
     NavLink,
     Bars,
     NavMenu,
-    NavLink,
     NavBtn,
     NavBtnLink
 } from './NavbarElements';

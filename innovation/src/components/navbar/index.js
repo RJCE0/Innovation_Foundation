@@ -6,7 +6,7 @@ import {
     NavMenu,
     NavBtn,
     NavBtnLink
-} from './NavbarElements';
+} from './navbarElements';
 export const Navbar = (props) => {
     return (
         <>
@@ -16,16 +16,16 @@ export const Navbar = (props) => {
                 </NavLink>
                 <Bars onClick={props.toggle} />
                 <NavMenu>
-                    <NavLink to="/" activeStyle>
+                    <NavLink to="/">
                         Home
                     </NavLink>
-                    <NavLink to="/internships" activeStyle>
+                    <NavLink to="/internships">
                         Internships
                     </NavLink>
-                    <NavLink to="/mentoships" activeStyle>
+                    <NavLink to="/mentoships">
                         Mentorships
                     </NavLink>
-                    <NavLink to="/student-blog" activeStyle>
+                    <NavLink to="/student-blog">
                         Student Blog
                     </NavLink>
                 </NavMenu>

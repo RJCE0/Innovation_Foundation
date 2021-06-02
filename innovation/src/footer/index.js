@@ -1,12 +1,14 @@
 import React from 'react'
-import {FooterContainer, FooterWraps, FooterLinksContainer, FooterLinksWraps,
-     FooterLinkItems, FooterLinkTitle, FooterLink, SocialMedia, SocialMediaWrap, 
-     SocialLogo, WebsiteRights} from  './FooterElements';
+import {
+    FooterContainer, FooterWraps, FooterLinksContainer, FooterLinksWraps,
+    FooterLinkItems, FooterLinkTitle, FooterLink, SocialMedia, SocialMediaWrap,
+    SocialLogo, WebsiteRights
+} from './footerElements';
 
 const Footer = () => {
     return (
         <FooterContainer>
-            <FooterWraps> 
+            <FooterWraps>
                 <FooterLinksContainer>
                     <FooterLinksWraps>
                         <FooterLinkItems>
@@ -47,11 +49,11 @@ const Footer = () => {
                 </FooterLinksContainer>
                 <SocialMedia>
                     <SocialMediaWrap>
-                        <SocialLogo to='/'> 
-                        Innovation 
+                        <SocialLogo to='/'>
+                            Innovation
                         </SocialLogo>
-                        <WebsiteRights> Innovation Inc © {new Date().getFullYear()} 
-                        All rights reserved. 
+                        <WebsiteRights> Innovation Inc © {new Date().getFullYear()}
+                            All rights reserved.
                         </WebsiteRights>
                     </SocialMediaWrap>
                 </SocialMedia>

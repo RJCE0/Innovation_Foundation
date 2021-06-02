@@ -19,18 +19,18 @@ export const Navbar = () => {
                     <NavLink to="/" activeStyle>
                         Home
                     </NavLink>
-                    <NavLink to="/opportunities" activeStyle>
-                        Opportunities
+                    <NavLink to="/internships" activeStyle>
+                        Internships
+                    </NavLink>
+                    <NavLink to="/mentoships" activeStyle>
+                        Mentorships
                     </NavLink>
                     <NavLink to="/student-blog" activeStyle>
                         Student Blog
                     </NavLink>
-                    <NavLink to="/contact-us" activeStyle>
-                        Contact Us
-                    </NavLink>
                 </NavMenu>
                 <NavBtn>
-                    <NavBtnLink to="/login"> Login </NavBtnLink>
+                    <NavBtnLink to="/login"> Sign in </NavBtnLink>
                 </NavBtn>
             </Nav>
         </>

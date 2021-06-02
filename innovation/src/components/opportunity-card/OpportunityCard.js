@@ -30,3 +30,5 @@ class OpportunityCard extends React.Component {
         );
     }
 }
+
+export default OpportunityCard;

@@ -6,7 +6,7 @@ export const FooterContainer = styled.footer`
 `
 
 export const FooterWraps = styled.div`
-    padding: 48px  24px;
+    padding: 48px 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +19,7 @@ export const FooterLinksContainer = styled.div`
     display: flex;
     justify-content: center;
 
-    @media screen and (max-width: 820px){
+    @media screen and (max-width: 700px){
         padding-top: 32px;
     }
 `
@@ -27,7 +27,7 @@ export const FooterLinksContainer = styled.div`
 export const FooterLinksWraps = styled.div`
     display: flex;
 
-    @media screen and (max-width: 820px){
+    @media screen and (max-width: 700px){
         flex-direction: column;
     }
 `
@@ -42,7 +42,7 @@ export const FooterLinkItems = styled.div`
     box-sizing: border-box;
     color: #fff;
 
-    @media screen and (max-width: 420px){
+    @media screen and (max-width: 400px){
         margin: 0;
         padding: 10px;
         width: 100%;
@@ -60,7 +60,7 @@ export const FooterLink = styled(Link)`
     font-size: 14px;
 
     &:hover {
-        color: #01bf71;
+        color: #256de1;
         transition: 0.3s ease-out
     }
 `
@@ -76,7 +76,7 @@ export const SocialMediaWrap = styled.div`
     max-width: 1100px;
     margin: 40px auto 0 auto;
 
-    @media screen and (max-width: 820px){
+    @media screen and (max-width: 700px){
         flex-direction: column;
     }
 `

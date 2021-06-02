@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar } from '../components/navbar'
 import { Sidebar } from '../components/sidebar'
-import Footer from '../footer';
+import Footer from '../components/footer';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false)

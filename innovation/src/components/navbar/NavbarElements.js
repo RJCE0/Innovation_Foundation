@@ -60,4 +60,8 @@ export const NavBtn = styled.nav`
         display: none;
     }
 `
-
+export const NavBtnLink = styled(Link)`
+    border-radius: 3.5px;
+    background: #;
+    color: #460eed;
+`

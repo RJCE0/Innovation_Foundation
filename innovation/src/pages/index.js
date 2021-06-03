@@ -21,7 +21,7 @@ export const Home = () => {
           title='Internship 1'
           desc='Example internship 1.'
           date='June 3rd 2021'
-          salary='£21 p/w'
+          salary='£7 p/h'
           location='London'
           favs='3'
         />
@@ -29,7 +29,7 @@ export const Home = () => {
           title='Internship 2'
           desc='Example internship 2.'
           date='June 3rd 2021'
-          salary='£21 p/w'
+          salary='£10 p/h'
           location='Amsterdam'
           favs='1'
         />
@@ -37,7 +37,7 @@ export const Home = () => {
           title='Internship 3'
           desc='Example Internship 3.'
           date='June 3rd 2021'
-          salary='£21 p/w'
+          salary='£15 p/h'
           location='Amsterdam'
           favs='2'
         />

@@ -28,7 +28,7 @@ class OpportunityCard extends React.Component {
                     </Card.Text>
                     <Buttons>
                         <Button backgroundColor='#256de1'>Apply</Button>
-                        <Button backgroundColor='#dabb0e'>Favourite</Button>
+                        <Button backgroundColor='#dabb0e'>Favourite ({this.props.favs})</Button>
                     </Buttons>
                 </Card.Body>
             </Card>

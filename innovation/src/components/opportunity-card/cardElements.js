@@ -10,12 +10,16 @@ export const OpportunityCardGroup = styled.div`
 export const Buttons = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 8px;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `
 
 export const Button = styled.button`
   padding: 8px;
   border: none;
-  margin-right: 8px;
   border-radius: 18px;
   background-color: ${props => props.backgroundColor};
   color: white;

@@ -4,12 +4,6 @@ import {
     FooterLinkItems, FooterLinkTitle, FooterLink, SocialMediaWrap,
     WebsiteRights, SocialMediaLink
 } from './footerElements';
-// import snapLogo from '../../assets/images/snapchat-logo.png';
-// import instaLogo from '../../assets/images/instagram-logo.png';
-// import twitterLogo from '../../assets/images/twitter-logo.png';
-// import gPlusLogo from '../../assets/images/google-plus-logo.png';
-// import { FiTwitter } from 'react-icons/fi'
-// import { AiFillAlert } from "react-icons/ai";
 import { SocialIcon } from 'react-social-icons';
 
 const Footer = () => {

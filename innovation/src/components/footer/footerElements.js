@@ -84,16 +84,18 @@ export const SocialLogo = styled(Link)`
     color: #fff;
     justify-self: start;
     cursor: pointer;
-    text-decoration: none;
     font-size: 1.5rem;
+    text-decoration: none;
     display: flex;
     align-items: center;
     margin-bottom: 16px;
     font-weight: bold;
 `
 export const WebsiteRights = styled.small`
+    display: flex;
     color: #fff;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    padding: 0.2rem 0;
 `
 
 

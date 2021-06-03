@@ -74,11 +74,6 @@ export const SocialMediaWrap = styled.div`
     max-width: 1100px;
     margin: 25px auto 25px auto;
     gap: 10px;
-
-    @media screen and (max-width: 700px){
-        flex-direction: column;
-    }
-
 `
 
 export const SocialMediaLink = styled(Link)``

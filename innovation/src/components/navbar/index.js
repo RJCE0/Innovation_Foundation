@@ -7,12 +7,13 @@ import {
     NavBtn,
     NavBtnLink
 } from './navbarElements';
+import logo from '../../assets/images/innovation-logo.png'
 export const Navbar = (props) => {
     return (
         <>
             <Nav>
                 <NavLink to="/">
-                    <h1> Innovation </h1>
+                    <img src={logo} alt='logo' width='65px' height='65px'/> 
                 </NavLink>
                 <Bars onClick={props.toggle} />
                 <NavMenu>

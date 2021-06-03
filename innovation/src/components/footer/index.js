@@ -12,38 +12,23 @@ const Footer = () => {
                 <FooterLinksContainer>
                     <FooterLinksWraps>
                         <FooterLinkItems>
-                            <FooterLinkTitle>Title1</FooterLinkTitle>
-                            <FooterLink to='/link'>link1</FooterLink>
-                            <FooterLink to='/link'>link2</FooterLink>
-                            <FooterLink to='/link'>link3</FooterLink>
-                            <FooterLink to='/link'>link4</FooterLink>
-                            <FooterLink to='/link'>link5</FooterLink>
+                            <FooterLinkTitle>Students</FooterLinkTitle>
+                            <FooterLink to='/link'>internships</FooterLink>
+                            <FooterLink to='/link'>mentorships</FooterLink>
+                            <FooterLink to='/link'>student Blog</FooterLink>
                         </FooterLinkItems>
                         <FooterLinkItems>
-                            <FooterLinkTitle>Title2 </FooterLinkTitle>
-                            <FooterLink to='/link'>link6</FooterLink>
-                            <FooterLink to='/link'>link7</FooterLink>
-                            <FooterLink to='/link'>link8</FooterLink>
-                            <FooterLink to='/link'>link9</FooterLink>
-                            <FooterLink to='/link'>link10</FooterLink>
-                        </FooterLinkItems>
-                    </FooterLinksWraps>
-                    <FooterLinksWraps>
-                        <FooterLinkItems>
-                            <FooterLinkTitle>Title3</FooterLinkTitle>
-                            <FooterLink to='/link'>link1</FooterLink>
-                            <FooterLink to='/link'>link2</FooterLink>
-                            <FooterLink to='/link'>link3</FooterLink>
-                            <FooterLink to='/link'>link4</FooterLink>
-                            <FooterLink to='/link'>link5</FooterLink>
+                            <FooterLinkTitle>Business </FooterLinkTitle>
+                            <FooterLink to='/link'>real-time</FooterLink>
+                            <FooterLink to='/link'>demographic</FooterLink>
+                            <FooterLink to='/link'>behaviours</FooterLink>
+                            <FooterLink to='/link'>conversions</FooterLink>
                         </FooterLinkItems>
                         <FooterLinkItems>
-                            <FooterLinkTitle>Title4 </FooterLinkTitle>
-                            <FooterLink to='/link'>link6</FooterLink>
-                            <FooterLink to='/link'>link7</FooterLink>
-                            <FooterLink to='/link'>link8</FooterLink>
-                            <FooterLink to='/link'>link9</FooterLink>
-                            <FooterLink to='/link'>link10</FooterLink>
+                            <FooterLinkTitle>About Us</FooterLinkTitle>
+                            <FooterLink to='/link'>our aims</FooterLink>
+                            <FooterLink to='/link'>team</FooterLink>
+                            <FooterLink to='/link'>contact us</FooterLink>
                         </FooterLinkItems>
                     </FooterLinksWraps>
                 </FooterLinksContainer>
@@ -52,8 +37,8 @@ const Footer = () => {
                         <SocialLogo to='/'>
                             Innovation
                         </SocialLogo>
-                        <WebsiteRights> Innovation Inc © {new Date().getFullYear()} 
-                            All rights reserved.
+                        <WebsiteRights> Innovation Inc © {new Date().getFullYear()}{"\t"}
+                             All rights reserved.
                         </WebsiteRights>
                     </SocialMediaWrap>
                 </SocialMedia>

@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 
 export const FooterContainer = styled.footer`
     background-color: #101522;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 `
 
 export const FooterWraps = styled.div`
@@ -66,7 +70,12 @@ export const FooterLink = styled(Link)`
 `
 
 export const SocialMedia = styled.section`
-    max-width: 100px;
+    position: fixed;
+    margin-left: 10px;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 10px;
+    max-width: 270px;
     width: 100%;
 `
 export const SocialMediaWrap = styled.div`
@@ -88,14 +97,13 @@ export const SocialLogo = styled(Link)`
     text-decoration: none;
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    margin-right: 10px;
+    margin-bottom: 5px;
     font-weight: bold;
 `
 export const WebsiteRights = styled.small`
-    display: flex;
     color: #fff;
-    margin-bottom: 12px;
-    padding: 0.2rem 0;
+    margin-bottom: 0px;
 `
 
 

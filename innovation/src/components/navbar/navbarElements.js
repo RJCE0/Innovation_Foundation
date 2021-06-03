@@ -2,6 +2,15 @@ import styled from 'styled-components'
 import { Link as LinkR } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 
+export const Logo = styled.img`
+    width: 55px;
+    height: 55px;
+`
+
+export const LogoLink = styled(LinkR)`
+    height:100%
+`
+
 export const Nav = styled.nav`
     background: #000;
     height: 75px;
@@ -23,7 +32,6 @@ export const NavLink = styled(LinkR)`
     &:active {
         border-bottom: #256de1 solid;
     }
-
 
     &:hover {
         color: #256de1;

@@ -71,17 +71,18 @@ export const SocialMediaWrap = styled.div`
     align-items: center;
     max-width: 1100px;
     margin: 25px auto 25px auto;
+    gap: 10px;
 
     @media screen and (max-width: 700px){
         flex-direction: column;
     }
 `
-export const SocialLogo = styled.img`
-    width: 55px;
-    height: 55px;
-`
+// export const SocialLogo = styled(AiFillAlert)`
+//     color: white;
+//     transform: scale(2);
+// `
 export const SocialMediaLink = styled(Link)`
-
+    //filter: greyscale(50%)
 `
 
 export const WebsiteRights = styled.small`

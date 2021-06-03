@@ -23,6 +23,7 @@ export const Home = () => {
           date='June 3rd 2021'
           salary='£21 p/w'
           location='London'
+          favs='3'
         />
         <OpportunityCard
           title='Internship 2'
@@ -30,6 +31,15 @@ export const Home = () => {
           date='June 3rd 2021'
           salary='£21 p/w'
           location='Amsterdam'
+          favs='1'
+        />
+        <OpportunityCard
+          title='Internship 3'
+          desc='Example Internship 3.'
+          date='June 3rd 2021'
+          salary='£21 p/w'
+          location='Amsterdam'
+          favs='2'
         />
       </OpportunityCardGroup>
       <Footer />

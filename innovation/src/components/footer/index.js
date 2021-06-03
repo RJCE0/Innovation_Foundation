@@ -2,9 +2,15 @@ import React from 'react'
 import {
     FooterContainer, FooterWraps, FooterLinksWraps,
     FooterLinkItems, FooterLinkTitle, FooterLink, SocialMediaWrap,
-    SocialLogo, WebsiteRights, SocialMediaLink
+    WebsiteRights, SocialMediaLink
 } from './footerElements';
-import logo from '../../assets/images/snapchat-logo.png'
+// import snapLogo from '../../assets/images/snapchat-logo.png';
+// import instaLogo from '../../assets/images/instagram-logo.png';
+// import twitterLogo from '../../assets/images/twitter-logo.png';
+// import gPlusLogo from '../../assets/images/google-plus-logo.png';
+// import { FiTwitter } from 'react-icons/fi'
+// import { AiFillAlert } from "react-icons/ai";
+import { SocialIcon } from 'react-social-icons';
 
 const Footer = () => {
     return (
@@ -33,14 +39,19 @@ const Footer = () => {
                 </FooterLinksWraps>
                 <SocialMediaWrap>
                     <SocialMediaLink>
-                        <SocialLogo src={logo} />
+                        <SocialIcon network="snapchat" bgColor="white" />
                     </SocialMediaLink>
                     <SocialMediaLink>
-                        <SocialLogo src={logo} />
+                        <SocialIcon network="twitter" bgColor="white" />
+                    </SocialMediaLink>
+                    <SocialMediaLink>
+                        <SocialIcon network="instagram" bgColor="white" />
+                    </SocialMediaLink>
+                    <SocialMediaLink>
+                        <SocialIcon network="google" bgColor="white" />
                     </SocialMediaLink>
                 </SocialMediaWrap>
-                <WebsiteRights> Innovation Inc © {new Date().getFullYear()}{"\t"}
-                    All rights reserved.
+                <WebsiteRights> Innovation Inc © {new Date().getFullYear()}{"\t"} All rights reserved.
                 </WebsiteRights>
             </FooterWraps>
         </FooterContainer>

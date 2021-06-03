@@ -2,32 +2,25 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const FooterContainer = styled.footer`
-    background-color: #101522;
-    position: fixed;
+    background-color: #000;
     left: 0;
     bottom: 0;
     width: 100%;
 `
 
 export const FooterWraps = styled.div`
-    padding: 48px 24px;
     display: flex;
+    padding: 15px 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 1100px;
     margin: 0 auto;
-`
-
-export const FooterLinksContainer = styled.div`
-    display: flex;
-    justify-content: center;
 
     @media screen and (max-width: 700px){
         padding-top: 32px;
     }
 `
-
 export const FooterLinksWraps = styled.div`
     display: flex;
 
@@ -39,12 +32,14 @@ export const FooterLinksWraps = styled.div`
 export const FooterLinkItems = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin: 16px;
-    text-align: left;
-    width: 160px;
+    align-items: center;
     box-sizing: border-box;
+    width: 150px;
     color: #fff;
+
+    @media screen and (max-width: 700px) {
+        margin-bottom: 20px;
+    }
 
     @media screen and (max-width: 400px){
         margin: 0;
@@ -54,7 +49,8 @@ export const FooterLinkItems = styled.div`
 `
 
 export const FooterLinkTitle = styled.h1`
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 16px;
 `
 export const FooterLink = styled(Link)`
@@ -62,48 +58,34 @@ export const FooterLink = styled(Link)`
     text-decoration: none;
     margin-bottom: 0.5rem;
     font-size: 14px;
+    transition: 0.15s ease-in-out;
 
     &:hover {
         color: #256de1;
-        transition: 0.3s ease-out
+        transition: 0.15s ease-in-out
     }
-`
-
-export const SocialMedia = styled.section`
-    position: fixed;
-    margin-left: 10px;
-    left: 0;
-    bottom: 0;
-    margin-bottom: 10px;
-    max-width: 270px;
-    width: 100%;
 `
 export const SocialMediaWrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1100px;
-    margin: 40px auto 0 auto;
+    margin: 25px auto 25px auto;
 
     @media screen and (max-width: 700px){
         flex-direction: column;
     }
 `
-export const SocialLogo = styled(Link)`
-    color: #fff;
-    justify-self: start;
-    cursor: pointer;
-    font-size: 1.5rem;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    font-weight: bold;
+export const SocialLogo = styled.img`
+    width: 55px;
+    height: 55px;
 `
+export const SocialMediaLink = styled(Link)`
+
+`
+
 export const WebsiteRights = styled.small`
     color: #fff;
-    margin-bottom: 0px;
 `
 
 

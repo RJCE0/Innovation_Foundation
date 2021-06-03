@@ -3,7 +3,7 @@ import { Navbar } from '../components/navbar'
 import { Sidebar } from '../components/sidebar'
 import Footer from '../components/footer';
 import OpportunityCard from '../components/opportunity-card/OpportunityCard';
-import { OpportunityCardGroup } from '../components/opportunity-card/opportunityCardGroup';
+import { OpportunityCardGroup } from '../components/opportunity-card/cardElements';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false)

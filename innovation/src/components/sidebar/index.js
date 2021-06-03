@@ -20,8 +20,10 @@ export const Sidebar = (props) => {
         <SidebarLink to='/student-blog'>
           Student Blog
         </SidebarLink>
+        <SidebarLink to='/signin'>
+          Sign In
+        </SidebarLink>
       </SidebarMenu>
-      {/* TODO: Add button for sign ins / sign ups. */}
     </SidebarContainer>
   );
 }

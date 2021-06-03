@@ -81,9 +81,7 @@ export const SocialMediaWrap = styled.div`
 
 `
 
-export const SocialMediaLink = styled(Link)`
-
-`
+export const SocialMediaLink = styled(Link)``
 
 export const WebsiteRights = styled.small`
     color: #fff;

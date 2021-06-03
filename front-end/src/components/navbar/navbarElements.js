@@ -24,6 +24,7 @@ export const NavLink = styled(LinkR)`
     color: #fff;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
@@ -57,6 +58,7 @@ export const Bars = styled(FaBars)`
 export const NavMenu = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-right: -20px;
 
     @media screen and (max-width: 700px) {
@@ -67,6 +69,7 @@ export const NavMenu = styled.div`
 export const NavBtn = styled.nav`
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-right: 20px;
 
     @media screen and (max-width: 700px) {

@@ -10,7 +10,8 @@ export const FooterContainer = styled.footer`
 
 export const FooterWraps = styled.div`
     display: flex;
-    padding: 15px 0;
+    padding-top: 25px;
+    padding-bottom: 20px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -26,6 +27,7 @@ export const FooterLinksWraps = styled.div`
 
     @media screen and (max-width: 700px){
         flex-direction: column;
+
     }
 `
 
@@ -76,13 +78,11 @@ export const SocialMediaWrap = styled.div`
     @media screen and (max-width: 700px){
         flex-direction: column;
     }
+
 `
-// export const SocialLogo = styled(AiFillAlert)`
-//     color: white;
-//     transform: scale(2);
-// `
+
 export const SocialMediaLink = styled(Link)`
-    //filter: greyscale(50%)
+
 `
 
 export const WebsiteRights = styled.small`

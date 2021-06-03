@@ -9,6 +9,7 @@ export const SidebarContainer = styled.aside`
   height: 100%;
   background: black;
   align-items: center;
+  justify-content: center;
   display: grid;
   left: 0;
   transition: 0.3s ease-in-out;
@@ -50,6 +51,8 @@ export const SidebarLink = styled(LinkR)`
   transition: 0.2s ease-in-out;
   color: white;
   cursor: pointer;
+  padding-left: 25px;
+  padding-right: 25px;
 
   &:hover {
     color: #256de1;

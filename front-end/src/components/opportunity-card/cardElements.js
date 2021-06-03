@@ -2,11 +2,18 @@ import styled from "styled-components"
 
 export const OpportunityCardGroup = styled.div`
   display: flex;
-  justify-content: center;
   gap: 10px;
   padding-top: 25px;
   padding-bottom: 25px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `
+
 export const Buttons = styled.div`
   display: flex;
   flex-direction: row;

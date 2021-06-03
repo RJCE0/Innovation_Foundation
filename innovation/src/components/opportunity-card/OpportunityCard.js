@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card'
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 class OpportunityCard extends React.Component {
     /* Opportunity cards should have a:
         - description
@@ -11,10 +12,10 @@ class OpportunityCard extends React.Component {
 
     render() {
         return (
-            <Card border='dark' bg='danger' style={{
-                width: '18rem'
+                <Card border='light' text = 'light' bg='dark' style={{
+                width: '18rem', borderRadius: '20px'
             }}>
-                <Card.Img variant="top" src={this.props.image_src} />
+                <Card.Img variant="top" alt='Example pic' src={this.props.image_src} />
                 <Card.Body>
                     <Card.Title> {this.props.title}</Card.Title>
                     <Card.Text>

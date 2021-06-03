@@ -52,7 +52,7 @@ const Footer = () => {
                         <SocialLogo to='/'>
                             Innovation
                         </SocialLogo>
-                        <WebsiteRights> Innovation Inc © {new Date().getFullYear()}
+                        <WebsiteRights> Innovation Inc © {new Date().getFullYear()} 
                             All rights reserved.
                         </WebsiteRights>
                     </SocialMediaWrap>

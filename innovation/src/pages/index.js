@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Navbar } from '../components/navbar'
 import { Sidebar } from '../components/sidebar'
-import Footer from '../components/footer';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +13,7 @@ export const Home = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggleIsOpen} />
       <Navbar toggle={toggleIsOpen} />
-      <Footer />
+
     </>
   )
 }

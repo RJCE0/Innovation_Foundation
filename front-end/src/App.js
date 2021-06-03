@@ -1,12 +1,17 @@
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Home } from './pages';
-import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { NewHome } from './pages/index';
+import { Home } from './pages/internships';
+import React from 'react';
 
 function App() {
+
   return (
     <Router>
-      <Home />
+      <Switch>
+        <Route path='/' component={NewHome} exact/>
+        <Route path='/internships' component={Home} exact/>
+      </Switch>
     </Router>
   );
 }

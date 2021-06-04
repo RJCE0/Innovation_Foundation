@@ -8,7 +8,17 @@ export const Logo = styled.img`
 `
 
 export const LogoLink = styled(LinkR)`
-    height:100%
+    height:100%;
+    transition: all 0.5s ease-in-out;
+    justify-self: flex-start;
+    cursor: pointer;
+    align-items: center;
+    margin-left: 24px;
+
+    &:hover {
+        transform: rotate(360deg);
+        transition: all 0.5s ease-in-out;
+    }
 `
 
 export const Nav = styled.nav`

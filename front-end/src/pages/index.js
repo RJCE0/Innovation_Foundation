@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Navbar } from '../components/navbar'
 import { Sidebar } from '../components/sidebar'
 import Footer from '../components/footer';
+import { WelcomeSection } from '../components/welcome-section/index'
 // import firebase from "../firebase"
 
 export const NewHome = () => {
@@ -16,9 +17,7 @@ export const NewHome = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggleIsOpen} />
       <Navbar toggle={toggleIsOpen} />
-      <div style={{ display: 'flex', height: '500px', justifyContent: 'center', alignItems: 'center' }}>
-        <h1>Welcome!</h1>
-      </div>
+      <WelcomeSection />
       <Footer />
     </>
   );

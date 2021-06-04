@@ -8,7 +8,7 @@ stages:
 
 before_script:
   - cd front-end
-  - npm ci
+  - yarn install
 
 .setup:
     script:
@@ -19,12 +19,12 @@ before_script:
 build-job:
   stage: build
   script:
-    - npm run build
+    - yarn run build
 
 test-job:
   stage: test
   script:
-    - CI=true npm test
+    - CI=true yarn test
 
 stage-heroku:
   stage: staging

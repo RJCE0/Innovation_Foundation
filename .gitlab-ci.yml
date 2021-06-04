@@ -1,41 +1,41 @@
 image: node:latest
 
-before_script:
-  - apt-get update -qy
-  - apt-get install -y ruby-dev
-  - gem install dpl
-  - cd innovation
-
 stages:
   - build
   - test
   - staging
   - deploy
 
-cache:
-  paths:
-    - node_modules/
+before_script:
+  - cd front-end
+  - yarn install
+
+.setup:
+    script:
+      - apt-get update -qy
+      - apt-get install -y ruby-dev
+      - gem install dpl
 
 build-job:
   stage: build
   script:
-    - npm install
-    - npm run build
+    - yarn run build
 
 test-job:
   stage: test
   script:
-    - npm install
-    - CI=true npm test
+    - CI=true yarn test
 
 stage-heroku:
   stage: staging
   script:
+    - !reference [.setup, script]
     - dpl --provider=heroku --app=$HEROKU_STAGE_NAME --api-key=$HEROKU_API_KEY
 
 deploy-heroku:
   stage: deploy
   script:
+    - !reference [.setup, script]
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
   only:
     - master

@@ -1,0 +1,31 @@
+/* Regular fonts */
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu'), url('./assets/fonts/Ubuntu-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+
+/* Curly fonts */
+
+@font-face {
+    font-family: 'Lobster';
+    src: local('Lobster'), url('./assets/fonts/Lobster-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Concert One';
+    src: local('Concert One'), url('./assets/fonts/ConcertOne-Regular.ttf') format('truetype');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}

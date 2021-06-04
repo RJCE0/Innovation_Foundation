@@ -25,7 +25,7 @@ export const Navbar = (props) => {
                     <NavLink to="/internships">
                         Internships
                     </NavLink>
-                    <NavLink to="/mentoships">
+                    <NavLink to="/mentorships">
                         Mentorships
                     </NavLink>
                     <NavLink to="/student-blog">

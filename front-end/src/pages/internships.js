@@ -29,7 +29,7 @@ export const Home = () => {
   
   useEffect(() => {
       getInternships();
-  }, []);
+  });
 
   return (
     <>

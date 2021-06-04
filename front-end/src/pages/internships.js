@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Navbar } from '../components/navbar'
 import { Sidebar } from '../components/sidebar'
 import Footer from '../components/footer';
-import OpportunityCard from '../components/opportunity-card/OpportunityCard';
-import { OpportunityCardGroup } from '../components/opportunity-card/cardElements';
-import firebase from '../firebase'
+import firebase from '../firebase';
+import { OppCard } from '../components/opportunity-card/opportunityCard';
+import { OppContainer, OppWrapper, OppH1 } from '../components/opportunity-card/oppCardElements'
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,7 +26,7 @@ export const Home = () => {
       setInternships(items);
       });
   }
-  
+
   useEffect(() => {
       getInternships();
   });
@@ -35,18 +35,20 @@ export const Home = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggleIsOpen} />
       <Navbar toggle={toggleIsOpen} />
-      <OpportunityCardGroup>
+      <OppContainer>
+        <OppH1>Opportunities</OppH1>
+        <OppWrapper>
         {internships.map((internship) => (
-           <OpportunityCard
+          <OppCard
            title={internship.title}
-           desc={internship.description}
+           description={internship.description}
            date={internship.date}
-           salary={internship.pay}
+           pay={internship.pay}
            location={internship.location}
            favs={internship.favourites}
-         />
-        ))}
-      </OpportunityCardGroup>
+          />))}
+        </OppWrapper>
+      </OppContainer>
       <Footer />
     </>
   )

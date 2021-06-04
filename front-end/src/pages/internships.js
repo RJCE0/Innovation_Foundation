@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navbar } from '../components/navbar'
 import { Sidebar } from '../components/sidebar'
 import Footer from '../components/footer';
 import OpportunityCard from '../components/opportunity-card/OpportunityCard';
 import { OpportunityCardGroup } from '../components/opportunity-card/cardElements';
+import firebase from '../firebase'
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,35 +13,39 @@ export const Home = () => {
     setIsOpen(!isOpen);
   }
 
+  const [internships, setInternships] = useState([]);
+  const ref = firebase.firestore().collection("opportunities");
+  console.log(ref);
+  
+  function getInternships(){
+      ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+      });
+      setInternships(items);
+      });
+  }
+  
+  useEffect(() => {
+      getInternships();
+  }, []);
+
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggleIsOpen} />
       <Navbar toggle={toggleIsOpen} />
       <OpportunityCardGroup>
-        <OpportunityCard
-          title='Internship 1'
-          desc='Example internship 1.'
-          date='June 3rd 2021'
-          salary='£7 p/h'
-          location='London'
-          favs='3'
-        />
-        <OpportunityCard
-          title='Internship 2'
-          desc='Example internship 2.'
-          date='June 3rd 2021'
-          salary='£10 p/h'
-          location='Amsterdam'
-          favs='1'
-        />
-        <OpportunityCard
-          title='Internship 3'
-          desc='Example Internship 3.'
-          date='June 3rd 2021'
-          salary='£15 p/h'
-          location='Amsterdam'
-          favs='2'
-        />
+        {internships.map((internship) => (
+           <OpportunityCard
+           title={internship.title}
+           desc={internship.description}
+           date={internship.date}
+           salary={internship.pay}
+           location={internship.location}
+           favs={internship.favourites}
+         />
+        ))}
       </OpportunityCardGroup>
       <Footer />
     </>

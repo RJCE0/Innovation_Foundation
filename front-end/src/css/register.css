@@ -1,0 +1,36 @@
+#register-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+#title-header {
+  /* background-color: red; */
+  text-align: center;
+}
+#title-header .title {
+  font-size: 3em;
+  display: block;
+  font-family: "Muli";
+  color: #338cd1;
+}
+#title-header .sub-title {
+  display: block;
+  color: #6facdc;
+  font-size: 25px;
+}
+
+#signup-container {
+  position: relative;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #f9f9f9;
+  width: 25vw;
+  height: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}

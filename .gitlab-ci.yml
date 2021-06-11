@@ -7,8 +7,7 @@ stages:
   - deploy
 
 before_script:
-  - cd front-end
-  - yarn install
+  - yarn installs
 
 .setup:
     script:
@@ -19,23 +18,36 @@ before_script:
 build-job:
   stage: build
   script:
-    - yarn run build
+    - yarn build
+  needs: []
 
 test-job:
   stage: test
   script:
     - CI=true yarn test
+  needs: []
+
+stage-server:
+  stage: staging
+  before_script: []
+  script:
+    - !reference [.setup, script]
+    - dpl --provider=heroku --app=$HEROKU_SERVER_NAME --api-key=$HEROKU_API_KEY
 
 stage-heroku:
   stage: staging
+  before_script: []
   script:
     - !reference [.setup, script]
+    - cd front-end
     - dpl --provider=heroku --app=$HEROKU_STAGE_NAME --api-key=$HEROKU_API_KEY
 
 deploy-heroku:
   stage: deploy
+  before_script: []
   script:
     - !reference [.setup, script]
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
   only:
     - master
+

@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+.menu-item {
+  margin: 5px 5px;
+  user-select: none;
+  cursor: pointer;
+  border: 1px transparent solid;
+}
+
+.menu-item-wrapper {
+  border: 1px transparent solid;
+  margin: 0 10px 0 10px;
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.scroll-menu-arrow--disabled {
+  visibility: hidden;
+}

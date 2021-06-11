@@ -1,0 +1,46 @@
+#header-main-content .main-searchSlider {
+  /*background-color: red;*/
+  text-align: center;
+}
+
+#header-contentContainer .search-wrapper {
+  position: relative;
+  width: 50vw;
+  display: block;
+  margin: 0 auto;
+}
+#header-main-content .main-searchSlider #search-page-box {
+  position: relative;
+  width: 50vw;
+  padding: 12px;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Muli";
+  padding-right: 70px;
+  box-sizing: border-box;
+  /*font-family: 'Nunito';*/
+}
+
+#main-search-btn:hover {
+  box-shadow: none;
+}
+#main-search-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  /*background-color: red;*/
+  background-color: transparent;
+  padding: 0;
+  align-items: center;
+}
+#main-search-btn img {
+  display: block;
+  margin: 0 auto;
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  /*background-color: green;*/
+}

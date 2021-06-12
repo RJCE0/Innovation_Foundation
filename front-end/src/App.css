@@ -505,6 +505,8 @@ a {
   color: #338cd1;
   white-space: nowrap;
   width: 280px;
+  cursor: pointer;
+  text-decoration: none;
 }
 .content-info .additional-info {
   display: block;
@@ -737,6 +739,16 @@ a {
 }
 
 .content-top-leftContainer {
+  display: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.content-top-leftContainer .content-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.content-item:hover .content-top-leftContainer {
   display: flex;
   position: absolute;
   top: 0;
@@ -745,9 +757,5 @@ a {
   flex-direction: row;
   gap: 8px;
   z-index: 10;
-}
-
-.content-top-leftContainer .content-btn {
-  background-color: transparent;
-  border: none;
+  transition: all 0.2s ease-in-out;
 }

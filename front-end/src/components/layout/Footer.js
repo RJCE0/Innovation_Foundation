@@ -72,8 +72,6 @@ const SocialMediaWrap = styled.div`
   gap: 10px;
 `;
 
-const SocialMediaLink = styled(Link)``;
-
 const WebsiteRights = styled.div`
   color: #505050;
   display: flex;
@@ -110,6 +108,11 @@ const Name2 = styled.div`
   position: absolute;
   left: 0;
   top: 30px;
+
+  @media screen and (max-width: 700px) {
+    top: 32px;
+    left: 25px;
+  }
 `;
 
 const BottomLineWrap = styled.div`
@@ -118,6 +121,11 @@ const BottomLineWrap = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 export default () => {

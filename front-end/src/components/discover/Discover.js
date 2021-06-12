@@ -5,7 +5,6 @@ import axios from "axios";
 
 import Footer from "../layout/Footer";
 import createFilterOptions from "react-select-fast-filter-options";
-import Select from "react-select";
 import Button from "react-bootstrap/Button";
 import "react-bootstrap";
 //import "bootstrap/dist/css/bootstrap.css";
@@ -16,7 +15,7 @@ import { config } from "../../constants";
 import { DiscoverNavbar } from "./DiscoverNavbar";
 import OpportunityPage from "../opportunity-page/OpportunityPage";
 
-import { filterOptions } from "./ModalElements";
+import { SortBy } from "./SortBy";
 
 const optionsSortBy = [
   { label: "Select Option", value: 0 },
@@ -41,6 +40,7 @@ class Dashboard extends Component {
       minPay: null,
       sortByValue: null,
     };
+
     this.handleModal = this.handleModal.bind(this);
     this.onChangeDatePosted = this.onChangeDatePosted.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
@@ -93,6 +93,7 @@ class Dashboard extends Component {
   }
 
   onChangeSortBy(event) {
+    // If nothing is selected, then value is null.
     this.setState(() => {
       return {
         sortByValue: event.label == "Select Option" ? null : event.label,
@@ -117,14 +118,24 @@ class Dashboard extends Component {
   }
 
   onChangeStartDate(date) {
-    this.setState(() => {
-      return { startDate: date };
+    this.setState(({ startDate, endDate }) => {
+      const newStartDate = endDate
+        ? date.getTime() > endDate.getTime()
+          ? startDate
+          : date
+        : date;
+      return { startDate: newStartDate };
     });
   }
 
   onChangeEndDate(date) {
-    this.setState(() => {
-      return { endDate: date };
+    this.setState(({ startDate, endDate }) => {
+      const newEndDate = startDate
+        ? date.getTime() < startDate.getTime()
+          ? endDate
+          : date
+        : date;
+      return { endDate: newEndDate };
     });
   }
 
@@ -297,16 +308,6 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
-
-              {
-                //<div className="slider-pagination">
-              }
-              {
-                //} <div className="circ-container"></div>
-              }
-              {
-                //}   </div>
-              }
             </div>
           </div>
         </div>
@@ -316,21 +317,11 @@ class Dashboard extends Component {
               <div className="filterBtn-container">
                 <Button onClick={this.handleModal}>Filters</Button>
               </div>
-              <div
-                className="filterBtn-container"
-                style={{ width: "200px", height: "100%", zIndex: "12" }}
-              >
-                <Select
-                  onChange={this.onChangeSortBy}
-                  defaultValue={
-                    this.state.sortByValue
-                      ? { label: this.state.sortByValue }
-                      : optionsSortBy[0]
-                  }
-                  filterOptions={filterOptions(optionsSortBy)}
-                  options={optionsSortBy}
-                />
-              </div>
+              <SortBy
+                optionsSortBy={optionsSortBy}
+                onChangeSortBy={this.onChangeSortBy}
+                sortByValue={this.state.sortByValue}
+              />
               <div>
                 {this.state.selectOption.fullRemote ? (
                   <div className="filterContainer">

@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import Footer from "../layout/Footer";
-
+import createFilterOptions from "react-select-fast-filter-options";
+import Select from "react-select";
 import Button from "react-bootstrap/Button";
 import "react-bootstrap";
 //import "bootstrap/dist/css/bootstrap.css";
@@ -14,6 +15,15 @@ import "../../css/discover.css";
 import { config } from "../../constants";
 import { DiscoverNavbar } from "./DiscoverNavbar";
 import OpportunityPage from "../opportunity-page/OpportunityPage";
+
+import { filterOptions } from "./ModalElements";
+
+const optionsSortBy = [
+  { label: "Select Option", value: 0 },
+  { label: "Most Recently Posted", value: 1 },
+  { label: "Start Date", value: 2 },
+  { label: "End Date", value: 3 },
+];
 
 class Dashboard extends Component {
   constructor(props) {
@@ -29,6 +39,7 @@ class Dashboard extends Component {
       endDate: null,
       distance: null,
       minPay: null,
+      sortByValue: null,
     };
     this.handleModal = this.handleModal.bind(this);
     this.onChangeDatePosted = this.onChangeDatePosted.bind(this);
@@ -39,6 +50,7 @@ class Dashboard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeDistance = this.onChangeDistance.bind(this);
     this.onChangeMinPay = this.onChangeMinPay.bind(this);
+    this.onChangeSortBy = this.onChangeSortBy(this);
   }
 
   async getOpportunities(route, parameters) {
@@ -76,8 +88,14 @@ class Dashboard extends Component {
   handleSelectChange(event) {
     this.setState(({ selectOption }) => {
       selectOption[event.target.value] = !selectOption[event.target.value];
+      return { selectOption: selectOption };
+    });
+  }
+
+  onChangeSortBy(event) {
+    this.setState(() => {
       return {
-        selectOption: selectOption,
+        sortByValue: event.label == "Select Option" ? null : event.label,
       };
     });
   }
@@ -85,7 +103,7 @@ class Dashboard extends Component {
   onChangeLocation(event) {
     this.setState(() => {
       return {
-        selectLocation: event.label == "None" ? null : event.label,
+        selectLocation: event.label == "Select Option" ? null : event.label,
       };
     });
   }
@@ -93,46 +111,37 @@ class Dashboard extends Component {
   onChangeDatePosted(event) {
     this.setState(() => {
       return {
-        selectPostedDate: event.label == "None" ? null : event.label,
+        selectPostedDate: event.label == "Select Option" ? null : event.label,
       };
     });
   }
 
   onChangeStartDate(date) {
     this.setState(() => {
-      return {
-        startDate: date,
-      };
+      return { startDate: date };
     });
   }
 
   onChangeEndDate(date) {
     this.setState(() => {
-      return {
-        endDate: date,
-      };
+      return { endDate: date };
     });
   }
 
   onChangeDistance(_event, value) {
     this.setState(() => {
-      return {
-        distance: value === 0 ? null : value,
-      };
+      return { distance: value === 0 ? null : value };
     });
   }
 
   onChangeMinPay(_event, value) {
     this.setState(() => {
-      return {
-        minPay: value === 0 ? null : value,
-      };
+      return { minPay: value === 0 ? null : value };
     });
   }
 
   async handleSubmit() {
     this.handleModal();
-    console.log(this.state);
     const params = {
       selectOption: this.state.selectOption,
       selectLocation: this.state.selectLocation,
@@ -307,6 +316,21 @@ class Dashboard extends Component {
               <div className="filterBtn-container">
                 <Button onClick={this.handleModal}>Filters</Button>
               </div>
+              <div
+                className="filterBtn-container"
+                style={{ width: "200px", height: "100%", zIndex: "12" }}
+              >
+                <Select
+                  onChange={this.onChangeSortBy}
+                  defaultValue={
+                    this.state.sortByValue
+                      ? { label: this.state.sortByValue }
+                      : optionsSortBy[0]
+                  }
+                  filterOptions={filterOptions(optionsSortBy)}
+                  options={optionsSortBy}
+                />
+              </div>
               <div>
                 {this.state.selectOption.fullRemote ? (
                   <div className="filterContainer">
@@ -350,7 +374,7 @@ class Dashboard extends Component {
                 )}
                 {this.state.endDate && (
                   <div className="filterContainer">
-                    <span className="filterType">Ends Before{"\t"}</span>
+                    <span className="filterType">Starts Before{"\t"}</span>
                     <span className="filter-respo">
                       {`\t${this.state.endDate.toLocaleDateString("en-GB")}`}
                     </span>

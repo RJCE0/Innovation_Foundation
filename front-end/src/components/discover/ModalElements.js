@@ -131,20 +131,20 @@ const Slide = withStyles({
 })(Slider);
 
 const optionsLocation = [
-  { label: "None", value: 0 },
+  { label: "Select Option", value: 0 },
   { label: "London", value: 1 },
   { label: "Amsterdam", value: 2 },
 ];
 
 const optionsDatePosted = [
-  { label: "None", value: 0 },
+  { label: "Select Option", value: 0 },
   { label: "Today", value: 1 },
   { label: "This Week", value: 2 },
   { label: "This Month", value: 3 },
   { label: "This Year", value: 4 },
 ];
 
-const filterOptions = (options) => {
+export const filterOptions = (options) => {
   createFilterOptions({
     options,
   });
@@ -335,7 +335,7 @@ export const FilterModal = ({
                   </div>
                 </div>
                 <div>
-                  <h3 style={{ textAlign: "center" }}>Ends Before</h3>
+                  <h3 style={{ textAlign: "center" }}>Starts Before</h3>
                   <div
                     style={{
                       display: "flex",

@@ -84,15 +84,15 @@ class Dashboard extends Component {
     });
   }
 
-  onChangeExclusiveFilter() {
-    this.setState(({ exclusiveFilter }) => {
-      return { exclusiveFilter: !exclusiveFilter };
+  onChangeExclusiveFilter(event) {
+    this.setState(() => {
+      return { exclusiveFilter: event.target.checked };
     });
   }
 
-  onChangeFullRemote() {
-    this.setState(({ fullRemote }) => {
-      return { fullRemote: !fullRemote };
+  onChangeFullRemote(event) {
+    this.setState(() => {
+      return { fullRemote: event.target.checked };
     });
   }
 
@@ -123,22 +123,24 @@ class Dashboard extends Component {
 
   onChangeStartDate(date) {
     this.setState(({ startDate, endDate }) => {
-      const newStartDate = endDate
-        ? date.getTime() > endDate.getTime()
-          ? startDate
-          : date
-        : date;
+      const newStartDate =
+        endDate && date
+          ? date.getTime() > endDate.getTime()
+            ? startDate
+            : date
+          : date;
       return { startDate: newStartDate };
     });
   }
 
   onChangeEndDate(date) {
     this.setState(({ startDate, endDate }) => {
-      const newEndDate = startDate
-        ? date.getTime() < startDate.getTime()
-          ? endDate
-          : date
-        : date;
+      const newEndDate =
+        startDate && date
+          ? date.getTime() < startDate.getTime()
+            ? endDate
+            : date
+          : date;
       return { endDate: newEndDate };
     });
   }
@@ -178,7 +180,7 @@ class Dashboard extends Component {
         <FilterModal
           show={this.state.show}
           showModal={this.handleModal}
-          handleSelectChange={this.onChangeFullRemote}
+          onChangeFullRemote={this.onChangeFullRemote}
           onChangeDatePosted={this.onChangeDatePosted}
           onChangeLocation={this.onChangeLocation}
           startDate={this.state.startDate}
@@ -194,7 +196,7 @@ class Dashboard extends Component {
           distance={this.state.distance}
           minPay={this.state.minPay}
           exclusiveFilter={this.state.exclusiveFilter}
-          onChangeExclusiveFilter={this.state.exclusiveFilter}
+          onChangeExclusiveFilter={this.onChangeExclusiveFilter}
         />
         <div id="headerContainer">
           <div id="header-swirl-backdrop">
@@ -344,6 +346,12 @@ class Dashboard extends Component {
                       </span>
                     </div>
                   )
+                )}
+                {this.state.exclusiveFilter && (
+                  <div className="filterContainer">
+                    <span className="filterType">Exclusive{"\t"}</span>
+                    <span className="filter-respo">{"\tyes"}</span>
+                  </div>
                 )}
                 {this.state.startDate && (
                   <div className="filterContainer">

@@ -253,16 +253,38 @@ export const FilterModal = ({
                 <CloseModalButton onClick={() => showModal()} />
               </CloseModalDiv>
               <Extras>
-                <div>
-                  <label htmlFor="remote">Remote?</label>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  <label htmlFor="remote">
+                    <h3>Remote?</h3>
+                  </label>
                   <Toggle
                     id="remote"
                     defaultChecked={fullRemote}
                     onChange={onChangeFullRemote}
                   />
                 </div>
-                <div>
-                  <label htmlFor="exclusive">Exclusive?</label>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  <label htmlFor="exclusive">
+                    <h3>Exclusive?</h3>
+                  </label>
                   <Toggle
                     id="exclusive"
                     defaultChecked={exclusiveFilter}

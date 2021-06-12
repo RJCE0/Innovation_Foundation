@@ -10,6 +10,8 @@ import Select from "react-select";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { Button } from "react-bootstrap";
+import "react-toggle/style.css";
+import Toggle from "react-toggle";
 
 const ModalBackground = styled.div`
   width: 100%;
@@ -199,7 +201,7 @@ const marksPay = [
 export const FilterModal = ({
   show,
   showModal,
-  handleSelectChange,
+  onChangeFullRemote,
   onChangeLocation,
   onChangeDatePosted,
   startDate,
@@ -207,13 +209,15 @@ export const FilterModal = ({
   onChangeStartDate,
   onChangeEndDate,
   handleSubmit,
-  selectOption,
+  fullRemote,
   selectLocation,
   selectPostedDate,
   onChangeDistance,
   onChangeMinPay,
   distance,
   minPay,
+  exclusiveFilter,
+  onChangeExclusiveFilter,
 }) => {
   const classes = useStyles();
 
@@ -248,42 +252,23 @@ export const FilterModal = ({
               <CloseModalDiv>
                 <CloseModalButton onClick={() => showModal()} />
               </CloseModalDiv>
-              <FilterItem>
-                <FilterH2>Remote?</FilterH2>
-                <FilterLabels>
-                  <FilterLabel htmlFor="in-person">
-                    <FilterRadioButton
-                      type="checkbox"
-                      value="inPerson"
-                      id="in-persons"
-                      onChange={handleSelectChange}
-                      checked={selectOption.inPerson}
-                    />{" "}
-                    In Person
-                  </FilterLabel>
-                  <FilterLabel htmlFor="temp-remote">
-                    <FilterRadioButton
-                      type="checkbox"
-                      value="tempRemote"
-                      id="temp-remote"
-                      onChange={handleSelectChange}
-                      checked={selectOption.tempRemote}
-                    />{" "}
-                    Temporarily Remote
-                  </FilterLabel>
-                  <FilterLabel htmlFor="full-remote">
-                    <FilterRadioButton
-                      type="checkbox"
-                      value="fullRemote"
-                      id="full-remote"
-                      onChange={handleSelectChange}
-                      checked={selectOption.fullRemote}
-                    />{" "}
-                    Remote
-                  </FilterLabel>
-                </FilterLabels>
-              </FilterItem>
               <Extras>
+                <div>
+                  <label htmlFor="remote">Remote?</label>
+                  <Toggle
+                    id="remote"
+                    defaultChecked={fullRemote}
+                    onChange={onChangeFullRemote}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="exclusive">Exclusive?</label>
+                  <Toggle
+                    id="exclusive"
+                    defaultChecked={exclusiveFilter}
+                    onChange={onChangeExclusiveFilter}
+                  />
+                </div>
                 <div>
                   <h3 style={{ textAlign: "center" }}>Location</h3>
                   <Select

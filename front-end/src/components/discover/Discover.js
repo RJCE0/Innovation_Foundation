@@ -2,12 +2,9 @@ import React, { Component, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-
 import Footer from "../layout/Footer";
-import createFilterOptions from "react-select-fast-filter-options";
 import Button from "react-bootstrap/Button";
 import "react-bootstrap";
-//import "bootstrap/dist/css/bootstrap.css";
 import { FilterModal } from "./ModalElements";
 
 import "../../css/discover.css";
@@ -31,7 +28,6 @@ class Dashboard extends Component {
     this.state = {
       opportunities: [],
       show: false,
-      selectOption: { fullRemote: false, tempRemote: false, inPerson: false },
       selectLocation: null,
       selectPostedDate: null,
       startDate: null,
@@ -39,18 +35,21 @@ class Dashboard extends Component {
       distance: null,
       minPay: null,
       sortByValue: null,
+      fullRemote: false,
+      exclusiveFilter: false,
     };
 
     this.handleModal = this.handleModal.bind(this);
     this.onChangeDatePosted = this.onChangeDatePosted.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeDistance = this.onChangeDistance.bind(this);
     this.onChangeMinPay = this.onChangeMinPay.bind(this);
     this.onChangeSortBy = this.onChangeSortBy(this);
+    this.onChangeFullRemote = this.onChangeFullRemote.bind(this);
+    this.onChangeExclusiveFilter = this.onChangeExclusiveFilter.bind(this);
   }
 
   async getOpportunities(route, parameters) {
@@ -85,15 +84,20 @@ class Dashboard extends Component {
     });
   }
 
-  handleSelectChange(event) {
-    this.setState(({ selectOption }) => {
-      selectOption[event.target.value] = !selectOption[event.target.value];
-      return { selectOption: selectOption };
+  onChangeExclusiveFilter() {
+    this.setState(({ exclusiveFilter }) => {
+      return { exclusiveFilter: !exclusiveFilter };
+    });
+  }
+
+  onChangeFullRemote() {
+    this.setState(({ fullRemote }) => {
+      return { fullRemote: !fullRemote };
     });
   }
 
   onChangeSortBy(event) {
-    // If nothing is selected, then value is null.
+    // If nothing is selected, then value is null. - BACK-END
     this.setState(() => {
       return {
         sortByValue: event.label == "Select Option" ? null : event.label,
@@ -154,6 +158,7 @@ class Dashboard extends Component {
   async handleSubmit() {
     this.handleModal();
     const params = {
+      // Change this to full remote. - BACK-END
       selectOption: this.state.selectOption,
       selectLocation: this.state.selectLocation,
       selectPostedDate: this.state.selectPostedDate,
@@ -173,7 +178,7 @@ class Dashboard extends Component {
         <FilterModal
           show={this.state.show}
           showModal={this.handleModal}
-          handleSelectChange={this.handleSelectChange}
+          handleSelectChange={this.onChangeFullRemote}
           onChangeDatePosted={this.onChangeDatePosted}
           onChangeLocation={this.onChangeLocation}
           startDate={this.state.startDate}
@@ -183,11 +188,13 @@ class Dashboard extends Component {
           handleSubmit={this.handleSubmit}
           onChangeMinPay={this.onChangeMinPay}
           onChangeDistance={this.onChangeDistance}
-          selectOption={this.state.selectOption}
+          fullRemote={this.state.fullRemote}
           selectLocation={this.state.selectLocation}
           selectPostedDate={this.state.selectPostedDate}
           distance={this.state.distance}
           minPay={this.state.minPay}
+          exclusiveFilter={this.state.exclusiveFilter}
+          onChangeExclusiveFilter={this.state.exclusiveFilter}
         />
         <div id="headerContainer">
           <div id="header-swirl-backdrop">
@@ -323,7 +330,7 @@ class Dashboard extends Component {
                 sortByValue={this.state.sortByValue}
               />
               <div>
-                {this.state.selectOption.fullRemote ? (
+                {this.state.fullRemote ? (
                   <div className="filterContainer">
                     <span className="filterType">Remote{"\t"}</span>
                     <span className="filter-respo">{"\tyes"}</span>
@@ -338,23 +345,6 @@ class Dashboard extends Component {
                     </div>
                   )
                 )}
-
-                {this.state.selectOption.tempRemote && (
-                  <div className="filterContainer">
-                    <span className="filterType">Remote</span>
-                    <span className="filter-respo">
-                      Temporarily Remote{"\t"}
-                    </span>
-                  </div>
-                )}
-
-                {this.state.selectOption.tempRemote && (
-                  <div className="filterContainer">
-                    <span className="filterType">Remote</span>
-                    <span className="filter-respo">In Person{"\t"}</span>
-                  </div>
-                )}
-
                 {this.state.startDate && (
                   <div className="filterContainer">
                     <span className="filterType">Starts After{"\t"}</span>

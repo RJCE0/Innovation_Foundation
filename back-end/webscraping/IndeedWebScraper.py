@@ -9,33 +9,46 @@ jobs = soup.findAll(
 
 for op in jobs:
     # Role
-    print("Role: " + op.find('h2', class_='title').find('a').get('title'))
+    role = op.find('h2', class_='title').find('a').get('title')
+    print("Role: ", role)
 
     # Company
     company = op.find('div', class_='sjcl').find(
         'div').find('span', class_='company')
     if company.find('a', class_="turnstileLink") != None:
-        print("Company: " + company.find('a').text.strip())
+        company = company.find('a').text.strip()
     else:
-        print("Company: " + company.text.strip())
+        company = company.text.strip()
+    print("Company: ", company)
+
+    # Title
+    title = role + "at" + company
 
     # Location
     location = op.find('div', class_='sjcl').find(
         'span', class_='location accessible-contrast-color-location')
     if location != None:
-        print("Location: " + location.text.strip())
+        location = location.text.strip()
+    print("Location: ", location)
 
     # Summary
-    print('Summary: \"' + op.find('div',
-          class_='summary').find('ul').find('li').text.strip() + '\"')
+    summary = op.find('div', class_='summary').find('ul').find('li').text.strip()
+    print('Summary: \"' + summary + '\"')
 
     # Date posted
-    print("Date posted: " + op.find('div', class_='jobsearch-SerpJobCard-footer').find('div', class_='jobsearch-SerpJobCard-footerActions').find('div',
-          class_='result-link-bar-container').find('div', class_='result-link-bar').find('span', class_='date date-a11y').text.strip())
+    date_posted = op.find('div', class_='jobsearch-SerpJobCard-footer').find('div', class_='jobsearch-SerpJobCard-footerActions').find('div',
+          class_='result-link-bar-container').find('div', class_='result-link-bar').find('span', class_='date date-a11y').text.strip()
+    print("Date posted: ", date_posted )
 
     # link
-    print("Link: " + "https://uk.indeed.com" +
-          op.find('h2', class_='title').find('a').get('href'))
+    link = "https://uk.indeed.com" + op.find('h2', class_='title').find('a').get('href')
+    print("Link: ", link)
     print("\n")
+
+    """prototype code to insert into database"""
+    # if insertInternships(title, location, summary, -1, date, image_url):
+    #     print("INSERTION SUCCESSFUL FOR: \"" + title + "\"")
+    # else:
+    #     print("INSERTION FAILED FOR: \"" + title + "\"")   
 
 #Add python and bs4 

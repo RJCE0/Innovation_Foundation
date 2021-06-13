@@ -14,7 +14,7 @@ const OpportunityPage = (opp) => {
   const payStatement =
     opp.pay == 0 ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
   const [favClicked, setFavClicked] = useState(false);
-  const handleFavClicked = () => setFavClicked(!favClicked);
+  const handleFavClicked = () => setFavClicked((favClicked) => !favClicked);
   return (
     <>
       <div className="content-item" data-id={opp.id}>
@@ -68,7 +68,9 @@ const OpportunityPage = (opp) => {
           </button>
         </div>
         <div className="content-info">
-          <a className="title">{opp.title}</a>
+          <a className="title" onClick={handleShow}>
+            {opp.title}
+          </a>
           <span className="additional-info">
             {new Date(opp.date).toDateString()}
           </span>
@@ -95,7 +97,6 @@ const OpportunityPage = (opp) => {
           <h5>{opp.views} views </h5>
           <h5> Pay: {payStatement} </h5>
           <h5>
-            {console.log(opp)}
             Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
           </h5>
         </Modal.Body>
@@ -104,7 +105,7 @@ const OpportunityPage = (opp) => {
             {" "}
             Apply!{" "}
           </Button>
-          <Button variant="warning"> Add to Favourites</Button>
+          <Button variant="warning" onClick={handleFavClicked}> Add to Favourites</Button>
         </Modal.Footer>
       </Modal>
     </>

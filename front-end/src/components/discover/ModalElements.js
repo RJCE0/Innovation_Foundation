@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
-
 import { MdClose } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,6 +9,8 @@ import Select from "react-select";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { Button } from "react-bootstrap";
+import "react-toggle/style.css";
+import Toggle from "react-toggle";
 
 const ModalBackground = styled.div`
   width: 100%;
@@ -53,19 +54,6 @@ const CloseModalButton = styled(MdClose)`
   }
 `;
 
-const FilterItem = styled.div`
-  padding: 20px 20px 20px 20px;
-  margin: 0;
-`;
-
-const FilterH2 = styled.h3`
-  text-align: center;
-`;
-
-const FilterLabel = styled.label`
-  font-size: 1.2rem;
-`;
-
 const Extras = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1.5fr;
@@ -76,18 +64,6 @@ const Extras = styled.div`
 
   @media screen and (max-width: 700px) {
     grid-template-columns: 1.5fr;
-  }
-`;
-
-const FilterRadioButton = styled.input``;
-
-const FilterLabels = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 0 10px 0 10px;
-
-  @media screen and (max-width: 700px) {
-    flex-direction: column;
   }
 `;
 
@@ -112,6 +88,7 @@ const Slide = withStyles({
     border: "2px solid currentColor",
     marginTop: -8,
     marginLeft: -12,
+
     "&:focus, &:hover, &$active": {
       boxShadow: "inherit",
     },
@@ -131,20 +108,20 @@ const Slide = withStyles({
 })(Slider);
 
 const optionsLocation = [
-  { label: "None", value: 0 },
+  { label: "Select Option", value: 0 },
   { label: "London", value: 1 },
   { label: "Amsterdam", value: 2 },
 ];
 
 const optionsDatePosted = [
-  { label: "None", value: 0 },
+  { label: "Select Option", value: 0 },
   { label: "Today", value: 1 },
   { label: "This Week", value: 2 },
   { label: "This Month", value: 3 },
   { label: "This Year", value: 4 },
 ];
 
-const filterOptions = (options) => {
+export const filterOptions = (options) => {
   createFilterOptions({
     options,
   });
@@ -199,7 +176,7 @@ const marksPay = [
 export const FilterModal = ({
   show,
   showModal,
-  handleSelectChange,
+  onChangeFullRemote,
   onChangeLocation,
   onChangeDatePosted,
   startDate,
@@ -207,13 +184,15 @@ export const FilterModal = ({
   onChangeStartDate,
   onChangeEndDate,
   handleSubmit,
-  selectOption,
+  fullRemote,
   selectLocation,
   selectPostedDate,
   onChangeDistance,
   onChangeMinPay,
   distance,
   minPay,
+  exclusiveFilter,
+  onChangeExclusiveFilter,
 }) => {
   const classes = useStyles();
 
@@ -248,42 +227,45 @@ export const FilterModal = ({
               <CloseModalDiv>
                 <CloseModalButton onClick={() => showModal()} />
               </CloseModalDiv>
-              <FilterItem>
-                <FilterH2>Remote?</FilterH2>
-                <FilterLabels>
-                  <FilterLabel htmlFor="in-person">
-                    <FilterRadioButton
-                      type="checkbox"
-                      value="inPerson"
-                      id="in-persons"
-                      onChange={handleSelectChange}
-                      checked={selectOption.inPerson}
-                    />{" "}
-                    In Person
-                  </FilterLabel>
-                  <FilterLabel htmlFor="temp-remote">
-                    <FilterRadioButton
-                      type="checkbox"
-                      value="tempRemote"
-                      id="temp-remote"
-                      onChange={handleSelectChange}
-                      checked={selectOption.tempRemote}
-                    />{" "}
-                    Temporarily Remote
-                  </FilterLabel>
-                  <FilterLabel htmlFor="full-remote">
-                    <FilterRadioButton
-                      type="checkbox"
-                      value="fullRemote"
-                      id="full-remote"
-                      onChange={handleSelectChange}
-                      checked={selectOption.fullRemote}
-                    />{" "}
-                    Remote
-                  </FilterLabel>
-                </FilterLabels>
-              </FilterItem>
               <Extras>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  <label htmlFor="remote">
+                    <h3>Remote?</h3>
+                  </label>
+                  <Toggle
+                    id="remote"
+                    defaultChecked={fullRemote}
+                    onChange={onChangeFullRemote}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  <label htmlFor="exclusive">
+                    <h3>Exclusive?</h3>
+                  </label>
+                  <Toggle
+                    id="exclusive"
+                    defaultChecked={exclusiveFilter}
+                    onChange={onChangeExclusiveFilter}
+                  />
+                </div>
                 <div>
                   <h3 style={{ textAlign: "center" }}>Location</h3>
                   <Select
@@ -331,11 +313,12 @@ export const FilterModal = ({
                       todayButton="Today"
                       placeholderText=" Select starting date"
                       dateFormat="dd/MM/yyyy"
+                      isClearable={true}
                     />
                   </div>
                 </div>
                 <div>
-                  <h3 style={{ textAlign: "center" }}>Ends Before</h3>
+                  <h3 style={{ textAlign: "center" }}>Starts Before</h3>
                   <div
                     style={{
                       display: "flex",
@@ -355,6 +338,7 @@ export const FilterModal = ({
                       todayButton="Today"
                       placeholderText=" Select ending date"
                       dateFormat="dd/MM/yyyy"
+                      isClearable={true}
                     />
                   </div>
                 </div>
@@ -389,6 +373,8 @@ export const FilterModal = ({
                 style={{
                   display: "flex",
                   justifyContent: "center",
+                  flexDirection: "row",
+                  gap: "10px",
                 }}
               >
                 <Button onClick={handleSubmit} variant="primary">

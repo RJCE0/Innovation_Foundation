@@ -2,18 +2,24 @@ import React, { Component, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-
 import Footer from "../layout/Footer";
-
 import Button from "react-bootstrap/Button";
 import "react-bootstrap";
-//import "bootstrap/dist/css/bootstrap.css";
 import { FilterModal } from "./ModalElements";
 
 import "../../css/discover.css";
 import { config } from "../../constants";
 import { DiscoverNavbar } from "./DiscoverNavbar";
 import OpportunityPage from "../opportunity-page/OpportunityPage";
+
+import { SortBy } from "./SortBy";
+
+const optionsSortBy = [
+  { label: "Select Option", value: 0 },
+  { label: "Most Recently Posted", value: 1 },
+  { label: "Most Popular", value: 2 },
+  { label: "Start Date", value: 3 },
+];
 
 class Dashboard extends Component {
   constructor(props) {
@@ -22,23 +28,28 @@ class Dashboard extends Component {
     this.state = {
       opportunities: [],
       show: false,
-      selectOption: { fullRemote: false, tempRemote: false, inPerson: false },
       selectLocation: null,
       selectPostedDate: null,
       startDate: null,
       endDate: null,
       distance: null,
       minPay: null,
+      sortByValue: null,
+      fullRemote: false,
+      exclusiveFilter: false,
     };
+
     this.handleModal = this.handleModal.bind(this);
     this.onChangeDatePosted = this.onChangeDatePosted.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeDistance = this.onChangeDistance.bind(this);
     this.onChangeMinPay = this.onChangeMinPay.bind(this);
+    this.onChangeSortBy = this.onChangeSortBy.bind(this);
+    this.onChangeFullRemote = this.onChangeFullRemote.bind(this);
+    this.onChangeExclusiveFilter = this.onChangeExclusiveFilter.bind(this);
   }
 
   async getOpportunities(route, parameters) {
@@ -73,73 +84,105 @@ class Dashboard extends Component {
     });
   }
 
-  handleSelectChange(event) {
-    this.setState(({ selectOption }) => {
-      selectOption[event.target.value] = !selectOption[event.target.value];
+  onChangeExclusiveFilter(event) {
+    this.setState(() => {
+      return { exclusiveFilter: event.target.checked };
+    });
+  }
+
+  onChangeFullRemote(event) {
+    this.setState(() => {
+      return { fullRemote: event.target.checked };
+    });
+  }
+
+  async onChangeSortBy(event) {
+    // If nothing is selected, then value is null. - BACK-END
+    this.setState(() => {
       return {
-        selectOption: selectOption,
+        sortByValue: event.label == "Select Option" ? null : event.label,
       };
+    }, async () => {
+      const params = {
+        selectLocation: this.state.selectLocation,
+        selectPostedDate: this.state.selectPostedDate,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+        minPay: this.state.minPay,
+        sortByValue: this.state.sortByValue,
+        fullRemote: this.state.fullRemote,
+        exclusiveFilter: this.state.exclusiveFilter
+      };
+
+      this.setState({
+        opportunities: await this.getOpportunities("custom", params),
+      });
     });
   }
 
   onChangeLocation(event) {
     this.setState(() => {
       return {
-        selectLocation: event.label == "None" ? null : event.label,
+        selectLocation: event.label == "Select Option" ? null : event.label,
       };
     });
+    console.log(this.state.selectLocation)
   }
 
   onChangeDatePosted(event) {
     this.setState(() => {
       return {
-        selectPostedDate: event.label == "None" ? null : event.label,
+        selectPostedDate: event.label == "Select Option" ? null : event.label,
       };
     });
   }
 
   onChangeStartDate(date) {
-    this.setState(() => {
-      return {
-        startDate: date,
-      };
+    this.setState(({ startDate, endDate }) => {
+      const newStartDate =
+        endDate && date
+          ? date.getTime() > endDate.getTime()
+            ? startDate
+            : date
+          : date;
+      return { startDate: newStartDate };
     });
   }
 
   onChangeEndDate(date) {
-    this.setState(() => {
-      return {
-        endDate: date,
-      };
+    this.setState(({ startDate, endDate }) => {
+      const newEndDate =
+        startDate && date
+          ? date.getTime() < startDate.getTime()
+            ? endDate
+            : date
+          : date;
+      return { endDate: newEndDate };
     });
   }
 
   onChangeDistance(_event, value) {
     this.setState(() => {
-      return {
-        distance: value === 0 ? null : value,
-      };
+      return { distance: value === 0 ? null : value };
     });
   }
 
   onChangeMinPay(_event, value) {
     this.setState(() => {
-      return {
-        minPay: value === 0 ? null : value,
-      };
+      return { minPay: value === 0 ? null : value };
     });
   }
 
   async handleSubmit() {
     this.handleModal();
-    console.log(this.state);
     const params = {
-      selectOption: this.state.selectOption,
       selectLocation: this.state.selectLocation,
       selectPostedDate: this.state.selectPostedDate,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
       minPay: this.state.minPay,
+      fullRemote: this.state.fullRemote,
+      exclusiveFilter: this.state.exclusiveFilter
     };
 
     this.setState({
@@ -153,7 +196,7 @@ class Dashboard extends Component {
         <FilterModal
           show={this.state.show}
           showModal={this.handleModal}
-          handleSelectChange={this.handleSelectChange}
+          onChangeFullRemote={this.onChangeFullRemote}
           onChangeDatePosted={this.onChangeDatePosted}
           onChangeLocation={this.onChangeLocation}
           startDate={this.state.startDate}
@@ -163,11 +206,13 @@ class Dashboard extends Component {
           handleSubmit={this.handleSubmit}
           onChangeMinPay={this.onChangeMinPay}
           onChangeDistance={this.onChangeDistance}
-          selectOption={this.state.selectOption}
+          fullRemote={this.state.fullRemote}
           selectLocation={this.state.selectLocation}
           selectPostedDate={this.state.selectPostedDate}
           distance={this.state.distance}
           minPay={this.state.minPay}
+          exclusiveFilter={this.state.exclusiveFilter}
+          onChangeExclusiveFilter={this.onChangeExclusiveFilter}
         />
         <div id="headerContainer">
           <div id="header-swirl-backdrop">
@@ -288,16 +333,6 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
-
-              {
-                //<div className="slider-pagination">
-              }
-              {
-                //} <div className="circ-container"></div>
-              }
-              {
-                //}   </div>
-              }
             </div>
           </div>
         </div>
@@ -307,8 +342,13 @@ class Dashboard extends Component {
               <div className="filterBtn-container">
                 <Button onClick={this.handleModal}>Filters</Button>
               </div>
+              <SortBy
+                optionsSortBy={optionsSortBy}
+                onChangeSortBy={this.onChangeSortBy}
+                sortByValue={this.state.sortByValue}
+              />
               <div>
-                {this.state.selectOption.fullRemote ? (
+                {this.state.fullRemote ? (
                   <div className="filterContainer">
                     <span className="filterType">Remote{"\t"}</span>
                     <span className="filter-respo">{"\tyes"}</span>
@@ -323,23 +363,12 @@ class Dashboard extends Component {
                     </div>
                   )
                 )}
-
-                {this.state.selectOption.tempRemote && (
+                {this.state.exclusiveFilter && (
                   <div className="filterContainer">
-                    <span className="filterType">Remote</span>
-                    <span className="filter-respo">
-                      Temporarily Remote{"\t"}
-                    </span>
+                    <span className="filterType">Exclusive{"\t"}</span>
+                    <span className="filter-respo">{"\tyes"}</span>
                   </div>
                 )}
-
-                {this.state.selectOption.tempRemote && (
-                  <div className="filterContainer">
-                    <span className="filterType">Remote</span>
-                    <span className="filter-respo">In Person{"\t"}</span>
-                  </div>
-                )}
-
                 {this.state.startDate && (
                   <div className="filterContainer">
                     <span className="filterType">Starts After{"\t"}</span>
@@ -350,7 +379,7 @@ class Dashboard extends Component {
                 )}
                 {this.state.endDate && (
                   <div className="filterContainer">
-                    <span className="filterType">Ends Before{"\t"}</span>
+                    <span className="filterType">Starts Before{"\t"}</span>
                     <span className="filter-respo">
                       {`\t${this.state.endDate.toLocaleDateString("en-GB")}`}
                     </span>

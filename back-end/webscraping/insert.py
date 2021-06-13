@@ -1,18 +1,17 @@
 from dotenv import load_dotenv
 from datetime import date
+from utility import *
 import datetime
 import psycopg2
 import os
 
+# Load all known locations
 global locations
 with open(os.getcwd()+"/back-end/webscraping/locations.txt", 'r') as f:
     locations = [line.rstrip() for line in f]
 
 # Create connection to database and set cursor for queries
-
-
 def connectDB():
-
     # use env variables to connect to database
     try:
         load_dotenv()
@@ -33,26 +32,20 @@ def connectDB():
     return conn, cursor
 
 # Disconnect cursor and database connection
-
-
 def disconnectDB(conn, cursor):
     cursor.close()
     conn.close()
 
-# Check it works
-
-
+# Check database connection works
 def check():
     conn, cursor = connectDB()
     if(conn != None and cursor != None):
-        print("successful connection")
+        printGreen("successful connection")
 
     disconnectDB(conn, cursor)
-    print("successful disconnection")
+    printGreen("successful disconnection")
 
 # Convert date from "x days ago" to a real date string
-
-
 def convertDate(days_ago):
     cur_date = date.today()
     days = days_ago.split()[0]
@@ -60,9 +53,7 @@ def convertDate(days_ago):
     new_date = cur_date - datetime.timedelta(int(days))
     return new_date.strftime("%Y-%m-%d")
 
-# Clean the location to be single city
-
-
+# Clean the location to be single city (without postcode)
 def cleanLocation(location):
     if location is None:
         return "undisclosed"
@@ -71,6 +62,18 @@ def cleanLocation(location):
         if city in location:
             return city
 
+# checks if the post is already in database
+def isUnique(link):
+    conn, cursor = connectDB()
+
+    query = """SELECT * FROM test_internships
+                WHERE link=%s"""
+
+    cursor.execute(query, (link,))
+    result = cursor.fetchall()
+
+    disconnectDB(conn, cursor)
+    return len(result) == 0
 
 # Insert into internships table
 def insertInternships(title, location, description, pay, date_posted, link, image_url):
@@ -85,7 +88,6 @@ def insertInternships(title, location, description, pay, date_posted, link, imag
     views = 0
     fav = False
     date = None
-    # date_posted = date.today().strftime("%Y-%m-%d")
 
     try:
         # Execute query with variables

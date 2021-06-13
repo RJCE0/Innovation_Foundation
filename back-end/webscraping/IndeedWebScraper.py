@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from insert import *
 
 html_text = requests.get(
     "https://uk.indeed.com/jobs?q=software+intern&l=London%2C+Greater+London").text
@@ -32,23 +33,30 @@ for op in jobs:
     print("Location: ", location)
 
     # Summary
-    summary = op.find('div', class_='summary').find('ul').find('li').text.strip()
+    summary = op.find('div', class_='summary').find(
+        'ul').find('li').text.strip()
     print('Summary: \"' + summary + '\"')
 
     # Date posted
     date_posted = op.find('div', class_='jobsearch-SerpJobCard-footer').find('div', class_='jobsearch-SerpJobCard-footerActions').find('div',
-          class_='result-link-bar-container').find('div', class_='result-link-bar').find('span', class_='date date-a11y').text.strip()
-    print("Date posted: ", date_posted )
+                                                                                                                                       class_='result-link-bar-container').find('div', class_='result-link-bar').find('span', class_='date date-a11y').text.strip()
+    print("Date posted: ", date_posted)
 
+    # skip any posts that are older than a month
+    if date_posted == "30+ days ago":
+        continue
+    
     # link
-    link = "https://uk.indeed.com" + op.find('h2', class_='title').find('a').get('href')
+    link = "https://uk.indeed.com" + \
+        op.find('h2', class_='title').find('a').get('href')
     print("Link: ", link)
     print("\n")
 
-    """prototype code to insert into database"""
-    # if insertInternships(title, location, summary, -1, date, image_url):
+    check()
+    #prototype code to insert into database
+    # if insertInternships(title, cleanLocation(location), summary, -1, convertDate(date_posted), link, None):
     #     print("INSERTION SUCCESSFUL FOR: \"" + title + "\"")
     # else:
-    #     print("INSERTION FAILED FOR: \"" + title + "\"")   
+    #     print("INSERTION FAILED FOR: \"" + title + "\"")
 
-#Add python and bs4 
+# Add python and bs4s

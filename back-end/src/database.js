@@ -45,9 +45,9 @@ class Database {
     var result = {};
     var condition = '';
 
-    let { selectOption, selectLocation, selectPostedDate, startDate, endDate, minPay} = JSON.parse(input);
+    let { selectLocation, selectPostedDate, startDate, endDate, minPay, fullRemote, exclusive} = JSON.parse(input);
 
-    if(selectOption.fullRemote == true){  
+    if(fullRemote){  
       condition += `AND location = 'Remote'`;
     } else if(selectLocation != null){
       condition += `AND location = '${selectLocation}'`;
@@ -94,6 +94,11 @@ class Database {
     // Minimum pay filter (slider)
     if(minPay != null){
       condition+=`AND pay>=${minPay}`;
+    }
+
+    // Exclusive only
+    if(exclusive){
+      condition+=`AND exclusive=true`;
     }
 
     // execute query

@@ -158,13 +158,13 @@ class Dashboard extends Component {
   async handleSubmit() {
     this.handleModal();
     const params = {
-      // Change this to full remote. - BACK-END
-      selectOption: this.state.selectOption,
       selectLocation: this.state.selectLocation,
       selectPostedDate: this.state.selectPostedDate,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
       minPay: this.state.minPay,
+      fullRemote: this.state.fullRemote,
+      exclusiveFilter: this.state.exclusiveFilter
     };
 
     this.setState({

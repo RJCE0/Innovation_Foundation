@@ -45,7 +45,7 @@ class Database {
     var result = {};
     var condition = '';
 
-    let { selectLocation, selectPostedDate, startDate, endDate, minPay, fullRemote, exclusive} = JSON.parse(input);
+    let { selectLocation, selectPostedDate, startDate, endDate, minPay, fullRemote, exclusiveFilter} = JSON.parse(input);
 
     if(fullRemote){  
       condition += `AND location = 'Remote'`;
@@ -97,7 +97,7 @@ class Database {
     }
 
     // Exclusive only
-    if(exclusive){
+    if(exclusiveFilter){
       condition+=`AND exclusive=true`;
     }
 

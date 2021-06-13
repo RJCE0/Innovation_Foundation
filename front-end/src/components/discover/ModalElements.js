@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
-
 import { MdClose } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -55,19 +54,6 @@ const CloseModalButton = styled(MdClose)`
   }
 `;
 
-const FilterItem = styled.div`
-  padding: 20px 20px 20px 20px;
-  margin: 0;
-`;
-
-const FilterH2 = styled.h3`
-  text-align: center;
-`;
-
-const FilterLabel = styled.label`
-  font-size: 1.2rem;
-`;
-
 const Extras = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1.5fr;
@@ -78,18 +64,6 @@ const Extras = styled.div`
 
   @media screen and (max-width: 700px) {
     grid-template-columns: 1.5fr;
-  }
-`;
-
-const FilterRadioButton = styled.input``;
-
-const FilterLabels = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 0 10px 0 10px;
-
-  @media screen and (max-width: 700px) {
-    flex-direction: column;
   }
 `;
 
@@ -114,6 +88,7 @@ const Slide = withStyles({
     border: "2px solid currentColor",
     marginTop: -8,
     marginLeft: -12,
+
     "&:focus, &:hover, &$active": {
       boxShadow: "inherit",
     },
@@ -253,16 +228,38 @@ export const FilterModal = ({
                 <CloseModalButton onClick={() => showModal()} />
               </CloseModalDiv>
               <Extras>
-                <div>
-                  <label htmlFor="remote">Remote?</label>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  <label htmlFor="remote">
+                    <h3>Remote?</h3>
+                  </label>
                   <Toggle
                     id="remote"
                     defaultChecked={fullRemote}
                     onChange={onChangeFullRemote}
                   />
                 </div>
-                <div>
-                  <label htmlFor="exclusive">Exclusive?</label>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  <label htmlFor="exclusive">
+                    <h3>Exclusive?</h3>
+                  </label>
                   <Toggle
                     id="exclusive"
                     defaultChecked={exclusiveFilter}
@@ -316,6 +313,7 @@ export const FilterModal = ({
                       todayButton="Today"
                       placeholderText=" Select starting date"
                       dateFormat="dd/MM/yyyy"
+                      isClearable={true}
                     />
                   </div>
                 </div>
@@ -340,6 +338,7 @@ export const FilterModal = ({
                       todayButton="Today"
                       placeholderText=" Select ending date"
                       dateFormat="dd/MM/yyyy"
+                      isClearable={true}
                     />
                   </div>
                 </div>
@@ -374,6 +373,8 @@ export const FilterModal = ({
                 style={{
                   display: "flex",
                   justifyContent: "center",
+                  flexDirection: "row",
+                  gap: "10px",
                 }}
               >
                 <Button onClick={handleSubmit} variant="primary">

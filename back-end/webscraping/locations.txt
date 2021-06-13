@@ -7,6 +7,7 @@ Cambridge
 Canterbury
 Carlisle
 Chester
+Cheshire
 Chelmsford
 Chichester
 Coventry
@@ -14,6 +15,7 @@ Derby
 Durham
 Ely
 Exeter
+Geneva
 Gloucester
 Hereford
 Kingston upon Hull
@@ -25,9 +27,11 @@ Lincoln
 Liverpool
 London
 Manchester
+Maidstone
 Newcastle upon Tyne
 Norwich
 Nottingham
+Northamptonshire
 Oxford
 Peterborough
 Plymouth
@@ -48,4 +52,6 @@ Westminster
 Winchester
 Wolverhampton
 Worcester
+Wales
+UK
 York

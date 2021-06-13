@@ -7,10 +7,12 @@ import os
 
 # Load all known locations
 global locations
-with open(os.getcwd()+"/back-end/webscraping/locations.txt", 'r') as f:
+with open(os.getcwd()+"/locations.txt", 'r') as f:
     locations = [line.rstrip() for line in f]
 
 # Create connection to database and set cursor for queries
+
+
 def connectDB():
     # use env variables to connect to database
     try:
@@ -32,11 +34,15 @@ def connectDB():
     return conn, cursor
 
 # Disconnect cursor and database connection
+
+
 def disconnectDB(conn, cursor):
     cursor.close()
     conn.close()
 
 # Check database connection works
+
+
 def check():
     conn, cursor = connectDB()
     if(conn != None and cursor != None):
@@ -46,6 +52,8 @@ def check():
     printGreen("successful disconnection")
 
 # Convert date from "x days ago" to a real date string
+
+
 def convertDate(days_ago):
     cur_date = date.today()
     days = days_ago.split()[0]
@@ -53,20 +61,34 @@ def convertDate(days_ago):
     new_date = cur_date - datetime.timedelta(int(days))
     return new_date.strftime("%Y-%m-%d")
 
-# Clean the location to be single city (without postcode)
+# Clean the location
+
+
 def cleanLocation(location):
+
     if location is None:
         return "undisclosed"
 
+    # handle remote opportunties
+    remote = ["virtual", "remote", "home"]
+    for rem in remote:
+        if rem in location:
+            return "remote"
+
+    # handle in-person locations
     for city in locations:
         if city in location:
             return city
 
+    return "undisclosed"
+
 # checks if the post is already in database
+
+
 def isUnique(link):
     conn, cursor = connectDB()
 
-    query = """SELECT * FROM test_internships
+    query = """SELECT * FROM internships
                 WHERE link=%s"""
 
     cursor.execute(query, (link,))
@@ -76,23 +98,28 @@ def isUnique(link):
     return len(result) == 0
 
 # Insert into internships table
+
+
 def insertInternships(title, location, description, pay, date_posted, link, image_url):
     conn, cursor = connectDB()
 
-    query = """INSERT INTO test_internships(title, location, description, pay,
+    query = """INSERT INTO internships(title, location, description, pay,
              date, exclusive, views, image_url, fav, link, date_posted)
              VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+
+    if date_posted == None:
+        date_posted = date.today().strftime("%Y-%m-%d")
 
     # Default values for database
     exclusive = False
     views = 0
     fav = False
-    date = None
+    start_date = None
 
     try:
         # Execute query with variables
         cursor.execute(query, (title, location, description,
-                               pay, date, exclusive, views, image_url,
+                               pay, start_date, exclusive, views, image_url,
                                fav, link, date_posted))
 
         # Commit execution of query to update db

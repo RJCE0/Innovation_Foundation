@@ -64,6 +64,8 @@ for op in jobs:
 
     # Insert findings into database
     if insertInternships(title, cleanLocation(location), summary, -1, convertDate(date_posted), link, None):
-        printGreen("INSERTION SUCCESSFUL FOR: \"" + title + "\"" + "\n")
+        printGreen("INSERTION SUCCESSFUL FOR: \"" + title + "\"")
     else:
-        printRed("INSERTION FAILED FOR: \"" + title + "\"" + "\n")
+        printRed("INSERTION FAILED FOR: \"" + title + "\"")
+    
+    print("\n")

@@ -17,8 +17,8 @@ import { SortBy } from "./SortBy";
 const optionsSortBy = [
   { label: "Select Option", value: 0 },
   { label: "Most Recently Posted", value: 1 },
-  { label: "Start Date", value: 2 },
-  { label: "End Date", value: 3 },
+  { label: "Most Popular", value: 2 },
+  { label: "Start Date", value: 3 },
 ];
 
 class Dashboard extends Component {
@@ -47,7 +47,7 @@ class Dashboard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeDistance = this.onChangeDistance.bind(this);
     this.onChangeMinPay = this.onChangeMinPay.bind(this);
-    this.onChangeSortBy = this.onChangeSortBy(this);
+    this.onChangeSortBy = this.onChangeSortBy.bind(this);
     this.onChangeFullRemote = this.onChangeFullRemote.bind(this);
     this.onChangeExclusiveFilter = this.onChangeExclusiveFilter.bind(this);
   }
@@ -96,12 +96,27 @@ class Dashboard extends Component {
     });
   }
 
-  onChangeSortBy(event) {
+  async onChangeSortBy(event) {
     // If nothing is selected, then value is null. - BACK-END
     this.setState(() => {
       return {
         sortByValue: event.label == "Select Option" ? null : event.label,
       };
+    }, async () => {
+      const params = {
+        selectLocation: this.state.selectLocation,
+        selectPostedDate: this.state.selectPostedDate,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+        minPay: this.state.minPay,
+        sortByValue: this.state.sortByValue,
+        fullRemote: this.state.fullRemote,
+        exclusiveFilter: this.state.exclusiveFilter
+      };
+
+      this.setState({
+        opportunities: await this.getOpportunities("custom", params),
+      });
     });
   }
 
@@ -111,6 +126,7 @@ class Dashboard extends Component {
         selectLocation: event.label == "Select Option" ? null : event.label,
       };
     });
+    console.log(this.state.selectLocation)
   }
 
   onChangeDatePosted(event) {

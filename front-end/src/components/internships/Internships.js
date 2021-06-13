@@ -68,7 +68,6 @@ class InternshipPage extends React.Component {
       .get(`${config.API_URL}/${route}`)
       .then((res) => {
         const opportunities = res.data;
-        console.log(opportunities);
         result = opportunities;
       })
       .catch((error) => {

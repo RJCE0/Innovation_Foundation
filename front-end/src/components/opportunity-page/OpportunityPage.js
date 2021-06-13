@@ -97,7 +97,6 @@ const OpportunityPage = (opp) => {
           <h5>{opp.views} views </h5>
           <h5> Pay: {payStatement} </h5>
           <h5>
-            {console.log(opp)}
             Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
           </h5>
         </Modal.Body>

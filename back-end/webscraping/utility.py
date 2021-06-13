@@ -1,13 +1,20 @@
-# Reset to default
-global reset
-reset = '\033[0m'
+# Class for ANSI codes
+class colours:
+    RESET = '\033[0m'
+    GREEN = "\033[1;32;40m"
+    RED = "\033[1;31;40m"
+    PURPLE = "\033[1;35;40m"
 
 # Clearer coloured outputs
+def printColour(colour, str):
+    print(colour, str, colours.RESET)
+
+# Specific colour functions
 def printGreen(str):
-    print("\033[1;32;40m", str, reset)
+    printColour(colours.GREEN, str)
 
 def printRed(str):
-    print("\033[1;31;40m", str, reset)
+    printColour(colours.RED, str)
 
 def printPurple(str):
-    print("\033[1;35;40m", str, reset)
+    printColour(colours.PURPLE, str)

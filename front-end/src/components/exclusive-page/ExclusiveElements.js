@@ -53,22 +53,7 @@ export const ExclusiveImage = styled.img`
   box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.3);
 `;
 
-export const ExclusiveTitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const ExclusiveTitle = styled.h2`
-  position: relative;
-`;
-
-export const ExclusiveCompName = styled.h5`
-  position: absolute;
-`;
+export const ExclusiveTitle = styled.h2``;
 
 export const ApplyButtonsWrapper = styled.div`
   display: flex;
@@ -101,4 +86,11 @@ export const ApplyButtonComponent = styled.button`
   height: 40px;
   padding: 2px 2px 2px 2px;
   font-weight: bold;
+  border: 3px solid ${(props) => props.backgroundColor};
+
+  &:hover {
+    background-color: white;
+    color: ${(props) => props.backgroundColor};
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
 `;

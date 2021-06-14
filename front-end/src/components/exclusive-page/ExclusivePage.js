@@ -2,9 +2,7 @@ import React from "react";
 import { DiscoverNavbar } from "../discover/DiscoverNavbar";
 import Footer from "../layout/Footer";
 import {
-  ExclusiveTitleWrapper,
   ExclusivePageContainer,
-  ExclusiveCompName,
   ExclusiveHeader,
   ExclusiveImage,
   ExclusiveTitle,
@@ -14,8 +12,10 @@ import {
   ApplyButtonComponent,
 } from "./ExclusiveElements";
 import logo from "../../img/innovation-logo.png";
+import { useLocation } from "react-router";
 
 export const ExclusivePage = () => {
+  const opp = useLocation().state;
   return (
     <>
       <DiscoverNavbar />
@@ -23,12 +23,7 @@ export const ExclusivePage = () => {
         <ExclusiveHeader>
           <ExclusiveHeaderLeft>
             <ExclusiveImage src={logo} />
-            <ExclusiveTitleWrapper>
-              <ExclusiveTitle>
-                Introduction To Coding{" "}
-                <ExclusiveCompName>by Facebook</ExclusiveCompName>
-              </ExclusiveTitle>
-            </ExclusiveTitleWrapper>
+            <ExclusiveTitle>{opp.title}</ExclusiveTitle>
           </ExclusiveHeaderLeft>
           <ApplyButtonsWrapper>
             <ApplyButtons>

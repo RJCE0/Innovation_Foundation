@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import { config } from "../../constants";
 import { DiscoverNavbar } from "../discover/DiscoverNavbar";
 import Footer from "../layout/Footer";
 import {
@@ -28,12 +30,31 @@ class ExclusivePage extends React.Component {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  async getOpportunities(route, parameters) {
+    var result = [];
+    await axios
+      .get(`${config.API_URL}/${route}`, {
+        params: {
+          body: parameters,
+        },
+      })
+      .then((res) => {
+        const opportunities = res.data;
+        result = opportunities;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return result;
+  }
+
   async componentDidMount() {
-    await this.sleep(5000);
+    // await this.sleep(5000);
+    const params = {
+      oppId: this.oppId
+    };
     this.setState({
-      opps: {
-        title: "Something",
-      },
+      opps: await this.getOpportunities("exclusive", params)
     });
   }
 

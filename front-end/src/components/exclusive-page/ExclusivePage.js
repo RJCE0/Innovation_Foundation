@@ -56,6 +56,7 @@ class ExclusivePage extends React.Component {
     this.setState({
       opps: await this.getOpportunities("exclusive", params)
     });
+ 
   }
 
   render() {
@@ -68,7 +69,7 @@ class ExclusivePage extends React.Component {
             <ExclusiveHeader>
               <ExclusiveHeaderLeft>
                 <ExclusiveImage src={logo} />
-                <ExclusiveTitle>{this.state.opps.title}</ExclusiveTitle>
+                <ExclusiveTitle>{this.state.opps["0"].title}</ExclusiveTitle>
               </ExclusiveHeaderLeft>
               <ApplyButtonsWrapper>
                 <ApplyButtons>

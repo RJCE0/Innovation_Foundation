@@ -12,32 +12,62 @@ import {
   ApplyButtonComponent,
 } from "./ExclusiveElements";
 import logo from "../../img/innovation-logo.png";
-import { useLocation } from "react-router";
+import { withRouter } from "react-router";
+import Spinner from "../common/Spinner";
 
-export const ExclusivePage = () => {
-  const opp = useLocation().state;
-  return (
-    <>
-      <DiscoverNavbar />
-      <ExclusivePageContainer>
-        <ExclusiveHeader>
-          <ExclusiveHeaderLeft>
-            <ExclusiveImage src={logo} />
-            <ExclusiveTitle>{opp.title}</ExclusiveTitle>
-          </ExclusiveHeaderLeft>
-          <ApplyButtonsWrapper>
-            <ApplyButtons>
-              <ApplyButtonComponent backgroundColor="#256de1">
-                Apply
-              </ApplyButtonComponent>
-              <ApplyButtonComponent backgroundColor="#f8c51c">
-                Favourite
-              </ApplyButtonComponent>
-            </ApplyButtons>
-          </ApplyButtonsWrapper>
-        </ExclusiveHeader>
-      </ExclusivePageContainer>
-      <Footer />
-    </>
-  );
-};
+class ExclusivePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      opps: null,
+    };
+    this.oppId = this.props.match.params.handle.split("=")[1];
+  }
+
+  sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async componentDidMount() {
+    await this.sleep(5000);
+    this.setState({
+      opps: {
+        title: "Something",
+      },
+    });
+  }
+
+  render() {
+    // const opp = useLocation().state;
+    return (
+      <>
+        <DiscoverNavbar />
+        <ExclusivePageContainer>
+          {this.state.opps ? (
+            <ExclusiveHeader>
+              <ExclusiveHeaderLeft>
+                <ExclusiveImage src={logo} />
+                <ExclusiveTitle>{this.state.opps.title}</ExclusiveTitle>
+              </ExclusiveHeaderLeft>
+              <ApplyButtonsWrapper>
+                <ApplyButtons>
+                  <ApplyButtonComponent backgroundColor="#256de1">
+                    Apply
+                  </ApplyButtonComponent>
+                  <ApplyButtonComponent backgroundColor="#f8c51c">
+                    Favourite
+                  </ApplyButtonComponent>
+                </ApplyButtons>
+              </ApplyButtonsWrapper>
+            </ExclusiveHeader>
+          ) : (
+            <Spinner />
+          )}
+        </ExclusivePageContainer>
+        <Footer />
+      </>
+    );
+  }
+}
+
+export default withRouter(ExclusivePage);

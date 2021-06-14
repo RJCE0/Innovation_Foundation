@@ -3,6 +3,11 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import {
+  FacebookShareButton,
+  FacebookShareCount,
+  FacebookIcon
+} from "react-share"
 
 const clipboardStatement =
   "Take a look at this opportunity I found on the Innovation website!\n";
@@ -22,7 +27,13 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
           <Modal.Title> Sharing options for {opportunity.title}: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Button> Share Link on Facebook </Button>
+          <FacebookShareButton round
+            url={opportunity.link}
+            quote={clipboardStatement + opportunity.title + "\n"}
+            hash="#innovation"
+          >
+            <FacebookIcon round ></FacebookIcon>
+          </FacebookShareButton> {' '}
           <Button> Share Link on Twitter </Button>
           <Button> Share Link on LinkedIn </Button>
           <Button

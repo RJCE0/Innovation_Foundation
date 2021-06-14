@@ -38,6 +38,27 @@ class Database {
     return result;
   }
 
+  // for generating exclusive pages
+  static async getExclusiveById(input) {
+    var result = {};
+
+    let {oppId} = JSON.parse(input)
+
+    // execute query
+    await db
+    .any(projectSQL.customFilters, { condition: `AND id=${oppId}` })
+    .then((data) => {
+      console.log("success");
+      result = data;
+    })
+    .catch((error) => {
+      console.log("ERROR:", error);
+    });
+
+    return result;
+  }
+
+  // For filters and sort by on discover
   static async getCustomFilterOpps(input) {
     console.log(input)
 

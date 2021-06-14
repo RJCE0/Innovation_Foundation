@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import EmptyHeartImg from "../../img/empty-heart.svg";
 import FilledInHeartImg from "../../img/filled-heart.svg";
 import ShareImg from "../../img/share.svg";
+import { Link } from "react-router-dom";
 
 const OpportunityPage = (opp) => {
   const [show, setShow] = useState(false);
@@ -101,11 +102,25 @@ const OpportunityPage = (opp) => {
           </h5>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" href={opp.link} target="_blank">
+          {opp.exclusive ? (
+            <Link
+              to={`/discover/${opp.title.replace(/\s+/g, "").toLowerCase()}`}
+            >
+              <Button variant="primary" href={opp.link} target="_blank">
+                {" "}
+                Apply!{" "}
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="primary" href={opp.link} target="_blank">
+              {" "}
+              Apply!{" "}
+            </Button>
+          )}
+          <Button variant="warning" onClick={handleFavClicked}>
             {" "}
-            Apply!{" "}
+            Add to Favourites
           </Button>
-          <Button variant="warning" onClick={handleFavClicked}> Add to Favourites</Button>
         </Modal.Footer>
       </Modal>
     </>

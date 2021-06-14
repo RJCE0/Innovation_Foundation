@@ -8,14 +8,20 @@ import {
   ExclusiveHeader,
   ExclusiveImage,
   ExclusiveTitle,
-  ExclusiveHeaderLeft,
-  ApplyButtonsWrapper,
   ApplyButtons,
   ApplyButtonComponent,
+  ExclusiveBody,
+  ExclusiveBodyItem,
+  ExclusiveBreadCrumbs,
+  ExclusiveSummary,
+  ExclusiveSummaryItem,
 } from "./ExclusiveElements";
-import logo from "../../img/innovation-logo.png";
 import { withRouter } from "react-router";
 import Spinner from "../common/Spinner";
+import Location from "../common/location.gif";
+import Pound from "../common/pound.gif";
+import Calendar from "../common/calendar.gif";
+import Views from "../common/views.gif";
 
 class ExclusivePage extends React.Component {
   constructor(props) {
@@ -49,29 +55,55 @@ class ExclusivePage extends React.Component {
   }
 
   async componentDidMount() {
-    // await this.sleep(5000);
     const params = {
-      oppId: this.oppId
+      oppId: this.oppId,
     };
     this.setState({
-      opps: await this.getOpportunities("exclusive", params)
+      opps: await this.getOpportunities("exclusive", params),
     });
- 
   }
 
   render() {
-    // const opp = useLocation().state;
+    const {
+      title,
+      views,
+      pay,
+      date,
+      description,
+      image_url,
+      location,
+      date_posted,
+    } = this.state.opps ? this.state.opps["0"] : {};
+
     return (
       <>
         <DiscoverNavbar />
         <ExclusivePageContainer>
           {this.state.opps ? (
-            <ExclusiveHeader>
-              <ExclusiveHeaderLeft>
-                <ExclusiveImage src={logo} />
-                <ExclusiveTitle>{this.state.opps["0"].title}</ExclusiveTitle>
-              </ExclusiveHeaderLeft>
-              <ApplyButtonsWrapper>
+            <>
+              <ExclusiveHeader>
+                <ExclusiveImage src={image_url} />
+                <ExclusiveTitle>{title}</ExclusiveTitle>
+              </ExclusiveHeader>
+              <ExclusiveBreadCrumbs>
+                <ExclusiveSummary>
+                  <ExclusiveSummaryItem>
+                    <img width="20px" src={Location} alt="Location:" />
+                    {location}
+                  </ExclusiveSummaryItem>
+                  <ExclusiveSummaryItem>
+                    <img width="20px" src={Pound} alt="Location:" />
+                    {`${pay} p/w`}
+                  </ExclusiveSummaryItem>
+                  <ExclusiveSummaryItem>
+                    <img width="20px" src={Calendar} alt="Location:" />
+                    {new Date(date).toDateString("en-GB")}
+                  </ExclusiveSummaryItem>
+                  <ExclusiveSummaryItem>
+                    <img width="20px" src={Views} alt="Location:" />
+                    {views}
+                  </ExclusiveSummaryItem>
+                </ExclusiveSummary>
                 <ApplyButtons>
                   <ApplyButtonComponent backgroundColor="#256de1">
                     Apply
@@ -80,8 +112,110 @@ class ExclusivePage extends React.Component {
                     Favourite
                   </ApplyButtonComponent>
                 </ApplyButtons>
-              </ApplyButtonsWrapper>
-            </ExclusiveHeader>
+              </ExclusiveBreadCrumbs>
+              <ExclusiveBody>
+                <ExclusiveBodyItem>
+                  <h3 style={{ color: "#256de1" }}>What Your Role Involves</h3>
+                  <h5>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                  </h5>
+                </ExclusiveBodyItem>
+                <ExclusiveBodyItem>
+                  <h3 style={{ color: "#256de1" }}>Company Description</h3>
+                  <h5>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                  </h5>
+                </ExclusiveBodyItem>
+                <ExclusiveBodyItem>
+                  <h3 style={{ color: "#256de1" }}>Salary And Skills Gained</h3>
+                  <h5>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                  </h5>
+                </ExclusiveBodyItem>
+                <ExclusiveBodyItem>
+                  <h3 style={{ color: "#256de1" }}>Requirements</h3>
+                  <h5>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                  </h5>
+                </ExclusiveBodyItem>
+              </ExclusiveBody>
+            </>
           ) : (
             <Spinner />
           )}

@@ -41,6 +41,7 @@ stage-heroku:
     - !reference [.setup, script]
     - cd front-end
     - dpl --provider=heroku --app=$HEROKU_STAGE_NAME --api-key=$HEROKU_API_KEY
+  needs: [stage-server]
 
 deploy-heroku:
   stage: deploy

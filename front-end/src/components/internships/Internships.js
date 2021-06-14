@@ -14,9 +14,9 @@ import {
 } from "./InternshipsElements";
 import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
-import { Button } from "react-bootstrap";
 import "./i.css";
 import { FilterModal } from "../discover/ModalElements";
+import Spinner from "../common/Spinner";
 
 const MenuItem = ({ something }) => {
   return (
@@ -100,25 +100,7 @@ class InternshipPage extends React.Component {
   }
 
   // Adds new cards when you run out -- back-end
-  onLastItemVisible = () => {
-    // const newItems = Array(5)
-    //   .fill(1)
-    //   .map((el, ind) => ({ name: `item${this.state.itemsCount + ind + 1}` }));
-    // this.state.opportunities = this.state.opportunities.concat(newItems);
-    // this.menuItems = this.state.opportunities.map((el) => {
-    //   return (
-    //     <MenuItem
-    //       something={el}
-    //       key={el.id}
-    //       selected={this.state.selected}
-    //     />
-    //   );
-    // });
-    // this.setState({
-    //   itemsCount: this.state.opportunities.length,
-    //   selected: this.state.selected,
-    // });
-  };
+  onLastItemVisible = () => {};
 
   onUpdate = ({ translate }) => {
     this.setState({ translate });
@@ -161,7 +143,7 @@ class InternshipPage extends React.Component {
                       wheel={true}
                     />
                   ) : (
-                    <h4 style={{ textAlign: "center" }}>LOADING...</h4>
+                    <Spinner />
                   )}
                 </div>
               </NewlyAddedWrapper>
@@ -190,7 +172,7 @@ class InternshipPage extends React.Component {
                       wheel={true}
                     />
                   ) : (
-                    <h4 style={{ textAlign: "center" }}>LOADING...</h4>
+                    <Spinner />
                   )}
                 </div>
               </NewlyAddedWrapper>

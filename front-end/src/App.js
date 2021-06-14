@@ -12,7 +12,7 @@ import Discover from "./components/discover/Discover";
 import InternshipPage from "./components/internships/Internships";
 import NotFound from "./components/not-found/NotFound";
 import "./App.css";
-import { ExclusivePage } from "./components/exclusive-page/ExclusivePage";
+import ExclusivePage from "./components/exclusive-page/ExclusivePage";
 
 class App extends Component {
   render() {

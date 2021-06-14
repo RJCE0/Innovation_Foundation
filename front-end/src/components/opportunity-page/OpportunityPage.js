@@ -6,11 +6,15 @@ import "bootstrap/dist/css/bootstrap.css";
 import EmptyHeartImg from "../../img/empty-heart.svg";
 import FilledInHeartImg from "../../img/filled-heart.svg";
 import ShareImg from "../../img/share.svg";
+import ShareModal from "./ShareModal";
 
 const OpportunityPage = (opp) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showShare, setShowShare] = useState(false);
+  const handleShareClose = () => setShowShare(false);
+  const handleShareShow = () => setShowShare(true);
   const payStatement =
     opp.pay == 0 ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
   const [favClicked, setFavClicked] = useState(false);
@@ -63,7 +67,7 @@ const OpportunityPage = (opp) => {
               src={favClicked ? FilledInHeartImg : EmptyHeartImg}
             />
           </button>
-          <button className="content-btn">
+          <button className="content-btn" onClick={handleShareShow}>
             <img width="25px" height="25px" src={ShareImg} />
           </button>
         </div>
@@ -76,6 +80,11 @@ const OpportunityPage = (opp) => {
           </span>
         </div>
       </div>
+      <ShareModal
+        handleShareClose={handleShareClose}
+        showShare={showShare}
+        opportunity={opp}
+      />
       <Modal
         className="opportunity-page-modal"
         show={show}
@@ -105,7 +114,10 @@ const OpportunityPage = (opp) => {
             {" "}
             Apply!{" "}
           </Button>
-          <Button variant="warning" onClick={handleFavClicked}> Add to Favourites</Button>
+          <Button variant="warning" onClick={handleFavClicked}>
+            {" "}
+            Add to Favourites
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

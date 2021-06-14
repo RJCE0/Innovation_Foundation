@@ -3,19 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import EmptyHeartImg from "../../img/empty-heart.svg";
-import FilledInHeartImg from "../../img/filled-heart.svg";
-import ShareImg from "../../img/share.svg";
 
-function copyLinkToClipboard(link) {
-  const clipboardStatement =
-    "Take a look at this opportunity I found on the Innovation website!\n";
-  console.log("The link is: " + link);
-  return navigator.clipboard.writeText(clipboardStatement + link);
-}
+const clipboardStatement =
+  "Take a look at this opportunity I found on the Innovation website!\n";
 
 const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
-  var copied = false;
+  const [copied, setCopied] = useState(false);
   const status = copied ? "Link copied to clipboard!" : "Copy Link";
   return (
     <>
@@ -32,7 +25,14 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
           <Button> Share Link on Facebook </Button>
           <Button> Share Link on Twitter </Button>
           <Button> Share Link on LinkedIn </Button>
-          <Button onClick={copyLinkToClipboard(opportunity.link)}>
+          <Button
+            onClick={() => {
+              setCopied(true);
+              return navigator.clipboard.writeText(
+                clipboardStatement + opportunity.link
+              );
+            }}
+          >
             {" "}
             {status}{" "}
           </Button>

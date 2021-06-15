@@ -26,3 +26,5 @@ yarn-error.log*
 build/
 
 .vscode
+.metals
+__pycache__/

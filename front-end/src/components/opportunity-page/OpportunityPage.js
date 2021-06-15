@@ -57,8 +57,9 @@ const OpportunityPage = (opp) => {
   }
   const handleShareShow = () => setShowShare(true);
   const undisclosedPay = -1;
+  const unpaidOpportunity = 0;
   const payStatement =
-    opp.pay == 0 ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
+    opp.pay == unpaidOpportunity ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
   const [favClicked, setFavClicked] = useState(false);
   const handleFavClicked = () => setFavClicked((favClicked) => !favClicked);
   return (

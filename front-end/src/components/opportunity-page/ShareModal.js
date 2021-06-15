@@ -60,6 +60,7 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
                 clipboardStatement + opportunity.link
               );
             }}
+            variant={(copied) ?  "success" : "primary"}
           >
             {" "}
             {status}{" "}

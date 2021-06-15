@@ -1,5 +1,5 @@
 const prod = {
-  API_URL: "https://innovation-drp.herokuapp.com",
+  API_URL: "https://innovation-server.herokuapp.com",
 };
 
 const dev = {

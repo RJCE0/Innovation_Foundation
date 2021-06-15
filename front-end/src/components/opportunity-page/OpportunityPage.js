@@ -76,7 +76,7 @@ const OpportunityPage = (opp) => {
             {opp.title}
           </a>
           <span className="additional-info">
-            {new Date(opp.date).toDateString()}
+            {opp.date == null ? "Starting Date TBC" : new Date(opp.date).toDateString()}
           </span>
         </div>
       </div>
@@ -104,7 +104,7 @@ const OpportunityPage = (opp) => {
           {" "}
           <p>{opp.description}</p>
           <h5>{opp.views} views </h5>
-          <h5> Pay: {payStatement} </h5>
+          <h5> Pay: {(opp.pay) == -1 ? "Undisclosed" : payStatement} </h5>
           <h5>
             Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
           </h5>
@@ -112,7 +112,7 @@ const OpportunityPage = (opp) => {
         <Modal.Footer>
           <Button variant="primary" href={opp.link} target="_blank">
             {" "}
-            Apply!{" "}
+            Learn more!{" "}
           </Button>
           <Button variant="warning" onClick={handleFavClicked}>
             {" "}

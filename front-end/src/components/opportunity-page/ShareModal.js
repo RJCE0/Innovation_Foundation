@@ -25,10 +25,9 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
       <Modal
         show={showShare}
         onHide={handleShareClose}
-        backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title> Sharing options for {opportunity.title}: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -67,7 +66,6 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
             {status}{" "}
           </Button>
         </Modal.Body>
-        <Modal.Footer> </Modal.Footer>
       </Modal>
     </>
   );

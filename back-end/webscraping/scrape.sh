@@ -1,4 +1,5 @@
 #!/bin/sh
+sudo apt install python3-pip
 pip3 install -r requirements.txt
 python3 cleanInternships.py
 python3 GradCrackWebScraper.py

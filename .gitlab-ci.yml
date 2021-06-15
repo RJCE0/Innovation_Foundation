@@ -48,6 +48,7 @@ deploy-heroku:
   before_script: []
   script:
     - !reference [.setup, script]
+    - cd front-end
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
   only:
     - master

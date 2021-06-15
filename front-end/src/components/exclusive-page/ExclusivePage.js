@@ -15,6 +15,7 @@ import {
   ExclusiveBreadCrumbs,
   ExclusiveSummary,
   ExclusiveSummaryItem,
+  ExclusiveSummaryTitle
 } from "./ExclusiveElements";
 import { withRouter } from "react-router";
 import Spinner from "../common/Spinner";
@@ -87,6 +88,7 @@ class ExclusivePage extends React.Component {
               </ExclusiveHeader>
               <ExclusiveBreadCrumbs>
                 <ExclusiveSummary>
+                  <ExclusiveSummaryTitle>Summary</ExclusiveSummaryTitle>
                   <ExclusiveSummaryItem>
                     <img width="20px" src={Location} alt="Location:" />
                     {location}

@@ -114,3 +114,5 @@ export const ExclusiveBody = styled.div`
 export const ExclusiveBodyItem = styled.div`
   display: block;
 `;
+
+export const ExclusiveSummaryTitle = styled.h3``

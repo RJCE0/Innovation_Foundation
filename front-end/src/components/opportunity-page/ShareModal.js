@@ -6,7 +6,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import {
   FacebookShareButton,
   FacebookShareCount,
-  FacebookIcon
+  FacebookIcon,
+  TwitterIcon,
+  TwitterShareButton,
+  LinkedinIcon,
+  LinkedinShareButton
 } from "react-share"
 
 const clipboardStatement =
@@ -34,8 +38,21 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
           >
             <FacebookIcon round ></FacebookIcon>
           </FacebookShareButton> {' '}
-          <Button> Share Link on Twitter </Button>
-          <Button> Share Link on LinkedIn </Button>
+          <TwitterShareButton round
+            url={opportunity.link}
+            title={clipboardStatement + opportunity.title + "\n\n\n"}
+            hashtags={["innovation", "opportunity", "workexp"]}
+          >
+            <TwitterIcon round ></TwitterIcon>
+          </TwitterShareButton> {' '}
+          <LinkedinShareButton round
+            source={"Innovation Foundation"}
+            url={opportunity.link}
+            summary={clipboardStatement + opportunity.title + "\n\n" + "#InnovationFoundation"}
+            title="Innovation Foundation"
+          >
+            <LinkedinIcon round ></LinkedinIcon>
+          </LinkedinShareButton> {' '}
           <Button
             onClick={() => {
               setCopied(true);

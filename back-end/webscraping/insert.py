@@ -57,6 +57,8 @@ def check():
 def convertDate(days_ago):
     cur_date = date.today()
     days = days_ago.split()[0]
+    if days == 'Just':
+        days = 0
 
     new_date = cur_date - datetime.timedelta(int(days))
     return new_date.strftime("%Y-%m-%d")

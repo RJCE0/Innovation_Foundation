@@ -16,9 +16,8 @@ import {
 const clipboardStatement =
   "Take a look at this opportunity I found on the Innovation website!\n";
 
-const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
-  const [copied, setCopied] = useState(false);
-  const status = copied ? "Link copied to clipboard!" : "Copy Link";
+const ShareModal = ({ handleShareClose, showShare, opportunity, copy, setCopy}) => {
+  const status = copy ? "Link copied to clipboard!" : "Copy Link";
   const innovationHashtag = "#InnovationFoundation";
   return (
     <>
@@ -55,12 +54,12 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
           </LinkedinShareButton> {' '}
           <Button
             onClick={() => {
-              setCopied(true);
+              setCopy(true);
               return navigator.clipboard.writeText(
                 clipboardStatement + opportunity.link
               );
             }}
-            variant={(copied) ?  "success" : "primary"}
+            variant={(copy) ?  "success" : "primary"}
           >
             {" "}
             {status}{" "}

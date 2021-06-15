@@ -50,8 +50,13 @@ const OpportunityPage = (opp) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [showShare, setShowShare] = useState(false);
-  const handleShareClose = () => setShowShare(false);
+  const [copy, setCopied] = useState(false);
+  const handleShareClose = () => {
+    setShowShare(false);
+    setCopied(false);
+  }
   const handleShareShow = () => setShowShare(true);
+  const undisclosedPay = -1;
   const payStatement =
     opp.pay == 0 ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
   const [favClicked, setFavClicked] = useState(false);
@@ -101,6 +106,8 @@ const OpportunityPage = (opp) => {
         handleShareClose={handleShareClose}
         showShare={showShare}
         opportunity={opp}
+        copy={copy}
+        setCopy={setCopied}
       />
       <Modal
         className="opportunity-page-modal"
@@ -121,7 +128,7 @@ const OpportunityPage = (opp) => {
           {" "}
           <p>{opp.description}</p>
           <h5>{opp.views} views </h5>
-          <h5> Pay: {(opp.pay) == -1 ? "Undisclosed" : payStatement} </h5>
+          <h5> Pay: {(opp.pay) == undisclosedPay ? "Undisclosed" : payStatement} </h5>
           <h5>
             Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
           </h5>

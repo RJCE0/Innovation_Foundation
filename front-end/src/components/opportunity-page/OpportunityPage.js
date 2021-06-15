@@ -7,6 +7,7 @@ import EmptyHeartImg from "../../img/empty-heart.svg";
 import FilledInHeartImg from "../../img/filled-heart.svg";
 import ShareImg from "../../img/share.svg";
 import { Link } from "react-router-dom";
+import ShareModal from "./ShareModal";
 
 const CardElements = (opp) => (
   <div className="cardContainer contentBox lght-shad">
@@ -48,6 +49,9 @@ const OpportunityPage = (opp) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showShare, setShowShare] = useState(false);
+  const handleShareClose = () => setShowShare(false);
+  const handleShareShow = () => setShowShare(true);
   const payStatement =
     opp.pay == 0 ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
   const [favClicked, setFavClicked] = useState(false);
@@ -80,7 +84,7 @@ const OpportunityPage = (opp) => {
               src={favClicked ? FilledInHeartImg : EmptyHeartImg}
             />
           </button>
-          <button className="content-btn">
+          <button className="content-btn" onClick={handleShareShow}>
             <img width="25px" height="25px" src={ShareImg} />
           </button>
         </div>
@@ -89,10 +93,15 @@ const OpportunityPage = (opp) => {
             {opp.title}
           </a>
           <span className="additional-info">
-            {new Date(opp.date).toDateString()}
+            {opp.date == null ? "Starting Date TBC" : new Date(opp.date).toDateString()}
           </span>
         </div>
       </div>
+      <ShareModal
+        handleShareClose={handleShareClose}
+        showShare={showShare}
+        opportunity={opp}
+      />
       <Modal
         className="opportunity-page-modal"
         show={show}
@@ -112,27 +121,16 @@ const OpportunityPage = (opp) => {
           {" "}
           <p>{opp.description}</p>
           <h5>{opp.views} views </h5>
-          <h5> Pay: {payStatement} </h5>
+          <h5> Pay: {(opp.pay) == -1 ? "Undisclosed" : payStatement} </h5>
           <h5>
             Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
           </h5>
         </Modal.Body>
         <Modal.Footer>
-          {opp.exclusive ? (
-            <Link
-              to={`/discover/${opp.title.replace(/\s+/g, "").toLowerCase()}`}
-            >
-              <Button variant="primary" href={opp.link} target="_blank">
-                {" "}
-                Apply!{" "}
-              </Button>
-            </Link>
-          ) : (
-            <Button variant="primary" href={opp.link} target="_blank">
-              {" "}
-              Apply!{" "}
-            </Button>
-          )}
+          <Button variant="primary" href={opp.link} target="_blank">
+            {" "}
+            Learn more!{" "}
+          </Button>
           <Button variant="warning" onClick={handleFavClicked}>
             {" "}
             Add to Favourites

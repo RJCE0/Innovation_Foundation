@@ -82,6 +82,16 @@ app.get("/custom", async (req, res) => {
   }
 });
 
+app.get("/exclusive", async (req, res) => {
+  try {
+    const opportunities = await Database.getExclusiveById(req.query.body);
+    res.json(opportunities);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+
 // When new get requests are required, using existing sql queries write here:
 
 app.listen(port, () => {

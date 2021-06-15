@@ -9,6 +9,9 @@ node_modules
 # production
 /build
 
+# IDEA files from WebStorm/IntelliJ
+/.idea
+
 # misc
 .DS_Store
 .env.local

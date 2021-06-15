@@ -54,7 +54,7 @@ export const LogoLink = styled(LinkR)`
 `;
 
 export const Nav = styled.nav`
-  background: #000;
+  background: rgba(0, 0, 0, 0.9);
   height: 75px;
   display: flex;
   justify-content: space-between;

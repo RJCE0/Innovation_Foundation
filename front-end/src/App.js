@@ -12,6 +12,7 @@ import Discover from "./components/discover/Discover";
 import InternshipPage from "./components/internships/Internships";
 import NotFound from "./components/not-found/NotFound";
 import "./App.css";
+import ExclusivePage from "./components/exclusive-page/ExclusivePage";
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
             <Route exact path="/internships" component={InternshipPage} />
             {/*<Route exact path="/mentorship" component={MentorshipPage} /> */}
             <Route exact path="/not-found" component={NotFound} />
+            <Route exact path="/discover/:handle" component={ExclusivePage} />
           </div>
         </Router>
       </Provider>

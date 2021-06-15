@@ -19,6 +19,7 @@ const clipboardStatement =
 const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
   const [copied, setCopied] = useState(false);
   const status = copied ? "Link copied to clipboard!" : "Copy Link";
+  const innovationHashtag = "#InnovationFoundation";
   return (
     <>
       <Modal
@@ -48,7 +49,7 @@ const ShareModal = ({ handleShareClose, showShare, opportunity }) => {
           <LinkedinShareButton round
             source={"Innovation Foundation"}
             url={opportunity.link}
-            summary={clipboardStatement + opportunity.title + "\n\n" + "#InnovationFoundation"}
+            summary={clipboardStatement + opportunity.title + "\n\n" + innovationHashtag}
             title="Innovation Foundation"
           >
             <LinkedinIcon round ></LinkedinIcon>

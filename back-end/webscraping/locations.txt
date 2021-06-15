@@ -1,0 +1,57 @@
+Bath
+Birmingham
+Bradford
+Brighton and Hove
+Bristol
+Cambridge
+Canterbury
+Carlisle
+Chester
+Cheshire
+Chelmsford
+Chichester
+Coventry
+Derby
+Durham
+Ely
+Exeter
+Geneva
+Gloucester
+Hereford
+Kingston upon Hull
+Lancaster
+Leeds
+Leicester
+Lichfield
+Lincoln
+Liverpool
+London
+Manchester
+Maidstone
+Newcastle upon Tyne
+Norwich
+Nottingham
+Northamptonshire
+Oxford
+Peterborough
+Plymouth
+Portsmouth
+Preston
+Ripon
+Salford
+Salisbury
+Sheffield
+Southampton
+St Albans
+Stoke-on-Trent
+Sunderland
+Truro
+Wakefield
+Wells
+Westminster
+Winchester
+Wolverhampton
+Worcester
+Wales
+UK
+York

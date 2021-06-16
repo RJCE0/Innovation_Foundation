@@ -108,7 +108,7 @@ class Database {
         + `${postedDate.getMonth() + 1}-`
         + `${postedDate.getDate()}`;
 
-      condition += `AND date_posted='${resDate}'`;
+      condition += `AND date_posted>='${resDate}'`;
     }
 
     // Minimum pay filter (slider)
@@ -172,6 +172,24 @@ class Database {
 
   static async getRecents() {
     return this.anyQueries(projectSQL.getRecent);
+  }
+
+  static async updateViews(input){
+
+    console.log("INPUT:", input)
+    let { id, views} = JSON.parse(input);
+    console.log("ID: ", id)
+    console.log("VIEWS: ", views)
+
+    await db
+      .none(projectSQL.updateViews, { views: views, id: id })
+      .then((data) => {
+        console.log("success");
+        result = data;
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
   }
 
 

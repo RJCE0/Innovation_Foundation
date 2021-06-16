@@ -50,6 +50,14 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/views", async (req, res) => {
+  try {
+    await Database.updateViews(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 // To obtain opportunities from database for dynamically displaying
 app.get("/discover", async (req, res) => {
   try {

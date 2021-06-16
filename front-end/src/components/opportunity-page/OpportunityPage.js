@@ -8,6 +8,8 @@ import FilledInHeartImg from "../../img/filled-heart.svg";
 import ShareImg from "../../img/share.svg";
 import { Link } from "react-router-dom";
 import ShareModal from "./ShareModal";
+import axios from "axios";
+import { config } from "../../constants";
 
 const CardElements = (opp) => (
   <div className="cardContainer contentBox lght-shad">
@@ -45,115 +47,180 @@ const CardElements = (opp) => (
   </div>
 );
 
-const OpportunityPage = (opp) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [showShare, setShowShare] = useState(false);
-  const [copy, setCopied] = useState(false);
-  const handleShareClose = () => {
-    setShowShare(false);
-    setCopied(false);
-  };
-  const handleShareShow = () => setShowShare(true);
-  const undisclosedPay = -1;
-  const unpaidOpportunity = 0;
-  const payStatement =
-    opp.pay == unpaidOpportunity
-      ? "Unpaid opportunity!"
-      : "£" + opp.pay + "p/w";
-  const [favClicked, setFavClicked] = useState(opp.fav);
-  const handleFavClicked = () => setFavClicked((favClicked) => !favClicked);
-  return (
-    <>
-      <div className="content-item" data-id={opp.id}>
-        {opp.exclusive ? (
-          <Link
-            to={{
-              pathname: `/discover/${opp.title
-                .trim()
-                .replace(/\s+/g, "-")
-                .toLowerCase()}&id=${opp.id}`,
-              state: { ...opp },
-            }}
-          >
-            <CardElements {...opp} />
-          </Link>
-        ) : (
-          <a onClick={handleShow}>
-            <CardElements {...opp} />
-          </a>
-        )}
-        <div className="content-top-leftContainer">
-          <button onClick={handleFavClicked} className="content-btn">
-            <img
-              width="25px"
-              height="25px"
-              src={favClicked ? FilledInHeartImg : EmptyHeartImg}
-            />
-          </button>
-          <button className="content-btn" onClick={handleShareShow}>
-            <img width="25px" height="25px" src={ShareImg} />
-          </button>
+class OpportunityPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showShare: false,
+      copy: false,
+      favClicked: this.props.fav,
+      views: parseInt(this.props.views),
+      show: false,
+    };
+    this.handleShareClose = this.handleShareClose.bind(this);
+    this.handleShareShow = this.handleShareShow.bind(this);
+    this.handleFavClicked = this.handleFavClicked.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.setCopy = this.setCopy.bind(this);
+  }
+
+  handleShareClose() {
+    this.setState(() => {
+      return { copy: false, showShare: false };
+    });
+  }
+
+  handleShareShow() {
+    this.setState(() => {
+      return { showShare: true };
+    });
+  }
+
+  handleFavClicked() {
+    this.setState(({ favClicked }) => {
+      return { favClicked: !favClicked };
+    });
+  }
+
+  handleClose() {
+    this.setState(() => {
+      return { show: false };
+    });
+  }
+
+  handleShow() {
+    this.setState(({ views }) => {
+      return { show: true, views: views + 1 };
+    });
+  }
+
+  setCopy(newCopy) {
+    this.setState(() => {
+      return { copy: newCopy };
+    });
+  }
+
+  async updateViews(opp) {
+    await axios
+      .post(`${config.API_URL}/views`, {
+        params: {
+          body: opp,
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  render() {
+    const undisclosedPay = -1;
+    const unpaidOpportunity = 0;
+    const opp = this.props;
+    const payStatement =
+      opp.pay == unpaidOpportunity
+        ? "Unpaid opportunity!"
+        : "£" + opp.pay + "p/w";
+
+    return (
+      <>
+        <div className="content-item" data-id={opp.id}>
+          {opp.exclusive ? (
+            <Link
+              // onClick={() => {
+              //   updateViews({ ...opp, views: views });
+              // }}
+              to={{
+                pathname: `/discover/${opp.title
+                  .trim()
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}&id=${opp.id}`,
+                state: { ...opp, views: this.state.views },
+              }}
+            >
+              <CardElements {...opp} views={this.state.views} />
+            </Link>
+          ) : (
+            <a onClick={this.handleShow}>
+              <CardElements {...opp} views={this.state.views} />
+            </a>
+          )}
+          <div className="content-top-leftContainer">
+            <button onClick={this.handleFavClicked} className="content-btn">
+              <img
+                width="25px"
+                height="25px"
+                src={this.state.favClicked ? FilledInHeartImg : EmptyHeartImg}
+              />
+            </button>
+            <button className="content-btn" onClick={this.handleShareShow}>
+              <img width="25px" height="25px" src={ShareImg} />
+            </button>
+          </div>
+          <div className="content-info">
+            <a className="title" onClick={this.handleShow}>
+              {opp.title}
+            </a>
+            <span className="additional-info">
+              {opp.date == null
+                ? "Starting Date TBC"
+                : new Date(opp.date).toDateString()}
+            </span>
+          </div>
         </div>
-        <div className="content-info">
-          <a className="title" onClick={handleShow}>
-            {opp.title}
-          </a>
-          <span className="additional-info">
-            {opp.date == null
-              ? "Starting Date TBC"
-              : new Date(opp.date).toDateString()}
-          </span>
-        </div>
-      </div>
-      <ShareModal
-        handleShareClose={handleShareClose}
-        showShare={showShare}
-        opportunity={opp}
-        copy={copy}
-        setCopy={setCopied}
-      />
-      <Modal
-        className="opportunity-page-modal"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <div>
-              <h3>{opp.title}</h3>
-              {opp.exclusive && <h4 style={{ color: "#256de1" }}>Exclusive</h4>}
-            </div>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {" "}
-          <p>{opp.description}</p>
-          <h5>{opp.views} views </h5>
-          <h5>
+        <ShareModal
+          handleShareClose={this.handleShareClose}
+          showShare={this.state.showShare}
+          opportunity={opp}
+          copy={this.state.copy}
+          setCopy={this.setCopy}
+        />
+        <Modal
+          className="opportunity-page-modal"
+          show={this.state.show}
+          onHide={this.handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <div>
+                <h3>{opp.title}</h3>
+                {opp.exclusive && (
+                  <h4 style={{ color: "#256de1" }}>Exclusive</h4>
+                )}
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             {" "}
-            Pay: {opp.pay == undisclosedPay ? "Undisclosed" : payStatement}{" "}
-          </h5>
-          <h5>
-            Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
-          </h5>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" href={opp.link} target="_blank">
-            {" "}
-            Learn more!{" "}
-          </Button>
-          <Button variant="warning" onClick={handleFavClicked}>
-            {" "}
-            Add to Favourites
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-};
+            <p>{opp.description}</p>
+            <h5>{this.state.views} views </h5>
+            <h5>
+              {" "}
+              Pay: {opp.pay == undisclosedPay
+                ? "Undisclosed"
+                : payStatement}{" "}
+            </h5>
+            <h5>
+              Date Posted:{" "}
+              {new Date(opp.date_posted).toLocaleDateString("en-GB")}
+            </h5>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" href={opp.link} target="_blank">
+              {" "}
+              Learn more!{" "}
+            </Button>
+            <Button variant="warning" onClick={this.handleFavClicked}>
+              {" "}
+              Add to Favourites
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+}
 
 export default OpportunityPage;

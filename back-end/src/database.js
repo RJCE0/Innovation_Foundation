@@ -148,7 +148,7 @@ class Database {
     await db
       .any(projectSQL.customFilters, { condition: condition })
       .then((data) => {
-        console.log("success");
+        console.log("successful custom data retrieval");
         result = data;
       })
       .catch((error) => {
@@ -183,6 +183,7 @@ class Database {
   }
 
   static async updateViews(input) {
+
     let { id, views } = input.params.body;
     console.log("ID: ", id);
     console.log("VIEWS: ", views);
@@ -190,8 +191,7 @@ class Database {
     await db
       .any(projectSQL.updateViews, { views: views, id: id })
       .then((data) => {
-        console.log("success");
-        result = data;
+        console.log("successful views update");
       })
       .catch((error) => {
         console.log("ERROR:", error);

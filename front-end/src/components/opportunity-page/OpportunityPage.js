@@ -63,7 +63,6 @@ class OpportunityPage extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.setCopy = this.setCopy.bind(this);
-    this.updateViews = this.updateViews.bind(this);
   }
 
   handleShareClose() {
@@ -91,20 +90,9 @@ class OpportunityPage extends React.Component {
   }
 
   async handleShow() {
-    // this.setState(({ views }) => {
-    //   return { show: true, views: views + 1 };
-    // });
-    console.log("MASTERCLASS-MAYBE");
-    await axios
-      .post(`${config.API_URL}/views`, {
-        params: {
-          body: { ...this.props, views: this.state.views + 1 },
-        },
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log("MASTERCLASS-MAYBE");
+    this.setState(({ views }) => {
+      return { show: true, views: views + 1 };
+    }, this.updateViews.bind(this));
   }
 
   setCopy(newCopy) {
@@ -114,16 +102,10 @@ class OpportunityPage extends React.Component {
   }
 
   async updateViews() {
-    // this.setState(
-    //   ({ views }) => {
-    //     return { views: views + 1 };
-    //   },
-    //   () => console.log(this.state)
-    // );
     await axios
       .post(`${config.API_URL}/views`, {
         params: {
-          body: { ...this.props, views: this.state.views + 1 },
+          body: { ...this.props, views: this.state.views },
         },
       })
       .catch((error) => {
@@ -145,13 +127,11 @@ class OpportunityPage extends React.Component {
         <div className="content-item" data-id={opp.id}>
           {opp.exclusive ? (
             <Link
-              // onClick={this.updateViews}
               to={{
                 pathname: `/discover/${opp.title
                   .trim()
                   .replace(/\s+/g, "-")
                   .toLowerCase()}&id=${opp.id}`,
-                state: { ...opp, views: this.state.views },
               }}
             >
               <CardElements {...opp} views={this.state.views} />

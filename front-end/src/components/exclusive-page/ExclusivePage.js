@@ -59,9 +59,27 @@ class ExclusivePage extends React.Component {
     const params = {
       oppId: this.oppId,
     };
-    this.setState({
-      opps: await this.getOpportunities("exclusive", params),
-    });
+    this.setState(
+      {
+        opps: await this.getOpportunities("exclusive", params),
+      },
+      this.updateViews.bind(this)
+    );
+  }
+
+  async updateViews() {
+    await axios
+      .post(`${config.API_URL}/views`, {
+        params: {
+          body: {
+            ...this.state.opps["0"],
+            views: parseInt(this.state.opps["0"].views) + 1,
+          },
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -103,7 +121,7 @@ class ExclusivePage extends React.Component {
                   </ExclusiveSummaryItem>
                   <ExclusiveSummaryItem>
                     <img width="20px" src={Views} alt="Location:" />
-                    {views}
+                    {parseInt(views) + 1}
                   </ExclusiveSummaryItem>
                 </ExclusiveSummary>
                 <ApplyButtons>

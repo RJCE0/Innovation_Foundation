@@ -14,9 +14,8 @@ const dbInfo = {
 const db = pgp(dbInfo);
 
 class Database {
-
   static formatQueryDate(date) {
-    [date,] = date.split("T");
+    [date] = date.split("T");
     return date;
   }
 
@@ -42,30 +41,39 @@ class Database {
   static async getExclusiveById(input) {
     var result = {};
 
-    let {oppId} = JSON.parse(input)
+    let { oppId } = JSON.parse(input);
 
     // execute query
     await db
-    .any(projectSQL.customFilters, { condition: `AND id=${oppId}` })
-    .then((data) => {
-      console.log("success");
-      result = data;
-    })
-    .catch((error) => {
-      console.log("ERROR:", error);
-    });
+      .any(projectSQL.customFilters, { condition: `AND id=${oppId}` })
+      .then((data) => {
+        console.log("success");
+        result = data;
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
 
     return result;
   }
 
   // For filters and sort by on discover
   static async getCustomFilterOpps(input) {
-    console.log(input)
+    console.log(input);
 
     var result = {};
-    var condition = '';
+    var condition = "";
 
-    let { selectLocation, selectPostedDate, startDate, endDate, minPay, sortByValue, fullRemote, exclusiveFilter } = JSON.parse(input);
+    let {
+      selectLocation,
+      selectPostedDate,
+      startDate,
+      endDate,
+      minPay,
+      sortByValue,
+      fullRemote,
+      exclusiveFilter,
+    } = JSON.parse(input);
 
     if (fullRemote) {
       condition += `AND location = 'Remote'`;
@@ -81,7 +89,6 @@ class Database {
     }
 
     if (selectPostedDate != null) {
-
       // get current date
       var postedDate = new Date();
       const day = postedDate.getDay();
@@ -104,9 +111,10 @@ class Database {
       }
 
       // construct comparison date string for db
-      var resDate = `${postedDate.getFullYear()}-`
-        + `${postedDate.getMonth() + 1}-`
-        + `${postedDate.getDate()}`;
+      var resDate =
+        `${postedDate.getFullYear()}-` +
+        `${postedDate.getMonth() + 1}-` +
+        `${postedDate.getDate()}`;
 
       condition += `AND date_posted>='${resDate}'`;
     }
@@ -125,14 +133,14 @@ class Database {
     if (sortByValue != null) {
       switch (sortByValue) {
         case "Most Recently Posted":
-          condition += `ORDER BY date_posted desc`
+          condition += `ORDER BY date_posted desc`;
           break;
         case "Most Popular":
-          condition += `ORDER BY views desc`
-          break
+          condition += `ORDER BY views desc`;
+          break;
         case "Start Date":
-          condition += `ORDER BY date`
-          break
+          condition += `ORDER BY date`;
+          break;
       }
     }
 
@@ -174,15 +182,13 @@ class Database {
     return this.anyQueries(projectSQL.getRecent);
   }
 
-  static async updateViews(input){
-
-    console.log("INPUT:", input)
-    let { id, views} = JSON.parse(input);
-    console.log("ID: ", id)
-    console.log("VIEWS: ", views)
+  static async updateViews(input) {
+    let { id, views } = input.params.body;
+    console.log("ID: ", id);
+    console.log("VIEWS: ", views);
 
     await db
-      .none(projectSQL.updateViews, { views: views, id: id })
+      .any(projectSQL.updateViews, { views: views, id: id })
       .then((data) => {
         console.log("success");
         result = data;
@@ -191,8 +197,6 @@ class Database {
         console.log("ERROR:", error);
       });
   }
-
-
 }
 
 export default Database;

@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Cards = styled.div`
+  margin: 0 10% 0 10%;
+  padding: 0 10px;
+  max-width: 100%;
+`;
+
 export const InternshipContainer = styled.div`
   box-sizing: border-box;
   background: white;
@@ -38,7 +44,7 @@ export const NewlyAddedWrapper = styled.div`
   max-width: 100%;
 `;
 
-export const NewlyAddedP = styled.h4`
+export const NewlyAddedH4 = styled.h4`
   color: black;
   text-align: center;
 `;
@@ -58,8 +64,7 @@ export const MostPopularP = styled.p`
   font-size: 1.4rem;
 `;
 
-export const AllWrapper = styled.div`
-`;
+export const AllWrapper = styled.div``;
 
 export const AllP = styled.p`
   color: black;

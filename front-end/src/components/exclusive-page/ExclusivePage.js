@@ -15,7 +15,7 @@ import {
   ExclusiveBreadCrumbs,
   ExclusiveSummary,
   ExclusiveSummaryItem,
-  ExclusiveSummaryTitle
+  ExclusiveSummaryTitle,
 } from "./ExclusiveElements";
 import { withRouter } from "react-router";
 import Spinner from "../common/Spinner";

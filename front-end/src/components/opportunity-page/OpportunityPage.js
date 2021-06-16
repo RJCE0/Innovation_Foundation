@@ -54,13 +54,15 @@ const OpportunityPage = (opp) => {
   const handleShareClose = () => {
     setShowShare(false);
     setCopied(false);
-  }
+  };
   const handleShareShow = () => setShowShare(true);
   const undisclosedPay = -1;
   const unpaidOpportunity = 0;
   const payStatement =
-    opp.pay == unpaidOpportunity ? "Unpaid opportunity!" : "£" + opp.pay + "p/w";
-  const [favClicked, setFavClicked] = useState(false);
+    opp.pay == unpaidOpportunity
+      ? "Unpaid opportunity!"
+      : "£" + opp.pay + "p/w";
+  const [favClicked, setFavClicked] = useState(opp.fav);
   const handleFavClicked = () => setFavClicked((favClicked) => !favClicked);
   return (
     <>
@@ -99,7 +101,9 @@ const OpportunityPage = (opp) => {
             {opp.title}
           </a>
           <span className="additional-info">
-            {opp.date == null ? "Starting Date TBC" : new Date(opp.date).toDateString()}
+            {opp.date == null
+              ? "Starting Date TBC"
+              : new Date(opp.date).toDateString()}
           </span>
         </div>
       </div>
@@ -129,7 +133,10 @@ const OpportunityPage = (opp) => {
           {" "}
           <p>{opp.description}</p>
           <h5>{opp.views} views </h5>
-          <h5> Pay: {(opp.pay) == undisclosedPay ? "Undisclosed" : payStatement} </h5>
+          <h5>
+            {" "}
+            Pay: {opp.pay == undisclosedPay ? "Undisclosed" : payStatement}{" "}
+          </h5>
           <h5>
             Date Posted: {new Date(opp.date_posted).toLocaleDateString("en-GB")}
           </h5>

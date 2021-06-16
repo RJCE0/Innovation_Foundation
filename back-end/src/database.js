@@ -125,7 +125,7 @@ class Database {
     if (sortByValue != null) {
       switch (sortByValue) {
         case "Most Recently Posted":
-          condition += `ORDER BY date_posted`
+          condition += `ORDER BY date_posted desc`
           break;
         case "Most Popular":
           condition += `ORDER BY views desc`
@@ -169,6 +169,11 @@ class Database {
   static async sortInternByViews() {
     return this.anyQueries(projectSQL.sortInternByViews);
   }
+
+  static async getRecents() {
+    return this.anyQueries(projectSQL.getRecent);
+  }
+
 
 }
 

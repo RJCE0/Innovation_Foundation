@@ -14,4 +14,5 @@ export const projectSQL = {
   getPaidInternships: sql("../sql/getPaidInternships.sql"),
   sortInternByViews: sql("../sql/sortInternByViews.sql"),
   customFilters: sql("../sql/customFilters.sql"),
+  getRecent: sql("../sql/getRecent.sql"),
 };

@@ -21,6 +21,8 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 100;
+  top: 0;
+  left: 0;
   font-family: "Nunito", sans-serif;
 `;
 

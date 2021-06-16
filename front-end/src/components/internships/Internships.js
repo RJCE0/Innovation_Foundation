@@ -18,7 +18,7 @@ import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./i.css";
 import { FilterModal } from "../discover/ModalElements";
 import Spinner from "../common/Spinner";
-import { Button } from "react-bootstrap";
+import { CardsWithFilter } from "../common/CardsWithFilter";
 
 const MenuItem = ({ opp }) => {
   return (
@@ -46,6 +46,7 @@ class InternshipPage extends React.Component {
     this.state = {
       itemsCount: 0,
       opportunities: [],
+      oppRecent: [],
       opportunitiesPop: [],
       show: false,
     };
@@ -85,13 +86,19 @@ class InternshipPage extends React.Component {
         return { ...opportunity, name: opportunity.id };
       }),
     });
+    const oppRecent = await this.getOpportunities("recent");
+    this.setState({
+      oppRecent: oppRecent.map((opportunity) => {
+        return { ...opportunity, name: opportunity.id };
+      }),
+    });
     const oppPop = await this.getOpportunities("internships");
     this.setState({
       opportunitiesPop: oppPop.map((opportunity) => {
         return { ...opportunity, name: opportunity.id };
       }),
     });
-    this.menuItems = this.state.opportunities.map((opportunity) => {
+    this.menuItems = this.state.oppRecent.map((opportunity) => {
       return <MenuItem opp={opportunity} key={opportunity.id} />;
     });
     this.menuItemsPopular = this.state.opportunitiesPop.map((opportunity) => {
@@ -176,58 +183,10 @@ class InternshipPage extends React.Component {
                 </Cards>
               </NewlyAddedWrapper>
             </InternshipsWrapper>
-            <div id="main-contentContainer" style={{ marginTop: "30px" }}>
-              <div
-                style={{
-                  width: "100%",
-                  justifyContent: "center",
-                  marginBottom: "20px",
-                }}
-              >
-                <h4 style={{ textAlign: "center", marginBottom: "0.5rem" }}>
-                  All Internships
-                </h4>
-              </div>
-              <div className="containerWrapper">
-                <div id="main-filterContainer">
-                  <div className="filterBtn-container">
-                    <Button onClick={this.handleModal}>Filters</Button>
-                  </div>
-                  <div>
-                    <div className="filterContainer">
-                      <span className="filterType">Location</span>
-                      <span className="filter-respo">London</span>
-                    </div>
-
-                    <div className="filterContainer">
-                      <span className="filterType">Paid</span>
-                      <span className="filter-respo">Free</span>
-                    </div>
-                    <div className="filterContainer">
-                      <span className="filterType">Time</span>
-                      <span className="filter-respo">Day</span>
-                    </div>
-                  </div>
-                </div>
-
-                {this.receivedData ? (
-                  <div
-                    data-filtered="opportunities"
-                    data-applied-filter-type="location, pay, dates"
-                    data-applied-filter="london, free, day"
-                    id="contentContainer"
-                  >
-                    <div className="contentBox-wrapper">
-                      {this.state.opportunities.map((opp) => {
-                        return <OpportunityPage {...opp} />;
-                      })}
-                    </div>
-                  </div>
-                ) : (
-                  <Spinner />
-                )}
-              </div>
-            </div>
+            <h4 style={{ textAlign: "center", marginBottom: "-50px" }}>
+              All Internships
+            </h4>
+            <CardsWithFilter />
           </InternshipContent>
           <Footer />
         </InternshipContainer>

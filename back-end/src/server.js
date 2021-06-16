@@ -1,10 +1,12 @@
 import Database from './database'
-import path from 'path';
+// import path from 'path';
 
 
 const { Pool } = require('pg')
 const express = require('express');
 const cors = require('cors');
+const path = require('path')
+const fs = require('fs');
 const app = express();
 
 require('dotenv').config();
@@ -99,6 +101,20 @@ app.get("/recent", async (req, res) => {
   try {
     const opportunities = await Database.getRecents();
     res.json(opportunities);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+app.get("/locations", async (req, res) => {
+  try {
+    fs.readFile(path.join(__dirname, '../webscraping/locations.txt'), 'utf8', (err, data) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      res.json(data)
+    })
   } catch (error) {
     res.body = "Error: " + error;
   }

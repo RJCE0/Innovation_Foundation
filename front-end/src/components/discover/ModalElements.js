@@ -1,5 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
+import axios from 'axios'
+import {config} from '../../constants'
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import DatePicker from "react-datepicker";
@@ -109,11 +111,39 @@ const Slide = withStyles({
   },
 })(Slider);
 
-const optionsLocation = [
-  { label: "Select Option", value: 0 },
-  { label: "London", value: 1 },
-  { label: "Amsterdam", value: 2 },
-];
+const locations = async() => {
+  console.log("CALLED")
+  var result = [];
+  await axios
+    .get(`${config.API_URL}/locations`)
+    .then((res) => {
+      const location = res.data
+      result = location;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  return result.split("\n");
+}
+
+console.log(locations());
+
+const optionsLocation = () => {
+
+  const area = locations()
+  const areas = []
+  for(i in area){
+     areas.push({label: area[i], value: i+1})
+  }
+  return areas
+}
+//  [
+//   { label: "Select Option", value: 0 },
+//   { label: "London", value: 1 },
+//   { label: "Amsterdam", value: 2 },
+// ];
+
+
 
 const optionsDatePosted = [
   { label: "Select Option", value: 0 },
@@ -220,6 +250,9 @@ export const FilterModal = ({
     return () => document.removeEventListener("keydown", escapePress);
   }, [escapePress]);
 
+  const opl = optionsLocation()
+  console.log("OPL", opl)
+
   return (
     <>
       {show ? (
@@ -275,10 +308,10 @@ export const FilterModal = ({
                     defaultValue={
                       selectLocation
                         ? { label: selectLocation }
-                        : optionsLocation[0]
+                        : optionsLocation()[0]
                     }
-                    filterOptions={filterOptions(optionsLocation)}
-                    options={optionsLocation}
+                    filterOptions={filterOptions(optionsLocation())}
+                    options={optionsLocation()}
                   />
                 </div>
                 <div>

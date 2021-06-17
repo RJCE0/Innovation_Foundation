@@ -80,7 +80,7 @@ class OpportunityPage extends React.Component {
   handleFavClicked() {
     this.setState(({ favClicked }) => {
       return { favClicked: !favClicked };
-    });
+    }, this.updateFavourites.bind(this));
   }
 
   handleClose() {
@@ -99,6 +99,18 @@ class OpportunityPage extends React.Component {
     this.setState(() => {
       return { copy: newCopy };
     });
+  }
+
+  async updateFavourites() {
+    await axios
+      .post(`${config.API_URL}/favourites`, {
+        params: {
+          body: { ...this.props, fav: this.state.favClicked },
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async updateViews() {
@@ -155,7 +167,9 @@ class OpportunityPage extends React.Component {
           </div>
           <div className="content-info">
             <a className="title" onClick={this.handleShow}>
-              {opp.title.length > 26 ? opp.title.substring(0, 23).trim() + '...' : opp.title}
+              {opp.title.length > 26
+                ? opp.title.substring(0, 23).trim() + "..."
+                : opp.title}
             </a>
             <span className="additional-info">
               {opp.date == null

@@ -57,15 +57,15 @@ class Database {
     return result;
   }
 
-   // for generating exclusive pages extra information
-   static async getExclusiveInfoById(input) {
+  // for generating exclusive pages extra information
+  static async getExclusiveInfoById(input) {
     var result = {};
 
     let { oppId } = JSON.parse(input);
 
     // execute query
     await db
-      .any(projectSQL.exclusiveInfo, { condition: `id=${oppId}`})
+      .any(projectSQL.exclusiveInfo, { condition: `id=${oppId}` })
       .then((data) => {
         console.log("Success in retrieving exclusive information");
         result = data;
@@ -178,6 +178,43 @@ class Database {
     return result;
   }
 
+  static async getSortedFav(input) {
+    console.log("FAV INPUT", input);
+
+    var condition = `AND fav=true `;
+    var result = {};
+    let { sortByValue } = JSON.parse(input);
+    console.log(sortByValue);
+
+    // Sort by
+    if (sortByValue != null) {
+      switch (sortByValue) {
+        case "Most Recently Posted":
+          condition += `ORDER BY date_posted desc`;
+          break;
+        case "Most Popular":
+          condition += `ORDER BY views desc`;
+          break;
+        case "Start Date":
+          condition += `ORDER BY date`;
+          break;
+      }
+    }
+
+    // execute query
+    await db
+      .any(projectSQL.customFilters, { condition: condition })
+      .then((data) => {
+        console.log("successful custom data retrieval");
+        result = data;
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+    console.log("RESULT:", result);
+    return result;
+  }
+
   static async getAllOpportunities() {
     return this.anyQueries(projectSQL.getAllOpportunities);
   }
@@ -203,15 +240,25 @@ class Database {
   }
 
   static async updateViews(input) {
-
     let { id, views } = input.params.body;
-    console.log("ID: ", id);
-    console.log("VIEWS: ", views);
 
     await db
       .any(projectSQL.updateViews, { views: views, id: id })
       .then((data) => {
         console.log("successful views update");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+  }
+
+  static async updateFavourites(input) {
+    let { id, fav } = input.params.body;
+
+    await db
+      .any(projectSQL.updateFav, { fav: fav, id: id })
+      .then((data) => {
+        console.log("successful fav update");
       })
       .catch((error) => {
         console.log("ERROR:", error);

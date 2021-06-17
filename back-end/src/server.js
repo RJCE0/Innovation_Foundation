@@ -60,6 +60,14 @@ app.post("/views", async (req, res) => {
   }
 });
 
+
+app.post("/favourites", async (req, res) => {
+  try {
+    await Database.updateFavourites(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
 // To obtain opportunities from database for dynamically displaying
 app.get("/discover", async (req, res) => {
   try {
@@ -88,6 +96,15 @@ app.get("/custom", async (req, res) => {
   }
 });
 
+app.get("/customFav", async (req, res) => {
+  try {
+    const opportunities = await Database.getSortedFav(req.query.body);
+    res.json(opportunities);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.get("/exclusive", async (req, res) => {
   try {
     const opportunities = await Database.getExclusiveById(req.query.body);
@@ -100,6 +117,15 @@ app.get("/exclusive", async (req, res) => {
 app.get("/exclusive-info", async (req, res) => {
   try {
     const opportunities = await Database.getExclusiveInfoById(req.query.body);
+    res.json(opportunities);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+app.get("/favourites", async (req, res) => {
+  try {
+    const opportunities = await Database.getAllFavourites();
     res.json(opportunities);
   } catch (error) {
     res.body = "Error: " + error;

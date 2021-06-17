@@ -59,9 +59,9 @@ class ExclusivePage extends React.Component {
     this.setState(
       {
         opps: await this.getOpportunities("exclusive", params),
-        info: await this.getOpportunities("exclusive-info", params)
+        info: await this.getOpportunities("exclusive-info", params),
       },
-      this.updateViews.bind(this),
+      this.updateViews.bind(this)
     );
   }
 
@@ -81,68 +81,55 @@ class ExclusivePage extends React.Component {
   }
 
   formatInfoList(info) {
-    return info.split("\n").map(bullet => {
-      return <li style={{ padding: "5px 0 5px 0", listStyleType: "disclosure-closed" }}>
-        {bullet}
-      </li>
-    })
+    return info.split("\n").map((bullet) => {
+      return (
+        <li
+          style={{ padding: "5px 0 5px 0", listStyleType: "disclosure-closed" }}
+        >
+          {bullet}
+        </li>
+      );
+    });
   }
 
   formatInfo(info) {
-    return info.split("\n").map(para => {
-      return <p>
-        {para}
-      </p>
-    })
+    return info.split("\n").map((para) => {
+      return <p>{para}</p>;
+    });
   }
 
   render() {
-    const {
-      title,
-      views,
-      pay,
-      date,
-      description,
-      image_url,
-      location,
-      date_posted,
-    } = this.state.opps ? this.state.opps["0"] : {};
-
-    const {
-      role,
-      c_description,
-      skills_gained,
-      requirements,
-    } = this.state.info ? this.state.info["0"] : {};
+    const opps = this.state.opps ? this.state.opps["0"] : null;
+    const info = this.state.info ? this.state.info["0"] : null;
 
     return (
       <>
         <DiscoverNavbar />
         <ExclusivePageContainer>
-          {this.state.opps ? (
+          {opps ? (
             <>
               <ExclusiveHeader>
-                <ExclusiveImage src={image_url} />
-                <ExclusiveTitle>{title}</ExclusiveTitle>
+                <ExclusiveImage src={opps.image_url} />
+                <ExclusiveTitle>{opps.title}</ExclusiveTitle>
               </ExclusiveHeader>
               <ExclusiveBreadCrumbs>
                 <ExclusiveSummary>
                   <ExclusiveSummaryTitle>Summary</ExclusiveSummaryTitle>
                   <ExclusiveSummaryItem>
                     <img width="20px" src={Location} alt="Location:" />
-                    {location}
+                    {opps.location}
                   </ExclusiveSummaryItem>
                   <ExclusiveSummaryItem>
                     <img width="20px" src={Pound} alt="Location:" />
-                    {`${pay} p/w`}
+                    {`${opps.pay} p/w`}
                   </ExclusiveSummaryItem>
                   <ExclusiveSummaryItem>
                     <img width="20px" src={Calendar} alt="Location:" />
-                    {new Date(date).toDateString("en-GB")}
+                    {new Date(opps.date).toDateString("en-GB")}
                   </ExclusiveSummaryItem>
                   <ExclusiveSummaryItem>
                     <img width="20px" src={Views} alt="Location:" />
-                    {parseInt(views) + 1}
+                    {parseInt(opps.views) + 1}
                   </ExclusiveSummaryItem>
                 </ExclusiveSummary>
                 <ApplyButtons>
@@ -155,34 +142,36 @@ class ExclusivePage extends React.Component {
                 </ApplyButtons>
               </ExclusiveBreadCrumbs>
               <ExclusiveBody>
-                <ExclusiveBodyItem>
-                  <h3 style={{ color: "#256de1" }}>What Your Role Involves</h3>
-                  <h5>
-                    {this.formatInfo(role)}
-                  </h5>
-                </ExclusiveBodyItem>
-                <ExclusiveBodyItem>
-                  <h3 style={{ color: "#256de1" }}>Company Description</h3>
-                  <h5>
-                    {this.formatInfo(c_description)}
-                  </h5>
-                </ExclusiveBodyItem>
-                <ExclusiveBodyItem>
-                  <h3 style={{ color: "#256de1" }}>Salary, Benefits And Skills Gained</h3>
-                  <h5>
-                    <ul>
-                      {this.formatInfoList(skills_gained)}
-                    </ul>
-                  </h5>
-                </ExclusiveBodyItem>
-                <ExclusiveBodyItem>
-                  <h3 style={{ color: "#256de1" }}>Requirements</h3>
-                  <h5>
-                    <ul>
-                      {this.formatInfoList(requirements)}
-                    </ul>
-                  </h5>
-                </ExclusiveBodyItem>
+                {info ? (
+                  <>
+                    <ExclusiveBodyItem>
+                      <h3 style={{ color: "#256de1" }}>
+                        What Your Role Involves
+                      </h3>
+                      <h5>{this.formatInfo(info.role)}</h5>
+                    </ExclusiveBodyItem>
+                    <ExclusiveBodyItem>
+                      <h3 style={{ color: "#256de1" }}>Company Description</h3>
+                      <h5>{this.formatInfo(info.c_description)}</h5>
+                    </ExclusiveBodyItem>
+                    <ExclusiveBodyItem>
+                      <h3 style={{ color: "#256de1" }}>
+                        Salary, Benefits And Skills Gained
+                      </h3>
+                      <h5>
+                        <ul>{this.formatInfoList(info.skills_gained)}</ul>
+                      </h5>
+                    </ExclusiveBodyItem>
+                    <ExclusiveBodyItem>
+                      <h3 style={{ color: "#256de1" }}>Requirements</h3>
+                      <h5>
+                        <ul>{this.formatInfoList(info.requirements)}</ul>
+                      </h5>
+                    </ExclusiveBodyItem>{" "}
+                  </>
+                ) : (
+                  <Spinner />
+                )}
               </ExclusiveBody>
             </>
           ) : (

@@ -16,5 +16,6 @@ export const projectSQL = {
   customFilters: sql("../sql/customFilters.sql"),
   getRecent: sql("../sql/getRecent.sql"),
   updateViews: sql("../sql/updateViews.sql"),
+  updateFav: sql("../sql/updateFav.sql"),
   exclusiveInfo: sql("../sql/exclusiveInfo.sql"),
 };

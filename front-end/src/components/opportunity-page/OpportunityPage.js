@@ -155,7 +155,7 @@ class OpportunityPage extends React.Component {
           </div>
           <div className="content-info">
             <a className="title" onClick={this.handleShow}>
-              {opp.title}
+              {opp.title.length > 26 ? opp.title.substring(0, 23).trim() + '...' : opp.title}
             </a>
             <span className="additional-info">
               {opp.date == null

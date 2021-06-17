@@ -13,7 +13,7 @@ import {
 } from "./navbarElements";
 import outerLogo from "../../img/outer-logo.png";
 import innerLogo from "../../img/inner-logo.png";
-import persona from "../../img/user.png";
+import AvatarDropdown from "./AvatarDropdown";
 //import Navbar from 'react-bootstrap/Navbar'
 
 export const DiscoverNavbar = (props) => {
@@ -32,8 +32,8 @@ export const DiscoverNavbar = (props) => {
             <NavLink to="/student-blog">Student Blog</NavLink>
           </NavMenu>
           <NavAvatar>
-            <NavAvatarLink to="/discover">  
-            <Avatar src={persona} alt="avatar"/>
+          <NavAvatarLink>
+            <AvatarDropdown />
             </NavAvatarLink>
           </NavAvatar>
         </Nav>

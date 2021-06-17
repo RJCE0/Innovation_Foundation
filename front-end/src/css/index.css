@@ -58,10 +58,10 @@
 }
 
 #signup-container .inputContainer:focus::placeholder {
-  color: #fff;
+  font-weight: bolder;
 }
 #signup-container .inputContainer:focus {
-  background-color: #338cd1;
+  background-color: #a2ccec;
   color: #fff;
 }
 #signup-container .inputContainer {

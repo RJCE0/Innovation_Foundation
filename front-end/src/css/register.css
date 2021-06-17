@@ -22,6 +22,12 @@
   font-size: 25px;
 }
 
+@media screen and (max-width: 1000px) {
+  #signup-container {
+    min-width: 70%;
+  }
+}
+
 #signup-container {
   position: relative;
   right: 0;
@@ -29,7 +35,6 @@
   margin: 0 auto;
   margin-top: 50px;
   background-color: #f9f9f9;
-  width: 25vw;
   height: auto;
   padding: 20px;
   box-sizing: border-box;

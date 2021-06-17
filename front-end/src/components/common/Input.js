@@ -1,18 +1,27 @@
 import React from "react";
-import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const Input = ({ name, placeholder, value, error, onChange, styles }) => {
+const Input = ({ name, placeholder, value, error, onChange, styles, area }) => {
   return (
     <div className="">
-      <input
-        className="inputContainer text"
-        placeholder={placeholder}
-        name={name}
-        value={value}
-        onChange={onChange}
-        style={styles ? styles : null}
-      />
+      {area ? (
+        <textarea
+          placeholder={placeholder}
+          name={name}
+          value={value}
+          onChange={onChange}
+          style={styles ? styles : null}
+        />
+      ) : (
+        <input
+          className="inputContainer text"
+          placeholder={placeholder}
+          name={name}
+          value={value}
+          onChange={onChange}
+          style={styles ? styles : null}
+        />
+      )}
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );

@@ -10,18 +10,20 @@ import {
   InternshipContent,
   InternshipH1,
   NewlyAddedWrapper,
-  NewlyAddedP,
+  NewlyAddedH4,
+  Cards,
 } from "./InternshipsElements";
 import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./i.css";
 import { FilterModal } from "../discover/ModalElements";
 import Spinner from "../common/Spinner";
+import { CardsWithFilter } from "../common/CardsWithFilter";
 
-const MenuItem = ({ something }) => {
+const MenuItem = ({ opp }) => {
   return (
     <div className={`menu-item`}>
-      <OpportunityPage {...something} />
+      <OpportunityPage {...opp} />
     </div>
   );
 };
@@ -44,10 +46,11 @@ class InternshipPage extends React.Component {
     this.state = {
       itemsCount: 0,
       opportunities: [],
+      oppRecent: [],
       opportunitiesPop: [],
       show: false,
     };
-    this.done = false;
+    this.receivedData = false;
     this.menu = [];
     this.menuItems = [];
     this.menuItemsPopular = [];
@@ -79,23 +82,29 @@ class InternshipPage extends React.Component {
   async componentDidMount() {
     const opps = await this.getOpportunities("discover");
     this.setState({
-      opportunities: opps.map((el) => {
-        return { el, name: el.id };
+      opportunities: opps.map((opportunity) => {
+        return { ...opportunity, name: opportunity.id };
+      }),
+    });
+    const oppRecent = await this.getOpportunities("recent");
+    this.setState({
+      oppRecent: oppRecent.map((opportunity) => {
+        return { ...opportunity, name: opportunity.id };
       }),
     });
     const oppPop = await this.getOpportunities("internships");
     this.setState({
-      opportunitiesPop: oppPop.map((el) => {
-        return { el, name: el.id };
+      opportunitiesPop: oppPop.map((opportunity) => {
+        return { ...opportunity, name: opportunity.id };
       }),
     });
-    this.menuItems = this.state.opportunities.map((el) => {
-      return <MenuItem something={el.el} key={el.el.id} />;
+    this.menuItems = this.state.oppRecent.map((opportunity) => {
+      return <MenuItem opp={opportunity} key={opportunity.id} />;
     });
-    this.menuItemsPopular = this.state.opportunitiesPop.map((el) => {
-      return <MenuItem something={el.el} key={el.el.id} />;
+    this.menuItemsPopular = this.state.opportunitiesPop.map((opportunity) => {
+      return <MenuItem opp={opportunity} key={opportunity.id} />;
     });
-    this.done = true;
+    this.receivedData = true;
     this.forceUpdate();
   }
 
@@ -116,107 +125,68 @@ class InternshipPage extends React.Component {
           <DiscoverNavbar />
           <InternshipContent>
             <InternshipH1>Internships</InternshipH1>
-            {/* Cards for internships go here */}
             <InternshipsWrapper>
               <NewlyAddedWrapper>
-                <NewlyAddedP> Newly Added Internships</NewlyAddedP>
-                <div id="contentContainer">
-                  {this.done ? (
-                    <ScrollMenu
-                      alignCenter={true}
-                      arrowLeft={ArrowLeft}
-                      arrowRight={ArrowRight}
-                      clickWhenDrag={false}
-                      data={menu}
-                      dragging={false}
-                      hideArrows={false}
-                      hideSingleArrow={true}
-                      onLastItemVisible={this.onLastItemVisible}
-                      // back end stuf starts
-                      onSelect={this.onSelect}
-                      // onUpdate={this.onUpdate}
-                      // back-end stuff ends
-                      ref={(el) => (this.menu = el)}
-                      scrollToSelected={false}
-                      transition={+0.7}
-                      translate={0}
-                      wheel={true}
-                    />
-                  ) : (
-                    <Spinner />
-                  )}
-                </div>
+                <NewlyAddedH4> Newly Added Internships</NewlyAddedH4>
+                <Cards>
+                  <div id="contentContainer">
+                    {this.receivedData ? (
+                      <ScrollMenu
+                        alignCenter={true}
+                        arrowLeft={ArrowLeft}
+                        arrowRight={ArrowRight}
+                        clickWhenDrag={false}
+                        data={menu}
+                        dragging={false}
+                        hideArrows={false}
+                        hideSingleArrow={true}
+                        onLastItemVisible={this.onLastItemVisible}
+                        onSelect={this.onSelect}
+                        ref={(el) => (this.menu = el)}
+                        scrollToSelected={false}
+                        transition={+0.7}
+                        translate={0}
+                        wheel={true}
+                      />
+                    ) : (
+                      <Spinner />
+                    )}
+                  </div>
+                </Cards>
               </NewlyAddedWrapper>
               <NewlyAddedWrapper>
-                <NewlyAddedP>Most Popular</NewlyAddedP>
-                <div id="contentContainer">
-                  {this.done ? (
-                    <ScrollMenu
-                      alignCenter={true}
-                      arrowLeft={ArrowLeft}
-                      arrowRight={ArrowRight}
-                      clickWhenDrag={false}
-                      data={menuPop}
-                      dragging={false}
-                      hideArrows={false}
-                      hideSingleArrow={true}
-                      onLastItemVisible={this.onLastItemVisible}
-                      // back end stuf starts
-                      onSelect={this.onSelect}
-                      // onUpdate={this.onUpdate}
-                      // back-end stuff ends
-                      ref={(el) => (this.menu = el)}
-                      scrollToSelected={false}
-                      transition={+0.7}
-                      translate={0}
-                      wheel={true}
-                    />
-                  ) : (
-                    <Spinner />
-                  )}
-                </div>
+                <NewlyAddedH4>Most Popular</NewlyAddedH4>
+                <Cards>
+                  <div id="contentContainer">
+                    {this.receivedData ? (
+                      <ScrollMenu
+                        alignCenter={true}
+                        arrowLeft={ArrowLeft}
+                        arrowRight={ArrowRight}
+                        clickWhenDrag={false}
+                        data={menuPop}
+                        dragging={false}
+                        hideArrows={false}
+                        hideSingleArrow={true}
+                        onLastItemVisible={this.onLastItemVisible}
+                        onSelect={this.onSelect}
+                        ref={(el) => (this.menu = el)}
+                        scrollToSelected={false}
+                        transition={+0.7}
+                        translate={0}
+                        wheel={true}
+                      />
+                    ) : (
+                      <Spinner />
+                    )}
+                  </div>
+                </Cards>
               </NewlyAddedWrapper>
             </InternshipsWrapper>
-            {/* <div id="main-contentContainer" style={{ marginTop: "30px" }}>
-              <div className="containerWrapper">
-                <div id="main-filterContainer">
-                  <div className="filterBtn-container">
-                    <Button onClick={this.handleModal}>Filters</Button>
-                  </div>
-                  <div>
-                    <div className="filterContainer">
-                      <span className="filterType">Location</span>
-                      <span className="filter-respo">London</span>
-                    </div>
-
-                    <div className="filterContainer">
-                      <span className="filterType">Paid</span>
-                      <span className="filter-respo">Free</span>
-                    </div>
-                    <div className="filterContainer">
-                      <span className="filterType">Time</span>
-                      <span className="filter-respo">Day</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  data-filtered="opportunities"
-                  data-applied-filter-type="location, pay, dates"
-                  data-applied-filter="london, free, day"
-                  id="contentContainer"
-                >
-                  <div className="contentBox-wrapper">
-                    {this.state.opportunities.map((opp, index) => {
-                      return (
-                        // adt for ads
-                        <OpportunityPage {...opp} />
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div> */}
+            <h4 style={{ textAlign: "center", marginBottom: "-50px" }}>
+              All Internships
+            </h4>
+            <CardsWithFilter />
           </InternshipContent>
           <Footer />
         </InternshipContainer>

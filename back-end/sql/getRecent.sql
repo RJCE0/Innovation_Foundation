@@ -1,3 +1,3 @@
 SELECT * FROM internships
-ORDER BY views desc
+ORDER BY date_posted desc
 LIMIT 10

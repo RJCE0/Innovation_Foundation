@@ -1,10 +1,12 @@
 import Database from './database'
-import path from 'path';
+// import path from 'path';
 
 
 const { Pool } = require('pg')
 const express = require('express');
 const cors = require('cors');
+const path = require('path')
+const fs = require('fs');
 const app = express();
 
 require('dotenv').config();
@@ -30,10 +32,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// // Body parser middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
 app.get('/test', (req, res) => {
   res.json({ "test": true })
 })
@@ -49,6 +47,14 @@ app.post("/register", async (req, res) => {
   try {
     const newUser = await Database.addUser(req.body);
     res.json(newUser);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+app.post("/views", async (req, res) => {
+  try {
+    await Database.updateViews(req.body);
   } catch (error) {
     res.body = "Error: " + error;
   }
@@ -91,8 +97,29 @@ app.get("/exclusive", async (req, res) => {
   }
 });
 
+app.get("/recent", async (req, res) => {
+  try {
+    const opportunities = await Database.getRecents();
+    res.json(opportunities);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
 
-// When new get requests are required, using existing sql queries write here:
+app.get("/locations", async (req, res) => {
+  try {
+    fs.readFile(path.join(__dirname, '../webscraping/locations.txt'), 'utf8', (err, data) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      res.json(data)
+    })
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

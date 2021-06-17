@@ -1,5 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
+import axios from "axios";
+import { config } from "../../constants";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import DatePicker from "react-datepicker";
@@ -21,6 +23,8 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 100;
+  top: 0;
+  left: 0;
   font-family: "Nunito", sans-serif;
 `;
 
@@ -107,18 +111,26 @@ const Slide = withStyles({
   },
 })(Slider);
 
-const optionsLocation = [
-  { label: "Select Option", value: 0 },
-  { label: "London", value: 1 },
-  { label: "Amsterdam", value: 2 },
-];
+const locations = async () => {
+  var result = [];
+  await axios
+    .get(`${config.API_URL}/locations`)
+    .then((res) => {
+      const location = res.data;
+      result = location;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  return result.split("\n");
+};
 
 const optionsDatePosted = [
-  { label: "Select Option", value: 0 },
-  { label: "Today", value: 1 },
-  { label: "This Week", value: 2 },
-  { label: "This Month", value: 3 },
-  { label: "This Year", value: 4 },
+  { label: "Select Option", value: 0, key: 0 },
+  { label: "Today", value: 1, key: 1 },
+  { label: "This Week", value: 2, key: 2 },
+  { label: "This Month", value: 3, key: 3 },
+  { label: "This Year", value: 4, key: 4 },
 ];
 
 export const filterOptions = (options) => {
@@ -218,6 +230,16 @@ export const FilterModal = ({
     return () => document.removeEventListener("keydown", escapePress);
   }, [escapePress]);
 
+  const [optionsLocation, setOptionsLocation] = useState(null);
+  useEffect(async () => {
+    const something = await locations();
+    for (let i in something) {
+      something[i] = { label: something[i], value: i + 1, key: i + 1 };
+    }
+    something.unshift(optionsDatePosted[0]);
+    setOptionsLocation(something);
+  }, []);
+
   return (
     <>
       {show ? (
@@ -275,8 +297,10 @@ export const FilterModal = ({
                         ? { label: selectLocation }
                         : optionsLocation[0]
                     }
-                    filterOptions={filterOptions(optionsLocation)}
-                    options={optionsLocation}
+                    filterOptions={filterOptions(
+                      optionsLocation ? optionsLocation : []
+                    )}
+                    options={optionsLocation ? optionsLocation : []}
                   />
                 </div>
                 <div>

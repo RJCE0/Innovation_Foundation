@@ -115,4 +115,4 @@ export const ExclusiveBodyItem = styled.div`
   display: block;
 `;
 
-export const ExclusiveSummaryTitle = styled.h3``
+export const ExclusiveSummaryTitle = styled.h3``;

@@ -107,7 +107,6 @@ export class CardsWithFilter extends Component {
           fullRemote: this.state.fullRemote,
           exclusiveFilter: this.state.exclusiveFilter,
         };
-
         this.setState({
           opportunities: await this.getOpportunities("custom", params),
         });
@@ -121,7 +120,6 @@ export class CardsWithFilter extends Component {
         selectLocation: event.label == "Select Option" ? null : event.label,
       };
     });
-    console.log(this.state.selectLocation);
   }
 
   onChangeDatePosted(event) {

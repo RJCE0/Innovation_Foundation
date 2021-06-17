@@ -34,10 +34,6 @@ class ExclusivePage extends React.Component {
     this.oppId = this.props.match.params.handle.split("=")[1];
   }
 
-  sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   async getOpportunities(route, parameters) {
     var result = [];
     await axios
@@ -82,6 +78,22 @@ class ExclusivePage extends React.Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  formatInfoList(info) {
+    return info.split("\n").map(bullet => {
+      return <li style={{ padding: "5px 0 5px 0", listStyleType: "disclosure-closed" }}>
+        {bullet}
+      </li>
+    })
+  }
+
+  formatInfo(info) {
+    return info.split("\n").map(para => {
+      return <p>
+        {para}
+      </p>
+    })
   }
 
   render() {
@@ -146,33 +158,29 @@ class ExclusivePage extends React.Component {
                 <ExclusiveBodyItem>
                   <h3 style={{ color: "#256de1" }}>What Your Role Involves</h3>
                   <h5>
-                    <p>
-                      {role}
-                    </p>
+                    {this.formatInfo(role)}
                   </h5>
                 </ExclusiveBodyItem>
                 <ExclusiveBodyItem>
                   <h3 style={{ color: "#256de1" }}>Company Description</h3>
                   <h5>
-                    <p>
-                     {c_description}
-                    </p>
+                    {this.formatInfo(c_description)}
                   </h5>
                 </ExclusiveBodyItem>
                 <ExclusiveBodyItem>
-                  <h3 style={{ color: "#256de1" }}>Salary And Skills Gained</h3>
+                  <h3 style={{ color: "#256de1" }}>Salary, Benefits And Skills Gained</h3>
                   <h5>
-                  <p>
-                     {skills_gained}
-                    </p>
+                    <ul>
+                      {this.formatInfoList(skills_gained)}
+                    </ul>
                   </h5>
                 </ExclusiveBodyItem>
                 <ExclusiveBodyItem>
                   <h3 style={{ color: "#256de1" }}>Requirements</h3>
                   <h5>
-                  <p>
-                     {requirements}
-                    </p>
+                    <ul>
+                      {this.formatInfoList(requirements)}
+                    </ul>
                   </h5>
                 </ExclusiveBodyItem>
               </ExclusiveBody>

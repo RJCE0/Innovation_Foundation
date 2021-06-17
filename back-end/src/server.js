@@ -97,6 +97,15 @@ app.get("/exclusive", async (req, res) => {
   }
 });
 
+app.get("/exclusive-info", async (req, res) => {
+  try {
+    const opportunities = await Database.getExclusiveInfoById(req.query.body);
+    res.json(opportunities);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.get("/recent", async (req, res) => {
   try {
     const opportunities = await Database.getRecents();

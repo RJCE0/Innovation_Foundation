@@ -13,7 +13,6 @@ import {
 } from "./navbarElements";
 import outerLogo from "../../img/outer-logo.png";
 import innerLogo from "../../img/inner-logo.png";
-import image_src from "../../img/user.png";
 import AvatarDropdown from "./AvatarDropdown";
 //import Navbar from 'react-bootstrap/Navbar'
 
@@ -34,7 +33,7 @@ export const DiscoverNavbar = (props) => {
           </NavMenu>
           <NavAvatar>
           <NavAvatarLink>
-            <AvatarDropdown {...image_src}/>
+            <AvatarDropdown />
             </NavAvatarLink>
           </NavAvatar>
         </Nav>

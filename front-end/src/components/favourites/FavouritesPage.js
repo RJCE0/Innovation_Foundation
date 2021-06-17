@@ -5,6 +5,7 @@ import { CardsWithFilter } from "../common/CardsWithFilter";
 import styled from "styled-components";
 
 const FavouritesContainer = styled.div`
+  min-height: 700px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -15,6 +16,7 @@ const FavouritesContainer = styled.div`
 
 const FavouritesWrapper = styled.div`
   width: 90%;
+  height: 100%;
 `;
 
 export class FavouritesPage extends React.Component {

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import "react-bootstrap";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
+import React from "react";
+import "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
+import { config } from "../../constants";
 import EmptyHeartImg from "../../img/empty-heart.svg";
 import FilledInHeartImg from "../../img/filled-heart.svg";
 import ShareImg from "../../img/share.svg";
-import { Link } from "react-router-dom";
 import ShareModal from "./ShareModal";
-import axios from "axios";
-import { config } from "../../constants";
 
 const CardElements = (opp) => (
   <div className="cardContainer contentBox lght-shad">
@@ -131,9 +131,8 @@ class OpportunityPage extends React.Component {
     const opp = this.props;
     const payStatement =
       opp.pay == unpaidOpportunity
-        ? "Unpaid opportunity!"
+        ? "Unpaid opportunity"
         : "£" + opp.pay + "p/w";
-
     return (
       <>
         <div className="content-item" data-id={opp.id}>
@@ -196,9 +195,7 @@ class OpportunityPage extends React.Component {
             <Modal.Title>
               <div>
                 <h3>{opp.title}</h3>
-                {opp.exclusive && (
-                  <h4 style={{ color: "#256de1" }}>Exclusive</h4>
-                )}
+                <h5>{opp.location}</h5>
               </div>
             </Modal.Title>
           </Modal.Header>
@@ -211,6 +208,12 @@ class OpportunityPage extends React.Component {
               Pay: {opp.pay == undisclosedPay
                 ? "Undisclosed"
                 : payStatement}{" "}
+            </h5>
+            <h5>
+              Start Date:{" "}
+              {opp.date == null
+                ? "Undisclosed"
+                : new Date(opp.date).toDateString()}
             </h5>
             <h5>
               Date Posted:{" "}

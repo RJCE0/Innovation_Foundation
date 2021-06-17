@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ExclusivePageContainer = styled.div`
   display: flex;
@@ -116,3 +117,21 @@ export const ExclusiveBodyItem = styled.div`
 `;
 
 export const ExclusiveSummaryTitle = styled.h3``;
+
+export const ExclLink = styled(Link)`
+  color: white;
+  background-color: ${(props) => props.backgroundcolor};
+  border-radius: 25px;
+  min-width: fit-content;
+  width: 90%;
+  padding: 10px 10px 10px 10px;
+  font-weight: bold;
+  border: 3px solid ${(props) => props.backgroundcolor};
+  text-align: center;
+
+  &:hover {
+    background-color: white;
+    color: ${(props) => props.backgroundcolor};
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+`;

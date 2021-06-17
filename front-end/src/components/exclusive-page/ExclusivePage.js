@@ -16,6 +16,7 @@ import {
   ExclusiveSummary,
   ExclusiveSummaryItem,
   ExclusiveSummaryTitle,
+  ExclLink,
 } from "./ExclusiveElements";
 import { withRouter } from "react-router";
 import Spinner from "../common/Spinner";
@@ -30,8 +31,28 @@ class ExclusivePage extends React.Component {
     this.state = {
       opps: null,
       info: null,
+      fav: null,
     };
     this.oppId = this.props.match.params.handle.split("=")[1];
+    this.onFavClick = this.onFavClick.bind(this);
+  }
+
+  async onFavClick() {
+    this.setState(({ fav }) => {
+      return { fav: !fav };
+    }, this.updateFavourites.bind(this));
+  }
+
+  async updateFavourites() {
+    await axios
+      .post(`${config.API_URL}/favourites`, {
+        params: {
+          body: { ...this.state.opps["0"], fav: this.state.fav },
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async getOpportunities(route, parameters) {
@@ -56,10 +77,12 @@ class ExclusivePage extends React.Component {
     const params = {
       oppId: this.oppId,
     };
+    const opp = await this.getOpportunities("exclusive", params);
     this.setState(
       {
-        opps: await this.getOpportunities("exclusive", params),
+        opps: opp,
         info: await this.getOpportunities("exclusive-info", params),
+        fav: opp["0"].fav,
       },
       this.updateViews.bind(this)
     );
@@ -133,11 +156,19 @@ class ExclusivePage extends React.Component {
                   </ExclusiveSummaryItem>
                 </ExclusiveSummary>
                 <ApplyButtons>
-                  <ApplyButtonComponent backgroundColor="#256de1">
+                  <ExclLink
+                    backgroundcolor="#256de1"
+                    to={`/discover/apply/${opps.title}&id=${opps.id}`}
+                  >
                     Apply
-                  </ApplyButtonComponent>
-                  <ApplyButtonComponent backgroundColor="#f8c51c">
-                    Favourite
+                  </ExclLink>
+                  <ApplyButtonComponent
+                    onClick={this.onFavClick}
+                    backgroundColor="#f8c51c"
+                  >
+                    {this.state.fav
+                      ? "Remove from Favourites"
+                      : "Add to Favourites"}
                   </ApplyButtonComponent>
                 </ApplyButtons>
               </ExclusiveBreadCrumbs>

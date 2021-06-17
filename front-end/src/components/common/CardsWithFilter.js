@@ -57,11 +57,14 @@ export class CardsWithFilter extends Component {
   async componentDidMount() {
     this.setState(
       {
-        opportunities: (await this.getOpportunities("discover", [])).map(
-          (x) => {
-            return { key: x.id, ...x };
-          }
-        ),
+        opportunities: (
+          await this.getOpportunities(
+            this.props.favPage ? "favourites" : "discover",
+            []
+          )
+        ).map((x) => {
+          return { key: x.id, ...x };
+        }),
       },
       () =>
         this.props.setNumberOfInternships
@@ -93,7 +96,7 @@ export class CardsWithFilter extends Component {
     this.setState(
       () => {
         return {
-          sortByValue: event.label == "Select Option" ? null : event.label,
+          sortByValue: event.label == "Sort By" ? null : event.label,
         };
       },
       async () => {
@@ -108,7 +111,10 @@ export class CardsWithFilter extends Component {
           exclusiveFilter: this.state.exclusiveFilter,
         };
         this.setState({
-          opportunities: await this.getOpportunities("custom", params),
+          opportunities: await this.getOpportunities(
+            this.props.favPage ? "customFav" : "custom",
+            params
+          ),
         });
       }
     );
@@ -186,101 +192,111 @@ export class CardsWithFilter extends Component {
   render() {
     return (
       <>
-        <FilterModal
-          show={this.state.show}
-          showModal={this.handleModal}
-          onChangeFullRemote={this.onChangeFullRemote}
-          onChangeDatePosted={this.onChangeDatePosted}
-          onChangeLocation={this.onChangeLocation}
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          onChangeStartDate={this.onChangeStartDate}
-          onChangeEndDate={this.onChangeEndDate}
-          handleSubmit={this.handleSubmit}
-          onChangeMinPay={this.onChangeMinPay}
-          onChangeDistance={this.onChangeDistance}
-          fullRemote={this.state.fullRemote}
-          selectLocation={this.state.selectLocation}
-          selectPostedDate={this.state.selectPostedDate}
-          distance={this.state.distance}
-          minPay={this.state.minPay}
-          exclusiveFilter={this.state.exclusiveFilter}
-          onChangeExclusiveFilter={this.onChangeExclusiveFilter}
-        />
+        {this.props.noFilter ? null : (
+          <FilterModal
+            show={this.state.show}
+            showModal={this.handleModal}
+            onChangeFullRemote={this.onChangeFullRemote}
+            onChangeDatePosted={this.onChangeDatePosted}
+            onChangeLocation={this.onChangeLocation}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onChangeStartDate={this.onChangeStartDate}
+            onChangeEndDate={this.onChangeEndDate}
+            handleSubmit={this.handleSubmit}
+            onChangeMinPay={this.onChangeMinPay}
+            onChangeDistance={this.onChangeDistance}
+            fullRemote={this.state.fullRemote}
+            selectLocation={this.state.selectLocation}
+            selectPostedDate={this.state.selectPostedDate}
+            distance={this.state.distance}
+            minPay={this.state.minPay}
+            exclusiveFilter={this.state.exclusiveFilter}
+            onChangeExclusiveFilter={this.onChangeExclusiveFilter}
+          />
+        )}
         <div id="main-contentContainer" style={{ marginTop: "30px" }}>
           <div className="containerWrapper">
             <div id="main-filterContainer">
-              <div className="filterBtn-container">
-                <Button onClick={this.handleModal}>Filters</Button>
-              </div>
+              {this.props.noFilter ? null : (
+                <div className="filterBtn-container">
+                  <Button onClick={this.handleModal}>Filters</Button>
+                </div>
+              )}
               <SortBy
                 optionsSortBy={optionsSortBy}
                 onChangeSortBy={this.onChangeSortBy}
                 sortByValue={this.state.sortByValue}
               />
-              <div>
-                {this.state.fullRemote ? (
-                  <div className="filterContainer">
-                    <span className="filterType">Remote{"\t"}</span>
-                    <span className="filter-respo">{"\tyes"}</span>
-                  </div>
-                ) : (
-                  this.state.selectLocation && (
+              {this.props.noFilter ? null : (
+                <div>
+                  {this.state.fullRemote ? (
                     <div className="filterContainer">
-                      <span className="filterType">Location{"\t"}</span>
+                      <span className="filterType">Remote{"\t"}</span>
+                      <span className="filter-respo">{"\tyes"}</span>
+                    </div>
+                  ) : (
+                    this.state.selectLocation && (
+                      <div className="filterContainer">
+                        <span className="filterType">Location{"\t"}</span>
+                        <span className="filter-respo">
+                          {`\t${this.state.selectLocation}`}
+                        </span>
+                      </div>
+                    )
+                  )}
+                  {this.state.exclusiveFilter && (
+                    <div className="filterContainer">
+                      <span className="filterType">Exclusive{"\t"}</span>
+                      <span className="filter-respo">{"\tyes"}</span>
+                    </div>
+                  )}
+                  {this.state.startDate && (
+                    <div className="filterContainer">
+                      <span className="filterType">Starts After{"\t"}</span>
                       <span className="filter-respo">
-                        {`\t${this.state.selectLocation}`}
+                        {`\t${this.state.startDate.toLocaleDateString(
+                          "en-GB"
+                        )}`}
                       </span>
                     </div>
-                  )
-                )}
-                {this.state.exclusiveFilter && (
-                  <div className="filterContainer">
-                    <span className="filterType">Exclusive{"\t"}</span>
-                    <span className="filter-respo">{"\tyes"}</span>
-                  </div>
-                )}
-                {this.state.startDate && (
-                  <div className="filterContainer">
-                    <span className="filterType">Starts After{"\t"}</span>
-                    <span className="filter-respo">
-                      {`\t${this.state.startDate.toLocaleDateString("en-GB")}`}
-                    </span>
-                  </div>
-                )}
-                {this.state.endDate && (
-                  <div className="filterContainer">
-                    <span className="filterType">Starts Before{"\t"}</span>
-                    <span className="filter-respo">
-                      {`\t${this.state.endDate.toLocaleDateString("en-GB")}`}
-                    </span>
-                  </div>
-                )}
-                {this.state.selectPostedDate && (
-                  <div className="filterContainer">
-                    <span className="filterType">Posted{"\t"}</span>
-                    <span className="filter-respo">
-                      {`\t${this.state.selectPostedDate}`}
-                    </span>
-                  </div>
-                )}
-                {this.state.distance && (
-                  <div className="filterContainer">
-                    <span className="filterType">Distance{"\t"}</span>
-                    <span className="filter-respo">
-                      {`\t${this.state.distance} miles`}
-                    </span>
-                  </div>
-                )}
-                {this.state.minPay && (
-                  <div className="filterContainer">
-                    <span className="filterType">Minimum Pay (p/w){"\t"}</span>
-                    <span className="filter-respo">
-                      {`\t£${this.state.minPay}`}
-                    </span>
-                  </div>
-                )}
-              </div>
+                  )}
+                  {this.state.endDate && (
+                    <div className="filterContainer">
+                      <span className="filterType">Starts Before{"\t"}</span>
+                      <span className="filter-respo">
+                        {`\t${this.state.endDate.toLocaleDateString("en-GB")}`}
+                      </span>
+                    </div>
+                  )}
+                  {this.state.selectPostedDate && (
+                    <div className="filterContainer">
+                      <span className="filterType">Posted{"\t"}</span>
+                      <span className="filter-respo">
+                        {`\t${this.state.selectPostedDate}`}
+                      </span>
+                    </div>
+                  )}
+                  {this.state.distance && (
+                    <div className="filterContainer">
+                      <span className="filterType">Distance{"\t"}</span>
+                      <span className="filter-respo">
+                        {`\t${this.state.distance} miles`}
+                      </span>
+                    </div>
+                  )}
+                  {this.state.minPay && (
+                    <div className="filterContainer">
+                      <span className="filterType">
+                        Minimum Pay (p/w){"\t"}
+                      </span>
+                      <span className="filter-respo">
+                        {`\t£${this.state.minPay}`}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div
@@ -290,11 +306,8 @@ export class CardsWithFilter extends Component {
               id="contentContainer"
             >
               <div className="contentBox-wrapper">
-                {this.state.opportunities.map((opp, index) => {
-                  return (
-                    // adt for ads
-                    <OpportunityPage {...opp} />
-                  );
+                {this.state.opportunities.map((opp) => {
+                  return <OpportunityPage {...opp} />;
                 })}
               </div>
             </div>

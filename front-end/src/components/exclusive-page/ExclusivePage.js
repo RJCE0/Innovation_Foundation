@@ -158,7 +158,10 @@ class ExclusivePage extends React.Component {
                 <ApplyButtons>
                   <ExclLink
                     backgroundcolor="#256de1"
-                    to={`/discover/apply/${opps.title}&id=${opps.id}`}
+                    to={`/discover/apply/${opps.title
+                      .trim()
+                      .replace(/\s+/g, "-")
+                      .toLowerCase()}&id=${opps.id}`}
                   >
                     Apply
                   </ExclLink>

@@ -192,12 +192,12 @@ class OpportunityPage extends React.Component {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>
-              <div>
+            <div>
+              <Modal.Title>
                 <h3>{opp.title}</h3>
-                <h5>{opp.location}</h5>
-              </div>
-            </Modal.Title>
+              </Modal.Title>
+              {opp.location}
+            </div>
           </Modal.Header>
           <Modal.Body>
             {" "}
@@ -227,7 +227,9 @@ class OpportunityPage extends React.Component {
             </Button>
             <Button variant="warning" onClick={this.handleFavClicked}>
               {" "}
-              Add to Favourites
+              {this.state.favClicked
+                ? "Remove from Favourites"
+                : "Add to Favourites"}
             </Button>
           </Modal.Footer>
         </Modal>

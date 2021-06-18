@@ -4,14 +4,16 @@
 }
 
 .main-filterSlider .main-filterSlider-wrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
-
-  /*background-color: yellow;*/
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
+@media screen and (max-width: 768px) {
+  .main-filterSlider .main-filterSlider-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
 .main-filter.active-type {
   background-color: #338cd1;
 }

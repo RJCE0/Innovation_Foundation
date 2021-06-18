@@ -38,6 +38,8 @@ const ModalWrapper = styled.div`
   z-index: 110;
   border-radius: 10px;
   padding: 20px 30px 60px 30px;
+  max-height: 90vh;
+  overflow-y: scroll;
 `;
 
 const CloseModalDiv = styled.div`

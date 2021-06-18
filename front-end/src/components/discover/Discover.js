@@ -26,9 +26,10 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div>
-        <div id="headerContainer">
-          <div id="header-swirl-backdrop">
+      <>
+        <DiscoverNavbar />
+        <div className="top">
+          <div className="swirly-background">
             <svg
               id="Layer_2"
               xmlns="http://www.w3.org/2000/svg"
@@ -55,102 +56,101 @@ class Dashboard extends Component {
             </svg>
           </div>
 
-          <DiscoverNavbar />
-
-          <div id="header-main-content">
-            <div className="header-titleContainer">
-              <span className="main-headerTitle">Discover</span>
-              <span className="sub-headerTitle">
+          <div className="content">
+            <div>
+              <span
+                className="main-headerTitle"
+                style={{ textAlign: "center" }}
+              >
+                Discover
+              </span>
+              <span className="sub-headerTitle" style={{ textAlign: "center" }}>
                 Opportunities Right in Your Grasp
               </span>
             </div>
 
-            <div id="header-contentContainer" className="main-filterSlider">
-              <div className="main-filterSlider-wrapper">
-                <div className="perspectiveContainer">
-                  <div
-                    data-filter="opportunities"
-                    id="oppo-filter"
-                    className="cardContainer shad main-filter active-type"
-                  >
-                    <div className="main-filter-lt" />
-                    <div className="main-filter-header">
-                      <span className="filter-title">Opportunities</span>
-                      <span className="filter-area">
-                        <span className="type-avail">
-                          {" "}
-                          {this.state.numberOfInternships}
-                        </span>{" "}
-                        available
-                      </span>
-                    </div>
-                    <img
-                      style={{
-                        maxHeight: "250px",
-                        display: "block",
-                        width: "80%",
-                        textAlign: "center",
-                        margin: "auto",
-                        opacity: 0.9,
-                      }}
-                      src="./img/opportunities.svg"
-                    />
-                  </div>
+            <div className="static-cards">
+              <div
+                data-filter="opportunities"
+                id="oppo-filter"
+                className="cardContainer shad main-filter active-type"
+              >
+                <div className="main-filter-lt" />
+                <div className="main-filter-header">
+                  <span className="filter-title">Opportunities</span>
+                  <span className="filter-area">
+                    <span className="type-avail">
+                      {" "}
+                      {this.state.numberOfInternships}
+                    </span>{" "}
+                    available
+                  </span>
                 </div>
+                <img
+                  style={{
+                    maxHeight: "250px",
+                    display: "block",
+                    width: "80%",
+                    textAlign: "center",
+                    margin: "auto",
+                    opacity: 0.9,
+                  }}
+                  src="./img/opportunities.svg"
+                />
+              </div>
 
-                <div className="perspectiveContainer">
-                  <div
-                    data-filter="events"
-                    id="event-filter"
-                    className="cardContainer shad main-filter"
-                  >
-                    <div className="main-filter-lt" />
-                    <div className="main-filter-header">
-                      <span className="filter-title">Internships</span>
-                      <span className="filter-area">
-                        <span className="type-avail">
-                          {this.state.numberOfInternships}
-                        </span>{" "}
-                        available
-                      </span>
-                    </div>
-                    <img
-                      style={{
-                        display: "block",
-                        width: "80%",
-                        textAlign: "center",
-                        margin: "auto",
-                        opacity: 0.9,
-                      }}
-                      src="./img/calender.svg"
-                    />
+              <div className="perspectiveContainer">
+                <div
+                  data-filter="events"
+                  id="event-filter"
+                  className="cardContainer shad main-filter"
+                >
+                  <div className="main-filter-lt" />
+                  <div className="main-filter-header">
+                    <span className="filter-title">Internships</span>
+                    <span className="filter-area">
+                      <span className="type-avail">
+                        {this.state.numberOfInternships}
+                      </span>{" "}
+                      available
+                    </span>
                   </div>
+                  <img
+                    style={{
+                      display: "block",
+                      width: "80%",
+                      textAlign: "center",
+                      margin: "auto",
+                      opacity: 0.9,
+                    }}
+                    src="./img/calender.svg"
+                  />
                 </div>
+              </div>
 
-                <div className="perspectiveContainer">
-                  <div
-                    data-filter="scholarship"
-                    id="scholar-filter"
-                    className="cardContainer shad main-filter"
-                  >
-                    <div className="main-filter-lt" />
-                    <div className="main-filter-header">
-                      <span className="filter-title">Mentorships</span>
-                      <span className="filter-area">
-                        <span className="type-avail">Coming Soon</span>
-                      </span>
-                    </div>
-                    <img
-                      style={{
-                        display: "block",
-                        width: "80%",
-                        textAlign: "center",
-                        margin: "auto",
-                        opacity: 0.9,
-                      }}
-                      src="./img/graduation.svg"
-                    />
+              <div className="perspectiveContainer">
+                <div
+                  data-filter="scholarship"
+                  id="scholar-filter"
+                  className="cardContainer shad main-filter"
+                >
+                  <div className="main-filter-lt" />
+                  <div className="main-filter-header">
+                    <span className="filter-title">Mentorships</span>
+                    <span className="filter-area">
+                      <span className="type-avail">Coming Soon</span>
+                    </span>
                   </div>
+                  <img
+                    style={{
+                      display: "block",
+                      width: "80%",
+                      textAlign: "center",
+                      margin: "auto",
+                      opacity: 0.9,
+                    }}
+                    src="./img/graduation.svg"
+                  />
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@ class Dashboard extends Component {
         </div>
         <CardsWithFilter setNumberOfInternships={this.setNumberOfInternships} />
         <Footer />
-      </div>
+      </>
     );
   }
 }

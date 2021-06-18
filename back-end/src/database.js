@@ -239,12 +239,29 @@ class Database {
     return this.anyQueries(projectSQL.getRecent);
   }
 
+  static async getAllApplications(){
+    var result = {};
+
+    // execute query
+    await db
+    .any(projectSQL.getAllApplications)
+    .then((data) => {
+      console.log("successful Application data retrieval");
+      result = data;
+    })
+    .catch((error) => {
+      console.log("ERROR:", error);
+    });
+
+    return result;
+  }
+
   static async updateViews(input) {
     let { id, views } = input.params.body;
 
     await db
       .any(projectSQL.updateViews, { views: views, id: id })
-      .then((data) => {
+      .then(() => {
         console.log("successful views update");
       })
       .catch((error) => {
@@ -257,12 +274,29 @@ class Database {
 
     await db
       .any(projectSQL.updateFav, { fav: fav, id: id })
-      .then((data) => {
+      .then(() => {
         console.log("successful fav update");
       })
       .catch((error) => {
         console.log("ERROR:", error);
       });
+
+  }
+
+  static async addApplication(input){
+    let {opp_id, name, email, number, additionalComments, file} = input.params.body;
+
+    const cv_uploaded = file != null
+
+    await db
+    .any(projectSQL.addApplication, { opp_id: opp_id, name: name, email: email,
+       number: number, comments: additionalComments, cv: cv_uploaded})
+    .then(() => {
+      console.log("successful application insertion");
+    })
+    .catch((error) => {
+      console.log("ERROR:", error);
+    });
   }
 }
 

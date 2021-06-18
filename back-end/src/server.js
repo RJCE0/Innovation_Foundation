@@ -60,6 +60,22 @@ app.post("/views", async (req, res) => {
   }
 });
 
+app.post("/apply", async (req, res) => {
+  try {
+    await Database.addApplication(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+app.get("/apply", async (req, res) => {
+  try {
+    const applications = await Database.getAllApplications();
+    res.json(applications);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
 
 app.post("/favourites", async (req, res) => {
   try {

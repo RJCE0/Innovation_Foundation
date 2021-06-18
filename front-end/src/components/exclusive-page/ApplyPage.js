@@ -20,8 +20,25 @@ class ApplyPage extends React.Component {
     };
   }
 
+  async addInternships(parameters) {
+
+    await axios
+      .post(`${config.API_URL}/apply`, {
+        params: {
+          body: parameters,
+        },
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
+    // this.addInternships(this.state, and opp_id is needed);
     console.log(this.state);
   };
 

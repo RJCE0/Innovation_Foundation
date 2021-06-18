@@ -15,6 +15,7 @@ import "./App.css";
 import ExclusivePage from "./components/exclusive-page/ExclusivePage";
 import { FavouritesPage } from "./components/favourites/FavouritesPage";
 import ApplyPage from "./components/exclusive-page/ApplyPage";
+import { MyApplications } from "./components/applications/MyApplications";
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path="/favourites" component={FavouritesPage} />
             <Route exact path="/discover/apply/:handle" component={ApplyPage} />
             <Route exact path="/discover/:handle" component={ExclusivePage} />
+            <Route exact path="/my-applications" component={MyApplications} />
           </div>
         </Router>
       </Provider>

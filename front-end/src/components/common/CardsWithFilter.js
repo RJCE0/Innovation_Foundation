@@ -92,7 +92,6 @@ export class CardsWithFilter extends Component {
   }
 
   async onChangeSortBy(event) {
-    // If nothing is selected, then value is null. - BACK-END
     this.setState(
       () => {
         return {
@@ -110,11 +109,12 @@ export class CardsWithFilter extends Component {
           fullRemote: this.state.fullRemote,
           exclusiveFilter: this.state.exclusiveFilter,
         };
-        this.setState({
-          opportunities: await this.getOpportunities(
-            this.props.favPage ? "customFav" : "custom",
-            params
-          ),
+        const opps = await this.getOpportunities(
+          this.props.favPage ? "customFav" : "custom",
+          params
+        );
+        this.setState(() => {
+          return { opportunities: opps };
         });
       }
     );
@@ -123,7 +123,7 @@ export class CardsWithFilter extends Component {
   onChangeLocation(event) {
     this.setState(() => {
       return {
-        selectLocation: event.label == "Select Option" ? null : event.label,
+        selectLocation: event.label == "Any" ? null : event.label,
       };
     });
   }
@@ -131,7 +131,7 @@ export class CardsWithFilter extends Component {
   onChangeDatePosted(event) {
     this.setState(() => {
       return {
-        selectPostedDate: event.label == "Select Option" ? null : event.label,
+        selectPostedDate: event.label == "Any" ? null : event.label,
       };
     });
   }
@@ -307,7 +307,7 @@ export class CardsWithFilter extends Component {
             >
               <div className="contentBox-wrapper">
                 {this.state.opportunities.map((opp) => {
-                  return <OpportunityPage {...opp} />;
+                  return <OpportunityPage {...opp} key={opp.id} />;
                 })}
               </div>
             </div>

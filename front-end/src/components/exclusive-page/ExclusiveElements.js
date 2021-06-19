@@ -22,6 +22,10 @@ export const ExclusiveHeader = styled.div`
   padding: 30px 30px 30px 30px;
   border-bottom: 3px rgba(0, 0, 0, 0.4) solid;
   gap: 30px;
+
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
 `;
 
 export const ExclusiveImage = styled.img`
@@ -46,6 +50,7 @@ export const ExclusiveBreadCrumbs = styled.div`
 
   @media screen and (max-width: 700px) {
     flex-direction: column;
+    width: 90%;
   }
 `;
 
@@ -56,9 +61,6 @@ export const ExclusiveSummary = styled.div`
   height: fit-content;
   align-items: center;
   flex-direction: column;
-  @media screen and (max-width: 700px) {
-    flex-direction: row;
-  }
 `;
 
 export const ExclusiveSummaryItem = styled.div`
@@ -111,6 +113,10 @@ export const ExclusiveBody = styled.div`
   width: 75%;
   padding: 30px 30px 30px 30px;
   gap: 10px;
+
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
 `;
 export const ExclusiveBodyItem = styled.div`
   display: block;

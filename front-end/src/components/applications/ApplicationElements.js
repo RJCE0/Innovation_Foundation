@@ -63,7 +63,11 @@ export const ApplicationsCardLogoContainer = styled.div`
 
 export const ApplicationsCardLogo = styled.img`
   width: 100%;
-  height: 100%;
+  height: 90%;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const ApplicationsCardInfo = styled.div`

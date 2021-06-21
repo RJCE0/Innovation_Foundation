@@ -1,9 +1,10 @@
-INSERT INTO "applications" {
-  "opp_id"
-  "full_name",
-  "email",
-  "mobile",
-  "comments",
-  "cv_uploaded"
-}
-VALUES (${opp_id}, ${full_name}, ${email}, ${mobile}, ${comments}, ${cv_uploaded})
+INSERT INTO applications (
+  user_id,
+  opp_id,
+  name,
+  email,
+  mobile,
+  comments,
+  cv_uploaded
+)
+VALUES (${user_id}, ${opp_id}, ${name}, ${email}, ${mobile}, ${comments}, ${cv_uploaded})

@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Input from "../common/Input";
 import { DiscoverNavbar } from "../discover/DiscoverNavbar";
 import Footer from "../layout/Footer";
+import { withRouter } from "react-router";
+import axios from "axios";
+import { config } from "../../constants.js";
 
 const InputFile = styled.input`
   padding: 10px 0px;
@@ -12,11 +15,13 @@ class ApplyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      opp_id: this.props.match.params.handle.split("=")[1],
       name: "",
       email: "",
-      number: "",
+      mobile: "",
       additionalComments: "",
       file: null,
+      user_id: 0,
     };
   }
 
@@ -37,7 +42,7 @@ class ApplyPage extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    // this.addInternships(this.state, and opp_id is needed);
+    this.addInternships(this.state);
     console.log(this.state);
   };
 
@@ -98,8 +103,8 @@ class ApplyPage extends React.Component {
 
           <Input
             placeholder="Enter your Mobile Number"
-            name="number"
-            value={this.state.number}
+            name="mobile"
+            value={this.state.mobile}
             onChange={this.onChange}
             styles={{
               padding: "10px 12px",
@@ -161,4 +166,4 @@ class ApplyPage extends React.Component {
   }
 }
 
-export default ApplyPage;
+export default withRouter(ApplyPage);

@@ -13,7 +13,6 @@ import {
 import axios from "axios";
 import { config } from "../../constants.js";
 import Spinner from "../common/Spinner";
-import logo from "../../img/innovation-logo.png";
 
 export class MyApplications extends React.Component {
   constructor(props) {
@@ -65,22 +64,22 @@ export class MyApplications extends React.Component {
               {this.state.appliedOpps.map((appliedOpp) => (
                 <ApplicationsCard
                   to={{
-                    pathname: `/discover/${appliedOpp.opp_title
+                    pathname: `/discover/${appliedOpp.title
                       .trim()
                       .replace(/\s+/g, "-")
                       .toLowerCase()}&id=${appliedOpp.opp_id}`,
                   }}
                 >
                   <ApplicationsCardInfo>
-                    <h3>{appliedOpp.opp_title}</h3>
+                    <h3>{appliedOpp.title}</h3>
                     <h5 style={{ color: "#256de1" }}>{appliedOpp.status}</h5>
                     <h5>
                       CV uploaded: {appliedOpp.cv_uploaded ? "Yes" : "No"}
                     </h5>
-                    <h5>Additional Comments: {appliedOpp.comments}</h5>
+                    <h5>Your Comments: {appliedOpp.comments}</h5>
                   </ApplicationsCardInfo>
                   <ApplicationsCardLogoContainer>
-                    <ApplicationsCardLogo src={logo} />
+                    <ApplicationsCardLogo src={appliedOpp.image_url} />
                   </ApplicationsCardLogoContainer>
                 </ApplicationsCard>
               ))}

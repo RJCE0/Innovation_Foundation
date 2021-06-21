@@ -37,7 +37,7 @@ a {
   padding: 10px 12px;
   box-sizing: border-box;
   outline: none;
-  font-weight: normal;
+  font-weight: bolder;
   font-size: 18px;
   color: #529cc7;
 }
@@ -99,8 +99,8 @@ a {
 #headerContainer {
   position: relative;
   width: 100%;
-  /*background-color: #505050;*/
 }
+
 #app-header {
   position: relative;
   display: flex;
@@ -174,7 +174,6 @@ a {
 #header-main-content {
   position: relative;
   width: 100%;
-
   /*background-color: #505050;*/
   padding: 10px 0 0 0;
   box-sizing: border-box;
@@ -688,20 +687,14 @@ a {
 .section-header {
   text-shadow: 2px 2px 5px #00000020;
 }
-#header-swirl-backdrop {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  left: 0;
-  top: 0;
-  z-index: -1;
-}
+
 .videoWrapper {
   position: absolute;
   width: 100%;
   height: auto;
   /* overflow: hidden; */
 }
+
 #bg-video {
   position: absolute;
   left: 0;
@@ -758,4 +751,87 @@ a {
   gap: 8px;
   z-index: 10;
   transition: all 0.2s ease-in-out;
+}
+
+#copy-button {
+  background-color: rgba(128, 128, 128, 0.507);
+  border-radius: 48%;
+  padding: 15px 15px;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: fit-content;
+  padding: 4vw 0 0 0;
+  font-family: Nunito;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.swirly-background {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+}
+
+.top .content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 3;
+  width: 90%;
+}
+
+.top .content .static-cards {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 1150px) {
+  .top .content .static-cards {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .top .content {
+    align-items: center;
+  }
+
+  .top .content .static-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .swirly-background {
+    display: none;
+  }
+
+  .sub-headerTitle {
+    color: black;
+  }
+
+  #main-contentContainer .containerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #main-filterContainer {
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .filterBtn-container {
+    border-right: 0px;
+    margin: 0;
+    padding: 0;
+    /*background: red;*/
+  }
 }

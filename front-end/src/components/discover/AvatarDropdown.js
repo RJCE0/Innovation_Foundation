@@ -28,6 +28,10 @@ const AvatarDropdown = () => {
       </Dropdown.Item>
       <Dropdown.Item as="button">
         {" "}
+        <Link to="/my-applications"> My Applications </Link>{" "}
+      </Dropdown.Item>
+      <Dropdown.Item as="button">
+        {" "}
         <Link to="/favourites"> My Favourites </Link>{" "}
       </Dropdown.Item>
       <Dropdown.Item as="button">

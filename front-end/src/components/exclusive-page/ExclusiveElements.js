@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ExclusivePageContainer = styled.div`
   display: flex;
@@ -21,6 +22,10 @@ export const ExclusiveHeader = styled.div`
   padding: 30px 30px 30px 30px;
   border-bottom: 3px rgba(0, 0, 0, 0.4) solid;
   gap: 30px;
+
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
 `;
 
 export const ExclusiveImage = styled.img`
@@ -45,6 +50,7 @@ export const ExclusiveBreadCrumbs = styled.div`
 
   @media screen and (max-width: 700px) {
     flex-direction: column;
+    width: 90%;
   }
 `;
 
@@ -55,9 +61,6 @@ export const ExclusiveSummary = styled.div`
   height: fit-content;
   align-items: center;
   flex-direction: column;
-  @media screen and (max-width: 700px) {
-    flex-direction: row;
-  }
 `;
 
 export const ExclusiveSummaryItem = styled.div`
@@ -110,9 +113,31 @@ export const ExclusiveBody = styled.div`
   width: 75%;
   padding: 30px 30px 30px 30px;
   gap: 10px;
+
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
 `;
 export const ExclusiveBodyItem = styled.div`
   display: block;
 `;
 
 export const ExclusiveSummaryTitle = styled.h3``;
+
+export const ExclLink = styled(Link)`
+  color: white;
+  background-color: ${(props) => props.backgroundcolor};
+  border-radius: 25px;
+  min-width: fit-content;
+  width: 90%;
+  padding: 10px 10px 10px 10px;
+  font-weight: bold;
+  border: 3px solid ${(props) => props.backgroundcolor};
+  text-align: center;
+
+  &:hover {
+    background-color: white;
+    color: ${(props) => props.backgroundcolor};
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+`;

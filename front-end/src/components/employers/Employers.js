@@ -47,14 +47,14 @@ class Register extends Component {
           <Navbar />
 
           <div id="header-main-content" style={{ textAlign: "center" }}>
-            <div class="header-titleContainer">
-              <div class="headerWrapper">
-                <span class="main-headerTitle" style={{ fontSize: "70px" }}>
+            <div className="header-titleContainer">
+              <div className="headerWrapper">
+                <span className="main-headerTitle" style={{ fontSize: "70px" }}>
                   Investing in the future
                 </span>
               </div>
               <span
-                class="sub-headerTitle"
+                className="sub-headerTitle"
                 style={{ display: "block", fontSize: "30px" }}
               >
                 Identifying the best youth talent the UK has to offer
@@ -62,7 +62,7 @@ class Register extends Component {
 
               <div style={{ display: "inline-block", flexDirection: "column" }}>
                 <a
-                  class="btn fill-btn"
+                  className="btn fill-btn"
                   style={{
                     display: "inline-block",
                     marginTop: "20px",
@@ -89,25 +89,25 @@ class Register extends Component {
 
         <div id="main-contentContainer">
           <div id="main-containerTitle">
-            <span class="ts">But why choose</span>
-            <span class="b ts">Innovation Foundation</span>
+            <span className="ts">But why choose</span>
+            <span className="b ts">Innovation Foundation</span>
           </div>
 
-          <div class="hm-section-container">
-            <div class="hm-section-wrapper">
-              <div class="flex-wrap">
-                <div class="hm-section-divider">
-                  <div class="section-text-wrapper">
-                    <span class="section-header">Who's Here</span>
-                    <p class="section-desc">
+          <div className="hm-section-container">
+            <div className="hm-section-wrapper">
+              <div className="flex-wrap">
+                <div className="hm-section-divider">
+                  <div className="section-text-wrapper">
+                    <span className="section-header">Our Community</span>
+                    <p className="section-desc">
                       Innovation Foundation is filled with highly-skilled,
                       ambitious students focused on furthering their respective
                       careers
                     </p>
                   </div>
                 </div>
-                <div class="hm-section-divider">
-                  <div class="section-divider-imgContainer">
+                <div className="hm-section-divider">
+                  <div className="section-divider-imgContainer">
                     <img src="img/b/certificate.svg" />
                   </div>
                 </div>
@@ -115,21 +115,21 @@ class Register extends Component {
             </div>
           </div>
 
-          <div class="hm-section-container">
-            <div class="hm-section-wrapper">
-              <div class="flex-wrap reverse">
-                <div class="hm-section-divider">
-                  <div class="section-text-wrapper">
-                    <span class="section-header">Our Reach</span>
-                    <p class="section-desc">
+          <div className="hm-section-container">
+            <div className="hm-section-wrapper">
+              <div className="flex-wrap reverse">
+                <div className="hm-section-divider">
+                  <div className="section-text-wrapper">
+                    <span className="section-header">Our Reach</span>
+                    <p className="section-desc">
                       With our presence spanning across many schools in London,
                       you'll find an abundance of talented students with a
                       passion for your industry
                     </p>
                   </div>
                 </div>
-                <div class="hm-section-divider">
-                  <div class="section-divider-imgContainer">
+                <div className="hm-section-divider">
+                  <div className="section-divider-imgContainer">
                     <img style={{ height: "100%" }} src="img/b/museum.svg" />
                   </div>
                 </div>
@@ -137,21 +137,21 @@ class Register extends Component {
             </div>
           </div>
 
-          <div class="hm-section-container">
-            <div class="hm-section-wrapper">
-              <div class="flex-wrap">
-                <div class="hm-section-divider">
-                  <div class="section-text-wrapper">
-                    <span class="section-header">Understand Your Audience</span>
-                    <p class="section-desc">
-                      You'll have access to detailed analytics on what
-                      interactions occur on your opportunities i.e. views,
+          <div className="hm-section-container">
+            <div className="hm-section-wrapper">
+              <div className="flex-wrap">
+                <div className="hm-section-divider">
+                  <div className="section-text-wrapper">
+                    <span className="section-header">Understand Your Audience</span>
+                    <p className="section-desc">
+                      Truly learn how to grasp the attention of young people through our detailed
+                      analytics on interactions with your posted opportunities i.e. views,
                       favourites, applications and more
                     </p>
                   </div>
                 </div>
-                <div class="hm-section-divider">
-                  <div class="section-divider-imgContainer">
+                <div className="hm-section-divider">
+                  <div className="section-divider-imgContainer">
                     <img src="img/b/in-stats.svg" />
                   </div>
                 </div>
@@ -160,7 +160,7 @@ class Register extends Component {
           </div>
         </div>
 
-        <div class="" style={{ position: "relative", padding: 0, margin: 0 }}>
+        <div className="" style={{ position: "relative", padding: 0, margin: 0 }}>
           <img src="img/s/blue.svg" />
           <img
             style={{
@@ -193,7 +193,7 @@ class Register extends Component {
             </span>
             <div style={{ display: "inline-block", flexDirection: "column" }}>
               <button
-                class="btn fill-btn lght-shad"
+                className="btn fill-btn lght-shad"
                 style={{
                   backgroundColor: "#fff",
                   color: "#529cc7",

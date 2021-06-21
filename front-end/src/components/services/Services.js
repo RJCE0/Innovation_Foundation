@@ -47,21 +47,21 @@ class Register extends Component {
           <Navbar />
 
           <div id="header-main-content" style={{ textAlign: "center" }}>
-            <div class="header-titleContainer">
-              <div class="headerWrapper">
-                <span class="main-headerTitle" style={{ fontSize: "70px" }}>
+            <div className="header-titleContainer">
+              <div className="headerWrapper">
+                <span className="main-headerTitle" style={{ fontSize: "70px" }}>
                   Providing for the Youth
                 </span>
               </div>
               <span
-                class="sub-headerTitle"
+                className="sub-headerTitle"
                 style={{ display: "block", fontSize: "30px" }}
               >
                 Filling the gap of opportunities missed by many around the UK
               </span>
 
               <a
-                class="btn fill-btn"
+                className="btn fill-btn"
                 style={{ display: "inline-block", marginTop: "20px" }}
                 href="#"
               >
@@ -73,9 +73,9 @@ class Register extends Component {
 
         <div id="main-contentContainer">
           <div id="main-containerTitle">
-            <span class="ts">Our Mission</span>
+            <span className="ts">Our Mission</span>
             <span
-              class="ts"
+              className="ts"
               style={{
                 width: "50%",
                 display: "block",
@@ -84,29 +84,30 @@ class Register extends Component {
                 color: "#338CD1",
               }}
             >
-              Innovation Foundation is a firm intended on enhancing the skills
-              of young people and pushing the capabilities of the youth. This is
-              done by providing an abundance of different opportunities and
-              practical ways of developing the skills learnt
+              Innovation Foundation intends on enhancing the skills
+              of young people and pushing the capabilities of the youth,
+              to overcome the glass ceiling. This is achieved by providing a
+              multitude of different opportunities and practical ways of developing
+              the skills learned
             </span>
           </div>
 
-          <div class="hm-section-container">
-            <div class="hm-section-wrapper">
-              <div class="flex-wrap">
-                <div class="hm-section-divider">
-                  <div class="section-text-wrapper">
-                    <p class="section-desc">
-                      Innovation Foundation is a hub intent on bringing together
-                      industry opportunities into one place to making it more
-                      easier for students to access. These opportunities range
-                      from valuable work experience placements, rewarding
-                      scholarships and insightful talks & lectures
+          <div className="hm-section-container">
+            <div className="hm-section-wrapper">
+              <div className="flex-wrap">
+                <div className="hm-section-divider">
+                  <div className="section-text-wrapper">
+                    <p className="section-desc">
+                      Innovation Foundation is a hub intent on gathering various
+                      industry opportunities into one place - making it
+                      easier for students across the country to access.
+                      These opportunities range from valuable work experience placements,
+                      rewarding internship experiences and insightful mentorship programmes
                     </p>
                   </div>
                 </div>
-                <div class="hm-section-divider">
-                  <div class="section-divider-imgContainer">
+                <div className="hm-section-divider">
+                  <div className="section-divider-imgContainer">
                     <img src="img/b/in-nodes.svg" />
                   </div>
                 </div>
@@ -114,21 +115,21 @@ class Register extends Component {
             </div>
           </div>
 
-          <div class="hm-section-container">
-            <div class="hm-section-wrapper">
-              <div class="flex-wrap reverse">
-                <div class="hm-section-divider">
-                  <div class="section-text-wrapper">
-                    <p class="section-desc">
-                      Innovation Inc has given community members the chance to
+          <div className="hm-section-container">
+            <div className="hm-section-wrapper">
+              <div className="flex-wrap reverse">
+                <div className="hm-section-divider">
+                  <div className="section-text-wrapper">
+                    <p className="section-desc">
+                      Innovation Inc has given foundation members the chance to
                       spring their idea into existence. Active members are given
                       the opportunity to produce their ideas through the Inc
                       with its resources
                     </p>
                   </div>
                 </div>
-                <div class="hm-section-divider">
-                  <div class="section-divider-imgContainer">
+                <div className="hm-section-divider">
+                  <div className="section-divider-imgContainer">
                     <img
                       style={{ height: "100%" }}
                       src="img/b/code-bubble.svg"
@@ -140,7 +141,7 @@ class Register extends Component {
           </div>
         </div>
 
-        <div class="" style={{ position: "relative", padding: 0, margin: 0 }}>
+        <div className="" style={{ position: "relative", padding: 0, margin: 0 }}>
           <img src="img/s/blue.svg" />
           <img
             style={{
@@ -172,7 +173,7 @@ class Register extends Component {
               Want to get in on the action
             </span>
             <button
-              class="btn fill-btn lght-shad"
+              className="btn fill-btn lght-shad"
               style={{ backgroundColor: "#fff", color: "#529cc7" }}
             >
               Sign Up

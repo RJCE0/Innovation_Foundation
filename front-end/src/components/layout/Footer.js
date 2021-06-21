@@ -70,6 +70,10 @@ const SocialMediaWrap = styled.div`
   align-items: center;
   width: 25%;
   gap: 10px;
+
+  @media screen and (max-width: 700px) {
+    width: fit-content;
+  }
 `;
 
 const WebsiteRights = styled.div`
@@ -111,7 +115,7 @@ const Name2 = styled.div`
 
   @media screen and (max-width: 700px) {
     top: 32px;
-    left: 25px;
+    left: 22px;
   }
 `;
 

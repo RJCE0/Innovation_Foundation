@@ -38,6 +38,8 @@ const ModalWrapper = styled.div`
   z-index: 110;
   border-radius: 10px;
   padding: 20px 30px 60px 30px;
+  max-height: 90vh;
+  overflow-y: scroll;
 `;
 
 const CloseModalDiv = styled.div`
@@ -126,7 +128,7 @@ const locations = async () => {
 };
 
 const optionsDatePosted = [
-  { label: "Select Option", value: 0, key: 0 },
+  { label: "Any", value: 0, key: 0 },
   { label: "Today", value: 1, key: 1 },
   { label: "This Week", value: 2, key: 2 },
   { label: "This Month", value: 3, key: 3 },

@@ -16,6 +16,7 @@ import {
   ExclusiveSummary,
   ExclusiveSummaryItem,
   ExclusiveSummaryTitle,
+  ExclLink,
 } from "./ExclusiveElements";
 import { withRouter } from "react-router";
 import Spinner from "../common/Spinner";
@@ -30,8 +31,30 @@ class ExclusivePage extends React.Component {
     this.state = {
       opps: null,
       info: null,
+      fav: null,
+      applied: false,
     };
+    this.user_id = 0;
     this.oppId = this.props.match.params.handle.split("=")[1];
+    this.onFavClick = this.onFavClick.bind(this);
+  }
+
+  async onFavClick() {
+    this.setState(({ fav }) => {
+      return { fav: !fav };
+    }, this.updateFavourites.bind(this));
+  }
+
+  async updateFavourites() {
+    await axios
+      .post(`${config.API_URL}/favourites`, {
+        params: {
+          body: { ...this.state.opps["0"], fav: this.state.fav },
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async getOpportunities(route, parameters) {
@@ -54,12 +77,16 @@ class ExclusivePage extends React.Component {
 
   async componentDidMount() {
     const params = {
+      user_id: this.user_id,
       oppId: this.oppId,
     };
+    const opp = await this.getOpportunities("exclusive", params);
     this.setState(
       {
-        opps: await this.getOpportunities("exclusive", params),
+        opps: opp,
         info: await this.getOpportunities("exclusive-info", params),
+        fav: opp["0"].fav,
+        applied: await this.getOpportunities("applied", params),
       },
       this.updateViews.bind(this)
     );
@@ -133,11 +160,26 @@ class ExclusivePage extends React.Component {
                   </ExclusiveSummaryItem>
                 </ExclusiveSummary>
                 <ApplyButtons>
-                  <ApplyButtonComponent backgroundColor="#256de1">
-                    Apply
-                  </ApplyButtonComponent>
-                  <ApplyButtonComponent backgroundColor="#f8c51c">
-                    Favourite
+                  <ExclLink
+                    backgroundcolor="#256de1"
+                    to={
+                      this.state.applied
+                        ? "/my-applications"
+                        : `/discover/apply/${opps.title
+                            .trim()
+                            .replace(/\s+/g, "-")
+                            .toLowerCase()}&id=${opps.id}`
+                    }
+                  >
+                    {this.state.applied ? "View Status" : "Apply"}
+                  </ExclLink>
+                  <ApplyButtonComponent
+                    onClick={this.onFavClick}
+                    backgroundColor="#f8c51c"
+                  >
+                    {this.state.fav
+                      ? "Remove from Favourites"
+                      : "Add to Favourites"}
                   </ApplyButtonComponent>
                 </ApplyButtons>
               </ExclusiveBreadCrumbs>

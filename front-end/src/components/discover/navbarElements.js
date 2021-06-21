@@ -9,7 +9,7 @@ export const Avatar = styled.img`
   top: 0;
 `;
 
-export const NavAvatarLink = styled(LinkR)`
+export const NavAvatarLink = styled.div`
   cursor: pointer;
   font-size: 1.5rem;
   margin-right: 12px;

@@ -9,7 +9,6 @@ import {
   OuterLogo,
   InnerLogo,
   LogoLink,
-  Avatar,
 } from "./navbarElements";
 import outerLogo from "../../img/outer-logo.png";
 import innerLogo from "../../img/inner-logo.png";

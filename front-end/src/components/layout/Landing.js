@@ -113,27 +113,27 @@ class Landing extends Component {
             </div>
             <Navbar />
             <div id="header-main-content">
-              <div class="header-titleContainer">
-                <div class="headerWrapper">
-                  <span class="main-headerTitle">Designed For Future</span>
+              <div className="header-titleContainer">
+                <div className="headerWrapper">
+                  <span className="main-headerTitle">Designed For Future</span>
                   <div id="slot-machine-container">
-                    <div class="slot-machine-wrapper">
-                      <span class="cara-text cara-active">Thinkers</span>
-                      <span class="cara-text">Software Developers</span>
-                      <span class="cara-text">Leaders</span>
-                      <span class="cara-text">Entrepreneurs</span>
-                      <span class="cara-text">Mathematicians</span>
-                      <span class="cara-text">Innovators</span>
-                      <span class="cara-text">Engineers</span>
+                    <div className="slot-machine-wrapper">
+                      <span className="cara-text cara-active">Thinkers</span>
+                      <span className="cara-text">Software Developers</span>
+                      <span className="cara-text">Leaders</span>
+                      <span className="cara-text">Entrepreneurs</span>
+                      <span className="cara-text">Mathematicians</span>
+                      <span className="cara-text">Innovators</span>
+                      <span className="cara-text">Engineers</span>
                     </div>
                   </div>
                 </div>
-                <span class="sub-headerTitle">
+                <span className="sub-headerTitle">
                   Join the new wave of youth focused on reinventing and
                   redesigning the world
                 </span>
 
-                <a class="btn fill-btn" href="./discover">
+                <a className="btn fill-btn" href="./discover">
                   Explore Now
                 </a>
               </div>
@@ -141,23 +141,23 @@ class Landing extends Component {
           </div>
 
           <div id="main-contentContainer">
-            <div class="hm-section-container">
-              <div class="hm-section-wrapper">
-                <div class="flex-wrap">
-                  <div class="hm-section-divider">
-                    <div class="section-text-wrapper">
-                      <span class="section-header">
+            <div className="hm-section-container">
+              <div className="hm-section-wrapper">
+                <div className="flex-wrap">
+                  <div className="hm-section-divider">
+                    <div className="section-text-wrapper">
+                      <span className="section-header">
                         Not your average work experience site
                       </span>
-                      <p class="section-desc">
+                      <p className="section-desc">
                         Innovation Foundation is the central hub for everything
                         a student needs. Activities, work experience,
                         scholarships and more
                       </p>
                     </div>
                   </div>
-                  <div class="hm-section-divider">
-                    <div class="section-divider-imgContainer">
+                  <div className="hm-section-divider">
+                    <div className="section-divider-imgContainer">
                       <img src="img/b/skeleton.png" />
                     </div>
                   </div>
@@ -166,7 +166,7 @@ class Landing extends Component {
             </div>
 
             <div
-              class="hm-section-container"
+              className="hm-section-container"
               style={{ position: "relative", marginBottom: 0 }}
             >
               <div
@@ -183,7 +183,7 @@ class Landing extends Component {
                 >
                   <g id="Layer_2" data-name="Layer 2">
                     <path
-                      class="cls-2"
+                      className="cls-2"
                       style={{ fill: "#e6e5e5" }}
                       d="M1920.08,180,834.45,441a991.8,991.8,0,0,1-328.73,22.72L0,414V715H1920.08Z"
                       transform="translate(0 -180)"
@@ -191,22 +191,22 @@ class Landing extends Component {
                   </g>
                 </svg>
               </div>
-              <div class="hm-section-wrapper">
-                <div class="flex-wrap reverse">
-                  <div class="hm-section-divider">
-                    <div class="section-text-wrapper">
-                      <span class="section-header">
+              <div className="hm-section-wrapper">
+                <div className="flex-wrap reverse">
+                  <div className="hm-section-divider">
+                    <div className="section-text-wrapper">
+                      <span className="section-header">
                         Find experiences near you
                       </span>
-                      <p class="section-desc">
+                      <p className="section-desc">
                         Innovation Foundation has removed all the hassle of
                         searching and gathering opportunities around you, making
                         it quicker and easier to find the perfect opportunity
                       </p>
                     </div>
                   </div>
-                  <div class="hm-section-divider">
-                    <div class="section-divider-imgContainer">
+                  <div className="hm-section-divider">
+                    <div className="section-divider-imgContainer">
                       <img src="img/b/pins.svg" />
                     </div>
                   </div>
@@ -215,7 +215,7 @@ class Landing extends Component {
             </div>
 
             <div
-              class="hm-section-container"
+              className="hm-section-container"
               style={{
                 backgroundColor: "#e6e5e5",
                 padding: "40px 0 20px 0",
@@ -223,7 +223,7 @@ class Landing extends Component {
               }}
             >
               <div
-                class="hm-section-wrapper"
+                className="hm-section-wrapper"
                 style={{
                   textAlign: "center",
                   width: "60%",
@@ -253,41 +253,41 @@ class Landing extends Component {
             </div>
 
             <div
-              class="hm-section-container"
+              className="hm-section-container"
               style={{ margin: 0, marginTop: "-40px", padding: 0 }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 356.17">
                 <g id="Layer_2" data-name="Layer 2">
                   <path
-                    class="cls-2"
+                    className="cls-2"
                     style={{ fill: "#e6e5e5" }}
                     d="M0,130,504.22,264.69a386.13,386.13,0,0,0,161.3,8.12L985.87,221a374.53,374.53,0,0,1,158.44,8.39l427,116.45a293.9,293.9,0,0,0,175.37-6.48L1920,278V0H0Z"
                   />
                 </g>
               </svg>
-              <div class="containerWrapper">
-                <div class="hm-section-header">
-                  <span class="hm-section-header-title">
+              <div className="containerWrapper">
+                <div className="hm-section-header">
+                  <span className="hm-section-header-title">
                     Popular Opportunites
                   </span>
-                  <span class="hm-section-header-sub">
+                  <span className="hm-section-header-sub">
                     Get a sneaky preview
                   </span>
                 </div>
                 <div id="contentContainer">
-                  <div class="privacy-overlay">
-                    <a class="btn fill-btn" href="./discover">
+                  <div className="privacy-overlay">
+                    <a className="btn fill-btn" href="./discover">
                       Join To View
                     </a>
                   </div>
 
-                  <div class="contentBox-wrapper">
-                    <div class="content-item" data-id="5jrdada7jr">
+                  <div className="contentBox-wrapper">
+                    <div className="content-item" data-id="5jrdada7jr">
                       <a href="#">
-                        <div class="cardContainer contentBox lght-shad">
-                          <div class="content-type-placeholder-img">
+                        <div className="cardContainer contentBox lght-shad">
+                          <div className="content-type-placeholder-img">
                             <img
-                              class="content-type-img"
+                              className="content-type-img"
                               src="https://storage.googleapis.com/whitehat-public/companies/219/logo/rectangle.png?v=1544520337"
                             />
 
@@ -316,21 +316,21 @@ class Landing extends Component {
                               </g>
                             </svg>
                           </div>
-                          <div class="content-type-overlay">
-                            <div class="content-bottom-gradient" />
-                            <div class="content-top-leftContainer">
-                              <button id="content-heart" class="content-btn">
+                          <div className="content-type-overlay">
+                            <div className="content-bottom-gradient" />
+                            <div className="content-top-leftContainer">
+                              <button id="content-heart" className="content-btn">
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" class="content-btn">
+                              <button id="content-share" className="content-btn">
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
 
-                            <span class="content-special excl">Exclusive</span>
-                            <span class="content-view">
+                            <span className="content-special excl">Exclusive</span>
+                            <span className="content-view">
                               <img
-                                class="content-vertified"
+                                className="content-vertified"
                                 src="./img/vertified.svg"
                               />
                               <span>24 Views</span>
@@ -338,20 +338,20 @@ class Landing extends Component {
                           </div>
                         </div>
                       </a>
-                      <div class="content-info">
-                        <a href="#" class="title">
+                      <div className="content-info">
+                        <a href="#" className="title">
                           Software Engineering & Data Processing Apprentice
                         </a>
-                        <span class="additional-info">12th March 2019</span>
+                        <span className="additional-info">12th March 2019</span>
                       </div>
                     </div>
 
-                    <div class="content-item" data-id="hr34hdj5e3">
+                    <div className="content-item" data-id="hr34hdj5e3">
                       <a href="#">
-                        <div class="cardContainer contentBox lght-shad">
-                          <div class="content-type-placeholder-img">
+                        <div className="cardContainer contentBox lght-shad">
+                          <div className="content-type-placeholder-img">
                             <img
-                              class="content-type-img"
+                              className="content-type-img"
                               src="data:image/jpeg;base64,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"
                             />
 
@@ -380,35 +380,35 @@ class Landing extends Component {
                               </g>
                             </svg>
                           </div>
-                          <div class="content-type-overlay">
-                            <div class="content-bottom-gradient" />
-                            <div class="content-top-leftContainer">
-                              <button id="content-heart" class="content-btn">
+                          <div className="content-type-overlay">
+                            <div className="content-bottom-gradient" />
+                            <div className="content-top-leftContainer">
+                              <button id="content-heart" className="content-btn">
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" class="content-btn">
+                              <button id="content-share" className="content-btn">
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
 
-                            <span class="content-view">6 Views</span>
+                            <span className="content-view">6 Views</span>
                           </div>
                         </div>
                       </a>
-                      <div class="content-info">
-                        <a href="#" class="title">
+                      <div className="content-info">
+                        <a href="#" className="title">
                           Work Experience at the BBC
                         </a>
-                        <span class="additional-info">7th April 2019</span>
+                        <span className="additional-info">7th April 2019</span>
                       </div>
                     </div>
 
-                    <div class="content-item" data-id="jg439djdfkg">
+                    <div className="content-item" data-id="jg439djdfkg">
                       <a href="#">
-                        <div class="cardContainer contentBox lght-shad">
-                          <div class="content-type-placeholder-img">
+                        <div className="cardContainer contentBox lght-shad">
+                          <div className="content-type-placeholder-img">
                             <img
-                              class="content-type-img"
+                              className="content-type-img"
                               src="https://storage.googleapis.com/whitehat-public/companies/222/logo/rectangle.png?v=1544720835"
                             />
 
@@ -437,35 +437,35 @@ class Landing extends Component {
                               </g>
                             </svg>
                           </div>
-                          <div class="content-type-overlay">
-                            <div class="content-bottom-gradient" />
-                            <div class="content-top-leftContainer">
-                              <button id="content-heart" class="content-btn">
+                          <div className="content-type-overlay">
+                            <div className="content-bottom-gradient" />
+                            <div className="content-top-leftContainer">
+                              <button id="content-heart" className="content-btn">
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" class="content-btn">
+                              <button id="content-share" className="content-btn">
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
 
-                            <span class="content-view">5435 Views</span>
+                            <span className="content-view">5435 Views</span>
                           </div>
                         </div>
                       </a>
-                      <div class="content-info">
-                        <a href="#" class="title">
+                      <div className="content-info">
+                        <a href="#" className="title">
                           Energy Specialist Apprentice
                         </a>
-                        <span class="additional-info">13th July 2019</span>
+                        <span className="additional-info">13th July 2019</span>
                       </div>
                     </div>
 
-                    <div class="content-item" data-id="hti34f632Df">
+                    <div className="content-item" data-id="hti34f632Df">
                       <a href="#">
-                        <div class="cardContainer contentBox lght-shad">
-                          <div class="content-type-placeholder-img">
+                        <div className="cardContainer contentBox lght-shad">
+                          <div className="content-type-placeholder-img">
                             <img
-                              class="content-type-img"
+                              className="content-type-img"
                               src="https://www.bitcni.org.uk/wp-content/uploads/2018/07/Sky-logo.jpg"
                             />
 
@@ -494,20 +494,20 @@ class Landing extends Component {
                               </g>
                             </svg>
                           </div>
-                          <div class="content-type-overlay">
-                            <div class="content-bottom-gradient" />
-                            <div class="content-top-leftContainer">
-                              <button id="content-heart" class="content-btn">
+                          <div className="content-type-overlay">
+                            <div className="content-bottom-gradient" />
+                            <div className="content-top-leftContainer">
+                              <button id="content-heart" className="content-btn">
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" class="content-btn">
+                              <button id="content-share" className="content-btn">
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
 
-                            <span class="content-view">
+                            <span className="content-view">
                               <img
-                                class="content-vertified"
+                                className="content-vertified"
                                 src="./img/vertified.svg"
                               />
                               <span>996 Views</span>
@@ -515,11 +515,11 @@ class Landing extends Component {
                           </div>
                         </div>
                       </a>
-                      <div class="content-info">
-                        <a href="#" class="title">
+                      <div className="content-info">
+                        <a href="#" className="title">
                           Software Engineering
                         </a>
-                        <span class="additional-info">7th April 2019</span>
+                        <span className="additional-info">7th April 2019</span>
                       </div>
                     </div>
                   </div>
@@ -527,16 +527,16 @@ class Landing extends Component {
               </div>
             </div>
 
-            <div class="hm-section-container" style={{ marginTop: "80px" }}>
-              <div class="containerWrapper">
-                <div class="contentHeader">
-                  <span class="header">Innovation Foundation Blog</span>
-                  <p class="sub-header">Uncover stories from our community</p>
+            <div className="hm-section-container" style={{ marginTop: "80px" }}>
+              <div className="containerWrapper">
+                <div className="contentHeader">
+                  <span className="header">Innovation Foundation Blog</span>
+                  <p className="sub-header">Uncover stories from our community</p>
                 </div>
-                <div class="blog-container">
+                <div className="blog-container">
                   <a href="#">
-                    <div class="cardContainer blog-item lght-shad">
-                      <div class="blog-img">
+                    <div className="cardContainer blog-item lght-shad">
+                      <div className="blog-img">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 280 160"
@@ -567,7 +567,7 @@ class Landing extends Component {
                           src="./img/showcase.jpg"
                         />
                       </div>
-                      <div class="blog-details">
+                      <div className="blog-details">
                         <span>
                           Innovation Foundation crowned Best Opportunities
                           Aggregator 2021
@@ -577,8 +577,8 @@ class Landing extends Component {
                   </a>
 
                   <a href="#">
-                    <div class="cardContainer blog-item lght-shad">
-                      <div class="blog-img">
+                    <div className="cardContainer blog-item lght-shad">
+                      <div className="blog-img">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 280 160"
@@ -609,7 +609,7 @@ class Landing extends Component {
                           src="./img/showcase.jpg"
                         />
                       </div>
-                      <div class="blog-details">
+                      <div className="blog-details">
                         <span>
                           Student Kicks Off Career in Software Development
                         </span>
@@ -618,8 +618,8 @@ class Landing extends Component {
                   </a>
 
                   <a href="#">
-                    <div class="cardContainer blog-item lght-shad">
-                      <div class="blog-img">
+                    <div className="cardContainer blog-item lght-shad">
+                      <div className="blog-img">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 280 160"
@@ -650,7 +650,7 @@ class Landing extends Component {
                           src="./img/showcase.jpg"
                         />
                       </div>
-                      <div class="blog-details">
+                      <div className="blog-details">
                         <span>
                           Innovation Foundation members rank 1st in Most
                           Talented Youth 2021
@@ -660,8 +660,8 @@ class Landing extends Component {
                   </a>
 
                   <a href="#">
-                    <div class="cardContainer blog-item lght-shad">
-                      <div class="blog-img">
+                    <div className="cardContainer blog-item lght-shad">
+                      <div className="blog-img">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 280 160"
@@ -692,7 +692,7 @@ class Landing extends Component {
                           src="./img/showcase.jpg"
                         />
                       </div>
-                      <div class="blog-details">
+                      <div className="blog-details">
                         <span>Innovation Female Developer Awards</span>
                       </div>
                     </div>

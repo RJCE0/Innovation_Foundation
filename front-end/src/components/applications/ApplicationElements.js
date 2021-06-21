@@ -9,7 +9,7 @@ export const ApplicationsContainer = styled.div`
   width: 100%;
   font-family: "Nunito";
   padding: 40px 0 40px 0;
-  gap: 20px;
+  gap: 40px;
 `;
 
 export const ApplicationsH1 = styled.h1`

@@ -49,28 +49,28 @@ class Navbar extends Component {
 
     return (
       <nav id="app-header">
-        <div class="nav-g g-1">
-          <div class="nav-el IN-logo">
+        <div className="nav-g g-1">
+          <div className="nav-el IN-logo">
             <a href="/">
-              <span class="IN-title">Innovation</span>
-              <span class="IN-COM-title">Foundation</span>
+              <span className="IN-title">Innovation</span>
+              <span className="IN-COM-title">Foundation</span>
             </a>
           </div>
-          <div class="nav-el home-search">
-            <div class="nav-links">
-              <a href="services" class="user-btn">
+          <div className="nav-el home-search">
+            <div className="nav-links">
+              <a href="services" className="user-btn">
                 Services
               </a>
-              {/* <a href="#" class="user-btn">
+              {/* <a href="#" className="user-btn">
 								Blog
 							</a> */}
-              <a href="employers" class="user-btn">
+              <a href="employers" className="user-btn">
                 For Employers
               </a>
             </div>
           </div>
         </div>
-        <div id="user-nav" class="nav-el nav-g g-2">
+        <div id="user-nav" className="nav-el nav-g g-2">
           <div id="user-nav-profile">
             {isAuthenticated ? authLinks : guestLinks}
           </div>

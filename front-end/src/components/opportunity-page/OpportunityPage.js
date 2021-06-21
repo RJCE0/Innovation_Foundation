@@ -206,7 +206,7 @@ class OpportunityPage extends React.Component {
             <h5>
               {" "}
               Pay: {opp.pay == undisclosedPay
-                ? "Undisclosed"
+                ? "Competitive"
                 : payStatement}{" "}
             </h5>
             <h5>

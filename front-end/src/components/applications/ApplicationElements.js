@@ -8,7 +8,7 @@ export const ApplicationsContainer = styled.div`
   justify-content: flex-start;
   width: 100%;
   font-family: "Nunito";
-  padding: 20px 20px;
+  padding: 40px 0 40px 0;
   gap: 20px;
 `;
 
@@ -77,8 +77,4 @@ export const ApplicationsCardInfo = styled.div`
     width: 100%;
     text-align: center;
   }
-`;
-
-export const CardLink = styled(Link)`
-  text-decoration: none;
 `;

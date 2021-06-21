@@ -9,7 +9,6 @@ import {
   ApplicationsCardLogo,
   ApplicationsCardLogoContainer,
   ApplicationsCardInfo,
-  CardLink,
 } from "./ApplicationElements";
 import axios from "axios";
 import { config } from "../../constants.js";

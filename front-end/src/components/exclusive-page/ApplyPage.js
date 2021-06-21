@@ -21,7 +21,6 @@ class ApplyPage extends React.Component {
   }
 
   async addInternships(parameters) {
-
     await axios
       .post(`${config.API_URL}/apply`, {
         params: {
@@ -29,7 +28,7 @@ class ApplyPage extends React.Component {
         },
       })
       .then((res) => {
-        console.log(res)
+        console.log(res);
       })
       .catch((error) => {
         console.log(error);
@@ -138,8 +137,10 @@ class ApplyPage extends React.Component {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
               padding: "10px 0px",
+              width: "100%",
+              flexDirection: "column",
+              gap: "10px",
             }}
           >
             <InputFile

@@ -43,7 +43,7 @@ class ApplyPage extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.addInternships(this.state);
-    console.log(this.state);
+    window.location.replace("/my-applications");
   };
 
   onChange = (e) => {
@@ -137,8 +137,6 @@ class ApplyPage extends React.Component {
             }}
             area
           />
-
-          {/* <textarea style={{ width: "100%" }} /> */}
           <div
             style={{
               display: "flex",

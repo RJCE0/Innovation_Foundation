@@ -98,7 +98,7 @@ class Register extends Component {
               <div className="flex-wrap">
                 <div className="hm-section-divider">
                   <div className="section-text-wrapper">
-                    <span className="section-header">Who's Here</span>
+                    <span className="section-header">Our Community</span>
                     <p className="section-desc">
                       Innovation Foundation is filled with highly-skilled,
                       ambitious students focused on furthering their respective
@@ -144,8 +144,8 @@ class Register extends Component {
                   <div className="section-text-wrapper">
                     <span className="section-header">Understand Your Audience</span>
                     <p className="section-desc">
-                      You'll have access to detailed analytics on what
-                      interactions occur on your opportunities i.e. views,
+                      Truly learn how to grasp the attention of young people through our detailed
+                      analytics on interactions with your posted opportunities i.e. views,
                       favourites, applications and more
                     </p>
                   </div>

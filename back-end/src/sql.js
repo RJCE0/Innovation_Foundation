@@ -20,4 +20,5 @@ export const projectSQL = {
   exclusiveInfo: sql("../sql/exclusiveInfo.sql"),
   addApplication: sql("../sql/addApplication.sql"),
   getAllApplications: sql("../sql/getAllApplications.sql"),
+  isApplied: sql("../sql/isApplied.sql"),
 };

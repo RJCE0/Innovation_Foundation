@@ -256,6 +256,28 @@ class Database {
     return result;
   }
 
+  static async isApplied(input) {
+    console.log(input)
+    var result = {};
+    let { user_id, oppId } = JSON.parse(input);
+
+    // execute query
+    await db
+      .any(projectSQL.isApplied, {user_id: user_id, opp_id: oppId})
+      .then((data) => {
+        console.log("successful Application data retrieval");
+        result = data;
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+
+    console.log("Applications?", result)
+    console.log("HAVE YOU APPLIED:", result != 0)
+    return result.length != 0;
+  }
+
+
   static async updateViews(input) {
     let { id, views } = input.params.body;
 

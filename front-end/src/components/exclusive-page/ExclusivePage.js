@@ -32,7 +32,9 @@ class ExclusivePage extends React.Component {
       opps: null,
       info: null,
       fav: null,
+      applied: false,
     };
+    this.user_id = 0;
     this.oppId = this.props.match.params.handle.split("=")[1];
     this.onFavClick = this.onFavClick.bind(this);
   }
@@ -75,6 +77,7 @@ class ExclusivePage extends React.Component {
 
   async componentDidMount() {
     const params = {
+      user_id: this.user_id,
       oppId: this.oppId,
     };
     const opp = await this.getOpportunities("exclusive", params);
@@ -83,6 +86,7 @@ class ExclusivePage extends React.Component {
         opps: opp,
         info: await this.getOpportunities("exclusive-info", params),
         fav: opp["0"].fav,
+        applied: await this.getOpportunities("applied", params),
       },
       this.updateViews.bind(this)
     );
@@ -158,12 +162,16 @@ class ExclusivePage extends React.Component {
                 <ApplyButtons>
                   <ExclLink
                     backgroundcolor="#256de1"
-                    to={`/discover/apply/${opps.title
-                      .trim()
-                      .replace(/\s+/g, "-")
-                      .toLowerCase()}&id=${opps.id}`}
+                    to={
+                      this.state.applied
+                        ? "/my-applications"
+                        : `/discover/apply/${opps.title
+                            .trim()
+                            .replace(/\s+/g, "-")
+                            .toLowerCase()}&id=${opps.id}`
+                    }
                   >
-                    Apply
+                    {this.state.applied ? "View Status" : "Apply"}
                   </ExclLink>
                   <ApplyButtonComponent
                     onClick={this.onFavClick}

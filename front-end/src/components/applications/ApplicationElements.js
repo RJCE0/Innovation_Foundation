@@ -23,7 +23,7 @@ export const ApplicationsCardsWrapper = styled.div`
   justify-items: center;
   row-gap: 20px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -40,10 +40,13 @@ export const ApplicationsCard = styled(Link)`
   user-select: none;
   color: inherit;
   transition: all 0.2s ease-in-out;
+  height: 300px;
+  gap: 10px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
     gap: 20px;
+    height: 400px;
   }
 
   &:hover {
@@ -54,10 +57,12 @@ export const ApplicationsCard = styled(Link)`
 
 export const ApplicationsCardLogoContainer = styled.div`
   width: 25%;
+  height: 100%;
 
   @media screen and (max-width: 768px) {
     width: 100%;
     border-bottom: 2px solid rgba(0, 0, 0, 1);
+    height: 50%;
   }
 `;
 
@@ -78,6 +83,7 @@ export const ApplicationsCardInfo = styled.div`
 
   @media screen and (max-width: 768px) {
     align-items: center;
+    height: 50%;
     width: 100%;
     text-align: center;
   }

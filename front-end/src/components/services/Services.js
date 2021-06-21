@@ -84,10 +84,11 @@ class Register extends Component {
                 color: "#338CD1",
               }}
             >
-              Innovation Foundation is a firm intended on enhancing the skills
-              of young people and pushing the capabilities of the youth. This is
-              done by providing an abundance of different opportunities and
-              practical ways of developing the skills learnt
+              Innovation Foundation intends on enhancing the skills
+              of young people and pushing the capabilities of the youth,
+              to overcome the glass ceiling. This is achieved by providing a
+              multitude of different opportunities and practical ways of developing
+              the skills learned
             </span>
           </div>
 
@@ -97,11 +98,11 @@ class Register extends Component {
                 <div className="hm-section-divider">
                   <div className="section-text-wrapper">
                     <p className="section-desc">
-                      Innovation Foundation is a hub intent on bringing together
-                      industry opportunities into one place to making it more
-                      easier for students to access. These opportunities range
-                      from valuable work experience placements, rewarding
-                      scholarships and insightful talks & lectures
+                      Innovation Foundation is a hub intent on gathering various
+                      industry opportunities into one place - making it
+                      easier for students across the country to access.
+                      These opportunities range from valuable work experience placements,
+                      rewarding internship experiences and insightful mentorship programmes
                     </p>
                   </div>
                 </div>
@@ -120,7 +121,7 @@ class Register extends Component {
                 <div className="hm-section-divider">
                   <div className="section-text-wrapper">
                     <p className="section-desc">
-                      Innovation Inc has given community members the chance to
+                      Innovation Inc has given foundation members the chance to
                       spring their idea into existence. Active members are given
                       the opportunity to produce their ideas through the Inc
                       with its resources

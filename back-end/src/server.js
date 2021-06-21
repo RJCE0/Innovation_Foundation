@@ -77,6 +77,15 @@ app.get("/apply", async (req, res) => {
   }
 });
 
+app.get("/applied", async (req, res) => {
+  try {
+    const applied = await Database.isApplied(req.query.body);
+    res.json(applied);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.post("/favourites", async (req, res) => {
   try {
     await Database.updateFavourites(req.body);

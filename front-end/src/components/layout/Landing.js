@@ -32,9 +32,6 @@ class Landing extends Component {
                   height: "1000px",
                 }}
               >
-                {/* <video autoplay loop id="bg-video">
-									<source src="./media/StarBackdrop.mp4" type="video/mp4" />
-								</video> */}
                 <Particles
                   style={{
                     width: "100%",
@@ -150,9 +147,9 @@ class Landing extends Component {
                         Not your average work experience site
                       </span>
                       <p className="section-desc">
-                        Innovation Foundation is the central hub for everything
-                        a student needs. Activities, work experience,
-                        scholarships and more
+                        Innovation Foundation is creating a centralised hub for everything
+                        a student needs. Work experience, Internships
+                        Mentorships and more
                       </p>
                     </div>
                   </div>
@@ -271,7 +268,7 @@ class Landing extends Component {
                     Popular Opportunites
                   </span>
                   <span className="hm-section-header-sub">
-                    Get a sneaky preview
+                    Get a sneak preview
                   </span>
                 </div>
                 <div id="contentContainer">
@@ -342,7 +339,7 @@ class Landing extends Component {
                         <a href="#" className="title">
                           Software Engineering & Data Processing Apprentice
                         </a>
-                        <span className="additional-info">12th March 2019</span>
+                        <span className="additional-info">12th March 2022</span>
                       </div>
                     </div>
 
@@ -399,7 +396,7 @@ class Landing extends Component {
                         <a href="#" className="title">
                           Work Experience at the BBC
                         </a>
-                        <span className="additional-info">7th April 2019</span>
+                        <span className="additional-info">7th August 2021</span>
                       </div>
                     </div>
 
@@ -448,7 +445,7 @@ class Landing extends Component {
                               </button>
                             </div>
 
-                            <span className="content-view">5435 Views</span>
+                            <span className="content-view">35 Views</span>
                           </div>
                         </div>
                       </a>
@@ -456,7 +453,7 @@ class Landing extends Component {
                         <a href="#" className="title">
                           Energy Specialist Apprentice
                         </a>
-                        <span className="additional-info">13th July 2019</span>
+                        <span className="additional-info">13th July 2021</span>
                       </div>
                     </div>
 
@@ -510,7 +507,7 @@ class Landing extends Component {
                                 className="content-vertified"
                                 src="./img/vertified.svg"
                               />
-                              <span>996 Views</span>
+                              <span>96 Views</span>
                             </span>
                           </div>
                         </div>
@@ -519,7 +516,7 @@ class Landing extends Component {
                         <a href="#" className="title">
                           Software Engineering
                         </a>
-                        <span className="additional-info">7th April 2019</span>
+                        <span className="additional-info">7th April 2022</span>
                       </div>
                     </div>
                   </div>

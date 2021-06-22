@@ -333,10 +333,17 @@ class Database {
   // Business side database functions
   static async addInternship(input) {
     let {title, location, summary, pay, date, image,
-      date_posted, role, c_description, skills_gained,
+       role, c_description, skills_gained,
      requirements } = input.params.body;
 
     var new_opp_id = null;
+
+    // Get today's date in correct format
+    const posted_date = new Date();
+    const resDate =
+    `${posted_date.getFullYear()}-` +
+    `${posted_date.getMonth() + 1}-` +
+    `${posted_date.getDate()}`;
 
    await db
      .any(projectSQL.addOpportunity, {
@@ -346,7 +353,7 @@ class Database {
        pay: pay,
        date: date,
        image_url: null, //todo
-       date_posted: null, //todo
+       date_posted: resDate, //todo
      })
      .then((data) => {
        console.log("New id:", data)
@@ -358,7 +365,7 @@ class Database {
      });
 
     const exclusive_info = {
-      opp_id: new_opp_id,
+      id: new_opp_id,
       role: role,
       c_description: c_description,
       skills_gained: skills_gained,

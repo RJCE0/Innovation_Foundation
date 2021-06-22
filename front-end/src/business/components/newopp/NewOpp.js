@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { DiscoverNavbar } from "../../../components/discover/DiscoverNavbar";
 import Footer from "../../../components/layout/Footer";
 import { withRouter } from "react-router";
-// import axios from "axios";
+import axios from "axios";
 import { BusinessSideNavOptions, config } from "../../../constants";
 import Input from "../../../components/common/Input";
 import Select from "react-select";
@@ -33,8 +33,24 @@ class ApplyPage extends React.Component {
       c_description: "",
       image: null,
     };
+    this.locations = []
   }
 
+  async getlocations() {
+    var result = [];
+    await axios
+      .get(`${config.API_URL}/locations`)
+      .then((res) => {
+        const location = res.data;
+        result = location;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return result.length ? result.split("\n") : [];
+  };
+  
+  
   async addInternship(parameters) {
     var result = [];
     await axios
@@ -52,8 +68,8 @@ class ApplyPage extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    // this.addInternships(this.state);
-    // window.location.replace("/my-applications");
+    this.addInternship(this.state);
+    // window.location.replace("/my-applications"); TO CHANGE
   };
 
   onChangeLocation = (e) => {
@@ -69,6 +85,16 @@ class ApplyPage extends React.Component {
   onChangeFile = (e) => {
     this.setState({ [e.target.name]: e.target.files[0] });
   };
+
+  async componentWillMount() {
+      const locationList = await this.getlocations();
+      for (let i in locationList) {
+        locationList[i] = { label: locationList[i], value: i + 1, key: i + 1 };
+      }
+      // locationList.unshift({ label: "Select Location", value: 0, key: 0 });
+      this.locations = locationList;
+      this.forceUpdate();
+    };
 
   render() {
     return (
@@ -232,9 +258,9 @@ class ApplyPage extends React.Component {
                 id="location"
                 name="location"
                 onChange={this.onChangeLocation}
-                defaultValue={options[0]}
-                filterOptions={filterOptions(options)}
-                options={options}
+                defaultValue={this.locations[0]}
+                filterOptions={filterOptions(this.locations)}
+                options={this.locations}
               />
             </label>
             <Input

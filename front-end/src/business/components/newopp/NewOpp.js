@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import S3FileUpload from 'react-s3';
 import { DiscoverNavbar } from "../../../components/discover/DiscoverNavbar";
 import Footer from "../../../components/layout/Footer";
 import { withRouter } from "react-router";
 import axios from "axios";
-import { BusinessSideNavOptions, config } from "../../../constants";
+import { aws_logo_config, BusinessSideNavOptions, config } from "../../../constants";
 import Input from "../../../components/common/Input";
 import Select from "react-select";
 import { filterOptions } from "../../../components/discover/ModalElements";
@@ -32,6 +33,7 @@ class ApplyPage extends React.Component {
       requirements: "",
       c_description: "",
       image: null,
+      image_url: "",
     };
     this.locations = []
   }
@@ -49,26 +51,45 @@ class ApplyPage extends React.Component {
       });
     return result.length ? result.split("\n") : [];
   };
-  
-  
-  async addInternship(parameters) {
-    var result = [];
-    await axios
-      .post(`${config.API_URL}/create`, {
-        params: {
-          body: parameters,
-        },
+
+
+  // Uploads file and returns link to file
+  async aws_upload(file) {
+    const configs = {
+      bucketName: "innovation-drp-bucket",
+      dirName: "logo",
+      region: "eu-west-2",
+      accessKeyId: "AKIAYSN3QHAZOZLZ7XNB",
+      secretAccessKey: "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",
+    }
+
+    var result = {};
+
+    await S3FileUpload.uploadFile(file, configs)
+      .then((data) => {
+        result = data;
+        console.log(data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-    return result;
+      .catch(err => console.error(err))
+
+    return result.location;
   }
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state);
-    this.addInternship(this.state);
+    this.setState({ image_url: await this.aws_upload(this.state.image) },
+      async () => {
+        await axios
+          .post(`${config.API_URL}/create`, {
+            params: {
+              body: this.state,
+            },
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      });
     // window.location.replace("/my-applications"); TO CHANGE
   };
 
@@ -82,19 +103,19 @@ class ApplyPage extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onChangeFile = (e) => {
+  onChangeFile = async (e) => {
     this.setState({ [e.target.name]: e.target.files[0] });
   };
 
   async componentWillMount() {
-      const locationList = await this.getlocations();
-      for (let i in locationList) {
-        locationList[i] = { label: locationList[i], value: i + 1, key: i + 1 };
-      }
-      // locationList.unshift({ label: "Select Location", value: 0, key: 0 });
-      this.locations = locationList;
-      this.forceUpdate();
-    };
+    const locationList = await this.getlocations();
+    for (let i in locationList) {
+      locationList[i] = { label: locationList[i], value: i + 1, key: i + 1 };
+    }
+    // locationList.unshift({ label: "Select Location", value: 0, key: 0 });
+    this.locations = locationList;
+    this.forceUpdate();
+  };
 
   render() {
     return (

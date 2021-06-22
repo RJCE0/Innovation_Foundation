@@ -12,6 +12,23 @@ const local = {
   API_URL: "http://localhost:5000",
 };
 
+// For amazon s3 hosting uploads
+export const aws_cv_config = {
+  bucketName: process.env.BUCKET_NAME,
+  dirName: process.env.CV_DIR_NAME,
+  region: "eu-west-2",
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+}
+
+export const aws_logo_config = {
+  bucketName: process.env.BUCKET_NAME,
+  dirName: process.env.LOGO_DIR_NAME,
+  region: "eu-west-2",
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+}
+
 function getConfig() {
   if (process.env.REACT_APP_NODE_ENV === "production") {
     return prod;

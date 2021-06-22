@@ -55,6 +55,7 @@ export class CardsWithFilter extends Component {
   }
 
   async componentDidMount() {
+    // this.interval = setInterval(async () =>
     this.setState(
       {
         opportunities: (
@@ -71,7 +72,12 @@ export class CardsWithFilter extends Component {
           ? this.props.setNumberOfInternships(this.state.opportunities.length)
           : null
     );
+    // , 1000)
   }
+
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
 
   handleModal() {
     this.setState(({ opportunities, show }) => {

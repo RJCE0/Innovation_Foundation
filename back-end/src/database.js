@@ -3,6 +3,7 @@ import { projectSQL } from "./sql";
 const pgp = require("pg-promise")({});
 require("dotenv").config();
 
+// To connect to database
 const dbInfo = {
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -332,9 +333,10 @@ class Database {
 
   // Business side database functions
   static async addInternship(input) {
-    let {title, location, summary, pay, date, image,
+    let {title, location, summary, pay, date,
        role, c_description, skills_gained,
-     requirements } = input.params.body;
+     requirements, image_url} = input.params.body;
+     console.log(input.params.body);
 
     var new_opp_id = null;
 
@@ -345,6 +347,7 @@ class Database {
     `${posted_date.getMonth() + 1}-` +
     `${posted_date.getDate()}`;
 
+    // Add to internships table
    await db
      .any(projectSQL.addOpportunity, {
        title: title,
@@ -352,8 +355,8 @@ class Database {
        description: summary,
        pay: pay,
        date: date,
-       image_url: null, //todo
-       date_posted: resDate, //todo
+       image_url: image_url,
+       date_posted: resDate,
      })
      .then((data) => {
        console.log("New id:", data)
@@ -372,6 +375,7 @@ class Database {
       requirements: requirements,
     }
 
+    // Add to exclusive internships table
     this.addExclusiveOpportunity(exclusive_info);
   }
 

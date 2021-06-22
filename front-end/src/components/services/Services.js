@@ -63,7 +63,7 @@ class Register extends Component {
               <a
                 className="btn fill-btn"
                 style={{ display: "inline-block", marginTop: "20px" }}
-                href="#"
+                href="/discover"
               >
                 Explore Now
               </a>

@@ -13,6 +13,7 @@ import {
 import outerLogo from "../../img/outer-logo.png";
 import innerLogo from "../../img/inner-logo.png";
 import AvatarDropdown from "./AvatarDropdown";
+import { StudentSideLinks, BusinessSideLinks } from "../../constants";
 
 export const DiscoverNavbar = (props) => {
   return (
@@ -24,14 +25,18 @@ export const DiscoverNavbar = (props) => {
         </LogoLink>
         <Bars onClick={props.toggle} />
         <NavMenu>
-          <NavLink to="/discover">Home</NavLink>
-          <NavLink to="/internships"> Internships</NavLink>
-          <NavLink to="/mentorships">Mentorships</NavLink>
-          <NavLink to="/student-blog">Student Blog</NavLink>
+          {props.links.map(({ text, dest }, index) => (
+            <NavLink to={dest} key={index}>
+              {text}
+            </NavLink>
+          ))}
         </NavMenu>
+        {/* Change to company logo? */}
         <NavAvatar>
           <NavAvatarLink>
-            <AvatarDropdown />
+            <AvatarDropdown
+              links={props.student ? StudentSideLinks : BusinessSideLinks}
+            />
           </NavAvatarLink>
         </NavAvatar>
       </Nav>

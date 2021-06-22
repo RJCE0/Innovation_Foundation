@@ -38,7 +38,8 @@ class Login extends Component {
       password: this.state.password,
     };
 
-    this.props.loginUser(userData);
+    // this.props.loginUser(userData);
+    window.location.replace("/discover");
   };
 
   onChange = (e) => {
@@ -111,9 +112,7 @@ class Login extends Component {
             error={errors.password}
           />
 
-          <button id="submitLogin" className="btn flat-btn fill-btn">
-            Login
-          </button>
+          <button className="btn flat-btn fill-btn">Login</button>
           <a
             className="signup-forgot"
             href="./register"

@@ -68,6 +68,14 @@ app.post("/apply", async (req, res) => {
   }
 });
 
+app.post("/create", async (req, res) => {
+  try {
+    await Database.addInternship(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.get("/apply", async (req, res) => {
   try {
     const applications = await Database.getAllApplications();

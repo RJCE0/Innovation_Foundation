@@ -24,6 +24,7 @@ import Location from "../common/location.gif";
 import Pound from "../common/pound.gif";
 import Calendar from "../common/calendar.gif";
 import Views from "../common/views.gif";
+import { StudentSideNavOptions } from "../../constants.js";
 
 class ExclusivePage extends React.Component {
   constructor(props) {
@@ -108,10 +109,11 @@ class ExclusivePage extends React.Component {
   }
 
   formatInfoList(info) {
-    return info.split("\n").map((bullet) => {
+    return info.split("\n").map((bullet, index) => {
       return (
         <li
           style={{ padding: "5px 0 5px 0", listStyleType: "disclosure-closed" }}
+          key={index}
         >
           {bullet}
         </li>
@@ -120,8 +122,8 @@ class ExclusivePage extends React.Component {
   }
 
   formatInfo(info) {
-    return info.split("\n").map((para) => {
-      return <p>{para}</p>;
+    return info.split("\n").map((para, index) => {
+      return <p key={index}>{para}</p>;
     });
   }
 
@@ -131,7 +133,7 @@ class ExclusivePage extends React.Component {
 
     return (
       <>
-        <DiscoverNavbar />
+        <DiscoverNavbar links={StudentSideNavOptions} student />
         <ExclusivePageContainer>
           {opps ? (
             <>

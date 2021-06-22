@@ -124,7 +124,7 @@ const locations = async () => {
     .catch((error) => {
       console.log(error);
     });
-  return result.split("\n");
+  return result.length ? result.split("\n") : [];
 };
 
 const optionsDatePosted = [

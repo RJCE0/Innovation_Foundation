@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { config } from "../../constants.js";
 import Spinner from "../common/Spinner";
+import { StudentSideNavOptions } from "../../constants.js";
 
 export class MyApplications extends React.Component {
   constructor(props) {
@@ -43,25 +44,22 @@ export class MyApplications extends React.Component {
 
   async componentDidMount() {
     const appliedOpportunities = await this.getApplications();
-    this.setState(
-      () => {
-        return {
-          appliedOpps: appliedOpportunities,
-        };
-      },
-      () => console.log(this.state.appliedOpps)
-    );
+    this.setState(() => {
+      return {
+        appliedOpps: appliedOpportunities,
+      };
+    });
   }
 
   render() {
     return (
       <>
-        <DiscoverNavbar />
+        <DiscoverNavbar links={StudentSideNavOptions} student />
         <ApplicationsContainer>
           <ApplicationsH1>My Applications</ApplicationsH1>
           {this.state.appliedOpps ? (
             <ApplicationsCardsWrapper>
-              {this.state.appliedOpps.map((appliedOpp) => (
+              {this.state.appliedOpps.map((appliedOpp, index) => (
                 <ApplicationsCard
                   to={{
                     pathname: `/discover/${appliedOpp.title
@@ -69,6 +67,7 @@ export class MyApplications extends React.Component {
                       .replace(/\s+/g, "-")
                       .toLowerCase()}&id=${appliedOpp.opp_id}`,
                   }}
+                  key={index}
                 >
                   <ApplicationsCardInfo>
                     <h3>{appliedOpp.title}</h3>

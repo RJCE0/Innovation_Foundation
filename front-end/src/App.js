@@ -16,6 +16,8 @@ import ExclusivePage from "./components/exclusive-page/ExclusivePage";
 import { FavouritesPage } from "./components/favourites/FavouritesPage";
 import ApplyPage from "./components/exclusive-page/ApplyPage";
 import { MyApplications } from "./components/applications/MyApplications";
+import { Homepage } from "./business/components/homepage/Homepage";
+import NewOpp from "./business/components/newopp/NewOpp";
 
 class App extends Component {
   render() {
@@ -36,6 +38,8 @@ class App extends Component {
             <Route exact path="/discover/apply/:handle" component={ApplyPage} />
             <Route exact path="/discover/:handle" component={ExclusivePage} />
             <Route exact path="/my-applications" component={MyApplications} />
+            <Route exact path="/business-home" component={Homepage} />
+            <Route exact path="/new-opportunity" component={NewOpp} />
           </div>
         </Router>
       </Provider>

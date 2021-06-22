@@ -6,6 +6,7 @@ import Footer from "../layout/Footer";
 import { withRouter } from "react-router";
 import axios from "axios";
 import { config } from "../../constants.js";
+import { StudentSideNavOptions } from "../../constants.js";
 
 const InputFile = styled.input`
   padding: 10px 0px;
@@ -57,7 +58,7 @@ class ApplyPage extends React.Component {
   render() {
     return (
       <>
-        <DiscoverNavbar />
+        <DiscoverNavbar links={StudentSideNavOptions} student />
         <form
           className="cardContainer lght-shad"
           id="signup-container"

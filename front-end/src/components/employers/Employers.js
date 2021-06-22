@@ -66,21 +66,10 @@ class Register extends Component {
                   style={{
                     display: "inline-block",
                     marginTop: "20px",
-                    pointerEvents: "none",
                   }}
-                  href="#"
+                  href="/business-home"
                 >
                   Employers Portal
-                  <span
-                    style={{
-                      display: "block",
-                      textAlign: "center",
-                      fontSize: 12,
-                      color: "#fff",
-                    }}
-                  >
-                    Coming Soon
-                  </span>
                 </a>
               </div>
             </div>
@@ -142,11 +131,14 @@ class Register extends Component {
               <div className="flex-wrap">
                 <div className="hm-section-divider">
                   <div className="section-text-wrapper">
-                    <span className="section-header">Understand Your Audience</span>
+                    <span className="section-header">
+                      Understand Your Audience
+                    </span>
                     <p className="section-desc">
-                      Truly learn how to grasp the attention of young people through our detailed
-                      analytics on interactions with your posted opportunities i.e. views,
-                      favourites, applications and more
+                      Truly learn how to grasp the attention of young people
+                      through our detailed analytics on interactions with your
+                      posted opportunities i.e. views, favourites, applications
+                      and more
                     </p>
                   </div>
                 </div>
@@ -160,7 +152,10 @@ class Register extends Component {
           </div>
         </div>
 
-        <div className="" style={{ position: "relative", padding: 0, margin: 0 }}>
+        <div
+          className=""
+          style={{ position: "relative", padding: 0, margin: 0 }}
+        >
           <img src="img/s/blue.svg" />
           <img
             style={{
@@ -192,26 +187,17 @@ class Register extends Component {
               Check out all the tools available to you
             </span>
             <div style={{ display: "inline-block", flexDirection: "column" }}>
-              <button
-                className="btn fill-btn lght-shad"
-                style={{
-                  backgroundColor: "#fff",
-                  color: "#529cc7",
-                  pointerEvents: "none",
-                }}
-              >
-                Employers Portal
-                <span
+              <a href="/business-home">
+                <button
+                  className="btn fill-btn lght-shad"
                   style={{
-                    display: "block",
-                    textAlign: "center",
-                    fontSize: 12,
+                    backgroundColor: "#fff",
                     color: "#529cc7",
                   }}
                 >
-                  Coming Soon
-                </span>
-              </button>
+                  Employers Portal
+                </button>
+              </a>
             </div>
           </div>
         </div>

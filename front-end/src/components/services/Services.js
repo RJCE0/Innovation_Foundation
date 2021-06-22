@@ -63,7 +63,7 @@ class Register extends Component {
               <a
                 className="btn fill-btn"
                 style={{ display: "inline-block", marginTop: "20px" }}
-                href="#"
+                href="/discover"
               >
                 Explore Now
               </a>
@@ -84,11 +84,11 @@ class Register extends Component {
                 color: "#338CD1",
               }}
             >
-              Innovation Foundation intends on enhancing the skills
-              of young people and pushing the capabilities of the youth,
-              to overcome the glass ceiling. This is achieved by providing a
-              multitude of different opportunities and practical ways of developing
-              the skills learned
+              Innovation Foundation intends on enhancing the skills of young
+              people and pushing the capabilities of the youth, to overcome the
+              glass ceiling. This is achieved by providing a multitude of
+              different opportunities and practical ways of developing the
+              skills learned
             </span>
           </div>
 
@@ -99,10 +99,11 @@ class Register extends Component {
                   <div className="section-text-wrapper">
                     <p className="section-desc">
                       Innovation Foundation is a hub intent on gathering various
-                      industry opportunities into one place - making it
-                      easier for students across the country to access.
-                      These opportunities range from valuable work experience placements,
-                      rewarding internship experiences and insightful mentorship programmes
+                      industry opportunities into one place - making it easier
+                      for students across the country to access. These
+                      opportunities range from valuable work experience
+                      placements, rewarding internship experiences and
+                      insightful mentorship programmes
                     </p>
                   </div>
                 </div>
@@ -141,7 +142,10 @@ class Register extends Component {
           </div>
         </div>
 
-        <div className="" style={{ position: "relative", padding: 0, margin: 0 }}>
+        <div
+          className=""
+          style={{ position: "relative", padding: 0, margin: 0 }}
+        >
           <img src="img/s/blue.svg" />
           <img
             style={{
@@ -172,12 +176,14 @@ class Register extends Component {
             >
               Want to get in on the action
             </span>
-            <button
-              className="btn fill-btn lght-shad"
-              style={{ backgroundColor: "#fff", color: "#529cc7" }}
-            >
-              Sign Up
-            </button>
+            <a href="/register">
+              <button
+                className="btn fill-btn lght-shad"
+                style={{ backgroundColor: "#fff", color: "#529cc7" }}
+              >
+                Sign Up
+              </button>
+            </a>
           </div>
         </div>
 

@@ -19,6 +19,7 @@ import "./i.css";
 import { FilterModal } from "../discover/ModalElements";
 import Spinner from "../common/Spinner";
 import { CardsWithFilter } from "../common/CardsWithFilter";
+import { StudentSideNavOptions } from "../../constants.js";
 
 const MenuItem = ({ opp }) => {
   return (
@@ -122,7 +123,7 @@ class InternshipPage extends React.Component {
       <div>
         <FilterModal show={this.state.show} showModal={this.handleModal} />
         <InternshipContainer id="Internships">
-          <DiscoverNavbar />
+          <DiscoverNavbar links={StudentSideNavOptions} student />
           <InternshipContent>
             <InternshipH1>Internships</InternshipH1>
             <InternshipsWrapper>

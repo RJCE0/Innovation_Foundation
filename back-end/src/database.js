@@ -329,6 +329,59 @@ class Database {
         console.log("ERROR:", error);
       });
   }
+
+  // Business side database functions
+  static async addInternship(input) {
+    let {title, location, summary, pay, date, image,
+      date_posted, role, c_description, skills_gained,
+     requirements } = input.params.body;
+
+    var new_opp_id = null;
+
+   await db
+     .any(projectSQL.addOpportunity, {
+       title: title,
+       location: location,
+       description: summary,
+       pay: pay,
+       date: date,
+       image_url: null, //todo
+       date_posted: null, //todo
+     })
+     .then((data) => {
+       console.log("New id:", data)
+       new_opp_id = data["0"].id
+       console.log("successful opportunity creation");
+     })
+     .catch((error) => {
+       console.log("ERROR:", error);
+     });
+
+    const exclusive_info = {
+      opp_id: new_opp_id,
+      role: role,
+      c_description: c_description,
+      skills_gained: skills_gained,
+      requirements: requirements,
+    }
+
+    this.addExclusiveOpportunity(exclusive_info);
+  }
+
+  // Add internship into exclusive table
+  static async addExclusiveOpportunity(exclusive_info) {
+
+    await db
+      .any(projectSQL.addExclusive, {...exclusive_info})
+      .then(() => {
+        console.log("successful exclusive internship insertion");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+
+  }
+
 }
 
 export default Database;

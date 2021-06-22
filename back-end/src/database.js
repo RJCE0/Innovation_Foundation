@@ -180,12 +180,10 @@ class Database {
   }
 
   static async getSortedFav(input) {
-    console.log("FAV INPUT", input);
 
     var condition = `AND fav=true `;
     var result = {};
     let { sortByValue } = JSON.parse(input);
-    console.log(sortByValue);
 
     // Sort by
     if (sortByValue != null) {
@@ -212,7 +210,6 @@ class Database {
       .catch((error) => {
         console.log("ERROR:", error);
       });
-    console.log("RESULT:", result);
     return result;
   }
 
@@ -258,7 +255,6 @@ class Database {
   }
 
   static async isApplied(input) {
-    console.log(input)
     var result = {};
     let { user_id, oppId } = JSON.parse(input);
 
@@ -273,8 +269,6 @@ class Database {
         console.log("ERROR:", error);
       });
 
-    console.log("Applications?", result)
-    console.log("HAVE YOU APPLIED:", result != 0)
     return result.length != 0;
   }
 
@@ -310,8 +304,6 @@ class Database {
       input.params.body;
 
     const cv_uploaded = file != null;
-    console.log(input.params.body);
-    console.log(cv_uploaded);
 
     await db
       .any(projectSQL.addApplication, {
@@ -333,7 +325,7 @@ class Database {
 
   // Business side database functions
   static async addInternship(input) {
-    let {title, location, summary, pay, date,
+    let {title, location, summary, pay, start_date,
        role, c_description, skills_gained,
      requirements, image_url} = input.params.body;
      console.log(input.params.body);
@@ -354,12 +346,11 @@ class Database {
        location: location,
        description: summary,
        pay: pay,
-       date: date,
+       date: this.formatQueryDate(start_date),
        image_url: image_url,
        date_posted: resDate,
      })
      .then((data) => {
-       console.log("New id:", data)
        new_opp_id = data["0"].id
        console.log("successful opportunity creation");
      })

@@ -9,6 +9,8 @@ import { aws_logo_config, BusinessSideNavOptions, config } from "../../../consta
 import Input from "../../../components/common/Input";
 import Select from "react-select";
 import { filterOptions } from "../../../components/discover/ModalElements";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const InputFile = styled.input`
   padding: 10px 0px;
@@ -34,6 +36,7 @@ class ApplyPage extends React.Component {
       c_description: "",
       image: null,
       image_url: "",
+      start_date: null,
     };
     this.locations = []
   }
@@ -68,7 +71,6 @@ class ApplyPage extends React.Component {
     await S3FileUpload.uploadFile(file, configs)
       .then((data) => {
         result = data;
-        console.log(data);
       })
       .catch(err => console.error(err))
 
@@ -78,7 +80,7 @@ class ApplyPage extends React.Component {
   onSubmit = async (e) => {
     e.preventDefault();
     this.setState({ image_url: await this.aws_upload(this.state.image) },
-      async () => {
+    async () => {
         await axios
           .post(`${config.API_URL}/create`, {
             params: {
@@ -116,6 +118,13 @@ class ApplyPage extends React.Component {
     this.locations = locationList;
     this.forceUpdate();
   };
+
+  onChangeStartDate = (date) => {
+    this.setState(() => {
+      date.setHours(3);
+      return { start_date: date };
+    })
+  }
 
   render() {
     return (
@@ -265,13 +274,32 @@ class ApplyPage extends React.Component {
             area
             maxLength="1500"
           />
+          <Input
+            placeholder="Pay per week (£)"
+            name="pay"
+            value={this.state.pay}
+            onChange={this.onChange}
+            styles={{
+              padding: "10px 12px",
+              borderRadius: "4px",
+              color: "#000000",
+              border: "2px solid #717171",
+              marginBottom: "10px",
+              width: "100%",
+              backgroundColor: "#f3f3f3",
+              boxSizing: "border-box",
+              outline: "none",
+              fontWeight: "bolder",
+              fontSize: 18,
+            }}
+          />
           <div
             style={{
               display: "flex",
               padding: "10px 0px",
               width: "100%",
               flexDirection: "row",
-              gap: "10px",
+              alignItems: "center",
             }}
           >
             <label htmlFor="location" style={{ width: "50%" }}>
@@ -279,54 +307,38 @@ class ApplyPage extends React.Component {
                 id="location"
                 name="location"
                 onChange={this.onChangeLocation}
-                defaultValue={{label: "Select Location", value: 0}}
+                defaultValue={{ label: "Select Location", value: 0 }}
                 filterOptions={filterOptions(this.locations)}
                 options={this.locations}
               />
             </label>
-            <Input
-              placeholder="Pay per week (£)"
-              name="pay"
-              value={this.state.pay}
-              onChange={this.onChange}
-              styles={{
-                padding: "10px 12px",
-                borderRadius: "4px",
-                color: "#000000",
-                border: "2px solid #717171",
-                marginBottom: "10px",
-                width: "100%",
-                backgroundColor: "#f3f3f3",
-                boxSizing: "border-box",
-                outline: "none",
-                fontWeight: "bolder",
-                fontSize: 18,
-              }}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              padding: "10px 0px",
-              width: "100%",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            <label htmlFor="myFile">
-              Upload Logo:{"\t"}
-              <InputFile
-                type="file"
-                id="myFile"
-                onChange={this.onChangeFile}
-                name="image"
+            <div style={{ display: "flex", width: "50%", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <DatePicker
+                id="start"
+                selected={this.state.start_date}
+                onChange={(date) => this.onChangeStartDate(date)}
+                showYearDropdown
+                scrollableYearDropdown
+                todayButton="Today"
+                placeholderText=" Select starting date"
+                dateFormat="dd/MM/yyyy"
+                isClearable={true}
+                minDate={new Date()}
               />
-            </label>
-
-            <button type="Submit" className="btn flat-btn fill-btn">
-              Post
-            </button>
+            </div>
           </div>
+          <label htmlFor="myFile" style={{ width: "100%", marginBottom: "10px" }}>
+            Upload Logo:{"\t"}
+            <InputFile
+              type="file"
+              id="myFile"
+              onChange={this.onChangeFile}
+              name="image"
+            />
+          </label>
+          <button style={{ width: "100%" }} type="Submit" className="btn flat-btn fill-btn">
+            Post
+          </button>
         </form>
         <Footer />
       </>

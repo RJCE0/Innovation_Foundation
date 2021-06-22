@@ -25,7 +25,7 @@ class ApplyPage extends React.Component {
     super(props);
     this.state = {
       title: "",
-      location: "",
+      location: null,
       summary: "",
       pay: "",
       role: "",
@@ -279,7 +279,7 @@ class ApplyPage extends React.Component {
                 id="location"
                 name="location"
                 onChange={this.onChangeLocation}
-                defaultValue={this.locations[0]}
+                defaultValue={{label: "Select Location", value: 0}}
                 filterOptions={filterOptions(this.locations)}
                 options={this.locations}
               />

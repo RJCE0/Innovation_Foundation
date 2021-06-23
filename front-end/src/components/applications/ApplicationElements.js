@@ -28,7 +28,7 @@ export const ApplicationsCardsWrapper = styled.div`
   }
 `;
 
-export const ApplicationsCard = styled(Link)`
+export const ApplicationsCard = styled.div`
   width: 90%;
   border: 1px solid black;
   border-radius: 10px;
@@ -36,9 +36,6 @@ export const ApplicationsCard = styled(Link)`
   padding: 5% 5% 5% 5%;
   display: flex;
   flex-direction: row;
-  text-decoration: none;
-  user-select: none;
-  color: inherit;
   transition: all 0.2s ease-in-out;
   height: 300px;
   gap: 10px;
@@ -50,8 +47,17 @@ export const ApplicationsCard = styled(Link)`
   }
 
   &:hover {
-    color: inherit;
     transform: scale(1.02);
+  }
+`;
+
+export const LinkR = styled(Link)`
+  text-decoration: none;
+  user-select: none;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
   }
 `;
 

@@ -19,7 +19,7 @@ export const DiscoverNavbar = (props) => {
   return (
     <>
       <Nav>
-        <LogoLink to="/discover">
+        <LogoLink to={props.student ? "/discover" : "/business-home"}>
           <OuterLogo src={outerLogo} alt="wheel" />
           <InnerLogo src={innerLogo} alt="in" />
         </LogoLink>

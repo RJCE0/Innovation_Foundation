@@ -7,6 +7,7 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import { config } from "../../constants.js";
 import { StudentSideNavOptions } from "../../constants.js";
+import S3FileUpload from "react-s3";
 
 const InputFile = styled.input`
   padding: 10px 0px;
@@ -26,43 +27,45 @@ class ApplyPage extends React.Component {
       user_id: 0,
     };
   }
-    // Uploads file and returns link to file
-    async aws_upload(file) {
-      const configs = {
-        bucketName: "innovation-drp-bucket",
-        dirName: "cv",
-        region: "eu-west-2",
-        accessKeyId: "AKIAYSN3QHAZOZLZ7XNB",
-        secretAccessKey: "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",
-      }
-  
-      var result = {};
-  
-      await S3FileUpload.uploadFile(file, configs)
-        .then((data) => {
-          result = data;
-        })
-        .catch(err => console.error(err))
-  
-      return result.location;
-    }
+  // Uploads file and returns link to file
+  async aws_upload(file) {
+    const configs = {
+      bucketName: "innovation-drp-bucket",
+      dirName: "cv",
+      region: "eu-west-2",
+      accessKeyId: "AKIAYSN3QHAZOZLZ7XNB",
+      secretAccessKey: "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",
+    };
+
+    var result = {};
+
+    await S3FileUpload.uploadFile(file, configs)
+      .then((data) => {
+        result = data;
+      })
+      .catch((err) => console.error(err));
+
+    return result.location;
+  }
 
   onSubmit = async (e) => {
+    const win = window;
     e.preventDefault();
-    this.setState({ file_url: await this.aws_upload(this.state.file) },
-    async () => {
+    this.setState(
+      { file_url: await this.aws_upload(this.state.file) },
+      async () => {
         await axios
           .post(`${config.API_URL}/apply`, {
             params: {
               body: this.state,
             },
           })
+          .then(win.location.replace("/my-applications"))
           .catch((error) => {
             console.log(error);
           });
-
-      });
-    window.location.replace("/my-applications");
+      }
+    );
   };
 
   onChange = (e) => {

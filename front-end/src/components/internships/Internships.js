@@ -38,8 +38,8 @@ Arrow.propTypes = {
   className: PropTypes.string,
 };
 
-const ArrowLeft = Arrow({ text: "<", className: "" });
-const ArrowRight = Arrow({ text: ">", className: "" });
+export const ArrowLeft = Arrow({ text: "<", className: "" });
+export const ArrowRight = Arrow({ text: ">", className: "" });
 
 class InternshipPage extends React.Component {
   constructor(props) {

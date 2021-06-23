@@ -9,6 +9,7 @@ import {
   ApplicationsCardLogo,
   ApplicationsCardLogoContainer,
   ApplicationsCardInfo,
+  LinkR,
 } from "./ApplicationElements";
 import axios from "axios";
 import { config } from "../../constants.js";
@@ -23,7 +24,7 @@ export class MyApplications extends React.Component {
       // Are the next ones needed?
       // opp_id: null,
       // comments: null,
-      // cv_uploaded: null,
+      // file_url: null,
       // status: null,
     };
   }
@@ -60,25 +61,44 @@ export class MyApplications extends React.Component {
           {this.state.appliedOpps ? (
             <ApplicationsCardsWrapper>
               {this.state.appliedOpps.map((appliedOpp, index) => (
-                <ApplicationsCard
-                  to={{
-                    pathname: `/discover/${appliedOpp.title
-                      .trim()
-                      .replace(/\s+/g, "-")
-                      .toLowerCase()}&id=${appliedOpp.opp_id}`,
-                  }}
-                  key={index}
-                >
+                <ApplicationsCard key={index}>
                   <ApplicationsCardInfo>
-                    <h3>{appliedOpp.title}</h3>
+                    <LinkR
+                      to={{
+                        pathname: `/discover/${appliedOpp.title
+                          .trim()
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()}&id=${appliedOpp.opp_id}`,
+                      }}
+                    >
+                      <h3>{appliedOpp.title}</h3>
+                    </LinkR>
                     <h5 style={{ color: "#256de1" }}>{appliedOpp.status}</h5>
-                    <h5>
-                      CV uploaded: {appliedOpp.cv_uploaded ? "Yes" : "No"}
-                    </h5>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        width: "25%",
+                        marginBottom: "10px",
+                        borderRadius: "5px",
+                        boxShadow: "none",
+                      }}
+                      onClick={() => window.open(appliedOpp.file_url)}
+                    >
+                      View CV
+                    </button>
                     <h5>Your Comments: {appliedOpp.comments}</h5>
                   </ApplicationsCardInfo>
                   <ApplicationsCardLogoContainer>
-                    <ApplicationsCardLogo src={appliedOpp.image_url} />
+                    <LinkR
+                      to={{
+                        pathname: `/discover/${appliedOpp.title
+                          .trim()
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()}&id=${appliedOpp.opp_id}`,
+                      }}
+                    >
+                      <ApplicationsCardLogo src={appliedOpp.image_url} />
+                    </LinkR>
                   </ApplicationsCardLogoContainer>
                 </ApplicationsCard>
               ))}
@@ -87,12 +107,6 @@ export class MyApplications extends React.Component {
             <Spinner />
           )}
         </ApplicationsContainer>
-        {/*
-        Opportunity Title
-        Comments
-        CV was uploaded or not boolean
-        Status
-       */}
         <Footer />
       </>
     );

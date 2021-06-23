@@ -4,6 +4,12 @@ import Footer from "../../../components/layout/Footer";
 import { BusinessSideNavOptions } from "../../../constants";
 import styled from "styled-components";
 import Spinner from "../../../components/common/Spinner";
+import {
+  ArrowRight,
+  ArrowLeft,
+} from "../../../components/internships/Internships";
+import ScrollMenu from "react-horizontal-scrolling-menu";
+import "../../../components/internships/i.css";
 
 export const ApplicationsCard = styled.button`
   width: 90%;
@@ -58,6 +64,10 @@ const AppliedInformationWrapper = styled.div`
   align-items: center;
   border: none;
   border-left: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 20px 30px 20px;
 
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -67,34 +77,34 @@ const AppliedInformationWrapper = styled.div`
 
 const dummy = [
   {
-    opp_title: "Facebook internship",
+    opp_title: "Software Engineering internship",
     opp_id: 5,
-    summary: "This is an internship that will break you. (f)",
+    summary: "This is an internship that will break you.",
   },
   {
-    opp_title: "Google internship",
+    opp_title: "Front-end internship",
     opp_id: 15,
-    summary: "This is an internship that will break you (g).",
+    summary: "This is an internship that will break you.",
   },
   {
-    opp_title: "Amazon internship",
+    opp_title: "Back-end internship",
     opp_id: 11,
-    summary: "This is an internship that will break you.(a)",
+    summary: "This is an internship that will break you.",
   },
   {
-    opp_title: "Netflix internship",
+    opp_title: "Janitor internship",
     opp_id: 69,
-    summary: "This is an internship that will break you.(n)",
+    summary: "This is an internship that will not break you.",
   },
   {
-    opp_title: "Spotify internship",
+    opp_title: "Get Bullied internship",
     opp_id: 420,
-    summary: "This is an internship that will break you.(s)",
+    summary: "This is an internship that will break you.",
   },
   {
     opp_title: "Corner Shop internship",
     opp_id: 52,
-    summary: "This is an internship that will not break you.(l)",
+    summary: "This is an internship that will not break you.",
   },
 ];
 
@@ -118,11 +128,6 @@ class PostedOpps extends Component {
             there is overflow because I want to and beacuse I can and because I
             am bored. Here is the actual sumary: {obj.summary} There you go.
           </h6>
-          <h6>
-            This is the summary of something. I am checking what happens when
-            there is overflow because I want to and beacuse I can and because I
-            am bored. Here is the actual sumary: {obj.summary} There you go.
-          </h6>
         </ApplicationsCard>
       );
     });
@@ -135,13 +140,19 @@ class AppliedInformation extends Component {
   }
 }
 
+const MenuItem = () => {
+  return <div className={`menu-item`}>Kallo</div>;
+};
+
 class PostedPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       postedOpps: null,
       selectedOppId: null,
+      menuItems: [],
     };
+    this.menu = [];
   }
 
   componentDidMount() {
@@ -154,6 +165,12 @@ class PostedPage extends Component {
     this.setState(() => {
       return { selectedOppId: newId };
     });
+  };
+
+  onLastItemVisible = () => {};
+
+  onSelect = () => {
+    console.log(this.state);
   };
 
   render() {
@@ -173,7 +190,27 @@ class PostedPage extends Component {
             />
           </PostedOppsWrapper>
           <AppliedInformationWrapper>
-            <AppliedInformation />
+            {this.state.menuItems.length ? (
+              <ScrollMenu
+                alignCenter={true}
+                arrowLeft={ArrowLeft}
+                arrowRight={ArrowRight}
+                clickWhenDrag={false}
+                data={this.state.menuItems}
+                dragging={false}
+                hideArrows={false}
+                hideSingleArrow={true}
+                onLastItemVisible={this.onLastItemVisible}
+                onSelect={this.onSelect}
+                ref={(el) => (this.menu = el)}
+                scrollToSelected={false}
+                transition={+0.7}
+                translate={0}
+                wheel={true}
+              />
+            ) : (
+              <Spinner />
+            )}
           </AppliedInformationWrapper>
         </BreakdownWrapper>
         <Footer />

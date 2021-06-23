@@ -382,6 +382,9 @@ class Database {
 
   }
 
+  // get all posted opportunities
+
+
 }
 
 export default Database;

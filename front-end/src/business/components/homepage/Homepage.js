@@ -13,7 +13,7 @@ export class Homepage extends Component {
   render() {
     return (
       <>
-        <DiscoverNavbar links={BusinessSideNavOptions} business/>
+        <DiscoverNavbar links={BusinessSideNavOptions} business />
         <Footer />
       </>
     );

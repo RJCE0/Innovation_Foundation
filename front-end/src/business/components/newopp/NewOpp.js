@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import S3FileUpload from 'react-s3';
+import S3FileUpload from "react-s3";
 import { DiscoverNavbar } from "../../../components/discover/DiscoverNavbar";
 import Footer from "../../../components/layout/Footer";
 import { withRouter } from "react-router";
 import axios from "axios";
-import { aws_logo_config, BusinessSideNavOptions, config } from "../../../constants";
+import {
+  aws_logo_config,
+  BusinessSideNavOptions,
+  config,
+} from "../../../constants";
 import Input from "../../../components/common/Input";
 import Select from "react-select";
 import { filterOptions } from "../../../components/discover/ModalElements";
@@ -38,7 +42,7 @@ class ApplyPage extends React.Component {
       image_url: "",
       start_date: null,
     };
-    this.locations = []
+    this.locations = [];
   }
 
   async getlocations() {
@@ -53,8 +57,7 @@ class ApplyPage extends React.Component {
         console.log(error);
       });
     return result.length ? result.split("\n") : [];
-  };
-
+  }
 
   // Uploads file and returns link to file
   async aws_upload(file) {
@@ -64,7 +67,7 @@ class ApplyPage extends React.Component {
       region: "eu-west-2",
       accessKeyId: "AKIAYSN3QHAZOZLZ7XNB",
       secretAccessKey: "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",
-    }
+    };
 
     var result = {};
 
@@ -72,15 +75,16 @@ class ApplyPage extends React.Component {
       .then((data) => {
         result = data;
       })
-      .catch(err => console.error(err))
+      .catch((err) => console.error(err));
 
     return result.location;
   }
 
   onSubmit = async (e) => {
     e.preventDefault();
-    this.setState({ image_url: await this.aws_upload(this.state.image) },
-    async () => {
+    this.setState(
+      { image_url: await this.aws_upload(this.state.image) },
+      async () => {
         await axios
           .post(`${config.API_URL}/create`, {
             params: {
@@ -90,8 +94,8 @@ class ApplyPage extends React.Component {
           .catch((error) => {
             console.log(error);
           });
-
-      });
+      }
+    );
     // window.location.replace("/my-applications"); TO CHANGE
   };
 
@@ -117,14 +121,14 @@ class ApplyPage extends React.Component {
     // locationList.unshift({ label: "Select Location", value: 0, key: 0 });
     this.locations = locationList;
     this.forceUpdate();
-  };
+  }
 
   onChangeStartDate = (date) => {
     this.setState(() => {
       date.setHours(3);
       return { start_date: date };
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -312,7 +316,15 @@ class ApplyPage extends React.Component {
                 options={this.locations}
               />
             </label>
-            <div style={{ display: "flex", width: "50%", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                width: "50%",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <DatePicker
                 id="start"
                 selected={this.state.start_date}
@@ -327,7 +339,10 @@ class ApplyPage extends React.Component {
               />
             </div>
           </div>
-          <label htmlFor="myFile" style={{ width: "100%", marginBottom: "10px" }}>
+          <label
+            htmlFor="myFile"
+            style={{ width: "100%", marginBottom: "10px" }}
+          >
             Upload Logo:{"\t"}
             <InputFile
               type="file"
@@ -336,7 +351,11 @@ class ApplyPage extends React.Component {
               name="image"
             />
           </label>
-          <button style={{ width: "100%" }} type="Submit" className="btn flat-btn fill-btn">
+          <button
+            style={{ width: "100%" }}
+            type="Submit"
+            className="btn flat-btn fill-btn"
+          >
             Post
           </button>
         </form>

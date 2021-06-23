@@ -98,6 +98,37 @@ const dummy = [
   },
 ];
 
+class PostedOpps extends Component {
+  render() {
+    return this.props.opps.map((obj, index) => {
+      return (
+        <ApplicationsCard
+          key={index}
+          act={this.props.selectedOppId == obj.opp_id}
+          onClick={() => this.props.onChangeSelectedOppId(obj.opp_id)}
+        >
+          <h3>{obj.opp_title}</h3>
+          <h6>
+            This is the summary of something. I am checking what happens when
+            there is overflow because I want to and beacuse I can and because I
+            am bored. Here is the actual sumary: {obj.summary} There you go.
+          </h6>
+          <h6>
+            This is the summary of something. I am checking what happens when
+            there is overflow because I want to and beacuse I can and because I
+            am bored. Here is the actual sumary: {obj.summary} There you go.
+          </h6>
+          <h6>
+            This is the summary of something. I am checking what happens when
+            there is overflow because I want to and beacuse I can and because I
+            am bored. Here is the actual sumary: {obj.summary} There you go.
+          </h6>
+        </ApplicationsCard>
+      );
+    });
+  }
+}
+
 class AppliedInformation extends Component {
   render() {
     return <div style={{ width: "100%", height: "100%" }}>KALLO</div>;
@@ -135,35 +166,11 @@ class PostedPage extends Component {
         <DiscoverNavbar links={BusinessSideNavOptions} business />
         <BreakdownWrapper>
           <PostedOppsWrapper>
-            {dummy.map((obj, index) => {
-              return (
-                <ApplicationsCard
-                  key={index}
-                  act={this.state.selectedOppId == obj.opp_id}
-                  onClick={() => this.onChangeSelectedOppId(obj.opp_id)}
-                >
-                  <h3>{obj.opp_title}</h3>
-                  <h6>
-                    This is the summary of something. I am checking what happens
-                    when there is overflow because I want to and beacuse I can
-                    and because I am bored. Here is the actual sumary:{" "}
-                    {obj.summary} There you go.
-                  </h6>
-                  <h6>
-                    This is the summary of something. I am checking what happens
-                    when there is overflow because I want to and beacuse I can
-                    and because I am bored. Here is the actual sumary:{" "}
-                    {obj.summary} There you go.
-                  </h6>
-                  <h6>
-                    This is the summary of something. I am checking what happens
-                    when there is overflow because I want to and beacuse I can
-                    and because I am bored. Here is the actual sumary:{" "}
-                    {obj.summary} There you go.
-                  </h6>
-                </ApplicationsCard>
-              );
-            })}
+            <PostedOpps
+              opps={dummy}
+              selectedOppId={this.state.selectedOppId}
+              onChangeSelectedOppId={this.onChangeSelectedOppId}
+            />
           </PostedOppsWrapper>
           <AppliedInformationWrapper>
             <AppliedInformation />

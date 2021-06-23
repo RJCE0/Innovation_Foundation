@@ -28,6 +28,17 @@ export const ApplicationsCardsWrapper = styled.div`
   }
 `;
 
+export const RemoveButton = styled.button`
+  padding: 15px 5px 15px 5px;
+  background: #ff0000;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  width: 75%;
+`;
+
 export const ApplicationsCard = styled.div`
   width: 90%;
   border: 1px solid black;
@@ -37,13 +48,11 @@ export const ApplicationsCard = styled.div`
   display: flex;
   flex-direction: row;
   transition: all 0.2s ease-in-out;
-  height: 300px;
   gap: 10px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
     gap: 20px;
-    height: 400px;
   }
 
   &:hover {

@@ -84,6 +84,14 @@ app.post("/status", async (req, res) => {
   }
 });
 
+app.post("/deleteApplication", async (req, res) => {
+  try {
+    await Database.deleteApplication(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.get("/apply", async (req, res) => {
   try {
     const applications = await Database.getAllApplications();

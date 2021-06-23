@@ -25,4 +25,5 @@ export const projectSQL = {
   addOpportunity: sql("../sql/addOpportunity.sql"),
   addExclusive: sql("../sql/addExclusive.sql"),
   updateApplicationStatus: sql("../sql/updateApplicationStatus.sql"),
+  deleteApplication: sql("../sql/deleteApplication.sql"),
 };

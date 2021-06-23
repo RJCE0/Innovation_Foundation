@@ -21,11 +21,6 @@ export class MyApplications extends React.Component {
     super(props);
     this.state = {
       appliedOpps: null,
-      // Are the next ones needed?
-      // opp_id: null,
-      // comments: null,
-      // file_url: null,
-      // status: null,
     };
   }
 

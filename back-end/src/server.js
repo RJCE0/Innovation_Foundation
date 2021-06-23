@@ -174,6 +174,17 @@ app.get("/recent", async (req, res) => {
   }
 });
 
+app.get("/userApplications", async (req, res) => {
+  try {
+    console.log("HERE in server!");
+    const applications = await Database.getUserApplications(req.query.body);
+    res.json(applications);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+
 app.get("/locations", async (req, res) => {
   try {
     fs.readFile(path.join(__dirname, '../webscraping/locations.txt'), 'utf8', (err, data) => {

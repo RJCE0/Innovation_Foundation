@@ -273,6 +273,25 @@ class Database {
   }
 
 
+static async getUserApplications(input) {
+    var result = {};
+
+    // execute query
+    await db
+      .any(projectSQL.getUserApplications, { opp_id: input})
+      .then((data) => {
+        console.log("successful student Application data retrieval");
+        result = data;
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+
+    return result;
+  }
+
+
+
   static async updateViews(input) {
     let { id, views } = input.params.body;
 

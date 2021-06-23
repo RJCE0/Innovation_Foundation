@@ -334,10 +334,6 @@ class Landing extends Component {
                               Exclusive
                             </span>
                             <span className="content-view">
-                              <img
-                                className="content-vertified"
-                                src="./img/vertified.svg"
-                              />
                               <span>24 Views</span>
                             </span>
                           </div>
@@ -529,10 +525,10 @@ class Landing extends Component {
                             </div>
 
                             <span className="content-view">
-                              <img
+                              {/* <img
                                 className="content-vertified"
                                 src="./img/vertified.svg"
-                              />
+                              /> */}
                               <span>96 Views</span>
                             </span>
                           </div>

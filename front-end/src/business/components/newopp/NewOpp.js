@@ -356,7 +356,7 @@ class ApplyPage extends React.Component {
             type="Submit"
             className="btn flat-btn fill-btn"
           >
-            Post
+            Post Opportunity
           </button>
         </form>
         <Footer />

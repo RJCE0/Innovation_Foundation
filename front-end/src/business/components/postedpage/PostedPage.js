@@ -77,6 +77,63 @@ const AppliedInformationWrapper = styled.div`
   }
 `;
 
+const IconNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const StudentInfoWrapper = styled.div`
+  border-top: 1px solid black;
+  width: 100%;
+  padding: 40px 0 40px 0;
+  overflow: hidden;
+  text-align: center;
+`;
+
+const Avatar = styled.img`
+  height: 100px;
+  width: 100px;
+  background-color: ${(props) => {
+    return props.clr;
+  }};
+`;
+
+const colours = [
+  "#4e93f2",
+  "#47d3e2",
+  "#d03632",
+  "#a966dd",
+  "#8c655d",
+  "#e1953c",
+  "#33e17a",
+];
+
+const MenuItem = ({ user }) => {
+  return (
+    <div className={`menu-item`}>
+      <IconNameWrapper>
+        <Avatar src={AvatarIcon} clr={colours[user.user_id]} />
+        <h3 style={{ textAlign: "center" }}>{user.name}</h3>
+      </IconNameWrapper>
+    </div>
+  );
+};
+
+const StatusButton = styled.button`
+  padding: 10px 10px 10px 10px;
+  color: white;
+  background-color: ${(props) => props.bg};
+  border: 1px solid ${(props) => props.bg};
+  border-radius: 10px;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    background-color: white;
+    color: ${(props) => props.bg};
+  }
+`;
+
 class PostedOpps extends Component {
   render() {
     return this.props.opps.map((obj, index) => {
@@ -97,45 +154,6 @@ class PostedOpps extends Component {
   }
 }
 
-const IconNameWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const Avatar = styled.img`
-  height: 100px;
-  width: 100px;
-  background-color: ${(props) => {
-    console.log(props.clr);
-    return props.clr;
-  }};
-`;
-
-const colours = [
-  "#4e93f2",
-  "#47d3e2",
-  "#d03632",
-  "#a966dd",
-  "#8c655d",
-  "#e1953c",
-  "#33e17a",
-];
-
-const MenuItem = ({ user }) => {
-  return (
-    <div className={`menu-item`}>
-      <IconNameWrapper>
-        <Avatar
-          src={AvatarIcon}
-          clr={colours[Math.floor(Math.random() * colours.length)]}
-        />
-        <h3 style={{ textAlign: "center" }}>{user.name}</h3>
-      </IconNameWrapper>
-    </div>
-  );
-};
-
 class PostedPage extends Component {
   constructor(props) {
     super(props);
@@ -144,7 +162,8 @@ class PostedPage extends Component {
       selectedOppId: null,
       menuItems: [],
       studentsArray: null,
-      selectedStudent: null,
+      selectedStudentIdx: null,
+      statusSelected: null,
     };
     this.menu = [];
   }
@@ -155,7 +174,6 @@ class PostedPage extends Component {
       .get(`${config.API_URL}/apply`)
       .then((res) => {
         const applications = res.data;
-        console.log(applications);
         result = applications;
       })
       .catch((error) => {
@@ -174,13 +192,29 @@ class PostedPage extends Component {
       })
       .then((res) => {
         const opportunities = res.data;
-        console.log(opportunities);
         result = opportunities;
       })
       .catch((error) => {
         console.log(error);
       });
     return result;
+  }
+
+  async updateApplicationStatus() {
+    await axios
+      .post(`${config.API_URL}/status`, {
+        params: {
+          body: {
+            newStatus: this.state.statusSelected,
+            user_id:
+              this.state.studentsArray[this.state.selectedStudentIdx].user_id,
+            opp_id: this.state.selectedOppId,
+          },
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async componentDidMount() {
@@ -198,6 +232,8 @@ class PostedPage extends Component {
         );
         this.setState(() => {
           return {
+            studentsArray: userApps,
+            selectedStudentIdx: userApps.length ? 0 : null,
             menuItems: userApps.map((user, userIdx) => {
               return <MenuItem user={user} key={userIdx} />;
             }),
@@ -218,6 +254,8 @@ class PostedPage extends Component {
         );
         this.setState(() => {
           return {
+            studentsArray: userApps,
+            selectedStudentIdx: userApps.length ? 0 : null,
             menuItems: userApps.map((user, userIdx) => {
               return <MenuItem user={user} key={userIdx} />;
             }),
@@ -229,10 +267,28 @@ class PostedPage extends Component {
 
   onLastItemVisible = () => {};
 
-  onSelect = () => {
-    console.log(this.state);
+  onSelect = (newIdx) => {
+    this.setState({
+      selectedStudentIdx: newIdx,
+      statusSelected: this.state.studentsArray[newIdx].status,
+    });
   };
-  // [{name: something, email: somethihng, number: something, comments: "", file_url: something, status: something }]
+
+  handleStatusChange = (event) => {
+    this.setState(
+      ({ studentsArray, selectedStudentIdx }) => {
+        const newArray = studentsArray.map((s, index) => {
+          if (index == selectedStudentIdx) {
+            return { ...s, status: event.target.value };
+          }
+          return s;
+        });
+        return { studentsArray: newArray, statusSelected: event.target.value };
+      },
+      () => this.updateApplicationStatus()
+    );
+  };
+
   render() {
     return (
       <>
@@ -268,6 +324,79 @@ class PostedPage extends Component {
               ) : (
                 <Spinner />
               )}
+              {this.state.selectedStudentIdx ? (
+                <StudentInfoWrapper>
+                  <h2>
+                    {
+                      this.state.studentsArray[this.state.selectedStudentIdx]
+                        .name
+                    }
+                  </h2>
+                  <h4>
+                    {
+                      this.state.studentsArray[this.state.selectedStudentIdx]
+                        .email
+                    }
+                  </h4>
+                  <h4>
+                    {
+                      this.state.studentsArray[this.state.selectedStudentIdx]
+                        .mobile
+                    }
+                  </h4>
+                  <h4>
+                    {
+                      this.state.studentsArray[this.state.selectedStudentIdx]
+                        .comments
+                    }
+                  </h4>
+
+                  <h4>
+                    {this.state.studentsArray[this.state.selectedStudentIdx]
+                      .file_url ? (
+                      <a
+                        href={
+                          this.state.studentsArray[
+                            this.state.selectedStudentIdx
+                          ].file_url
+                        }
+                        target="_blank"
+                      >
+                        View CV
+                      </a>
+                    ) : (
+                      "No CV Uploaded :("
+                    )}
+                  </h4>
+                  {this.state.statusSelected == "Submitted" ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "20px",
+                      }}
+                    >
+                      <StatusButton
+                        value="Accepted"
+                        bg="blue"
+                        onClick={this.handleStatusChange}
+                      >
+                        Accept
+                      </StatusButton>
+                      <StatusButton
+                        value="Rejected"
+                        bg="red"
+                        onClick={this.handleStatusChange}
+                      >
+                        Reject
+                      </StatusButton>
+                    </div>
+                  ) : (
+                    <h4>{`Status: ${this.state.statusSelected}`}</h4>
+                  )}
+                </StudentInfoWrapper>
+              ) : null}
             </AppliedInformationWrapper>
           </BreakdownWrapper>
         ) : (

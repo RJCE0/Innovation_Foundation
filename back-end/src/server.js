@@ -76,6 +76,14 @@ app.post("/create", async (req, res) => {
   }
 });
 
+app.post("/status", async (req, res) => {
+  try {
+    await Database.updateApplicationStatus(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.get("/apply", async (req, res) => {
   try {
     const applications = await Database.getAllApplications();

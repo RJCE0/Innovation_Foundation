@@ -290,8 +290,6 @@ static async getUserApplications(input) {
     return result;
   }
 
-
-
   static async updateViews(input) {
     let { id, views } = input.params.body;
 
@@ -401,7 +399,18 @@ static async getUserApplications(input) {
 
   }
 
-  // get all posted opportunities
+  static async updateApplicationStatus(input) {
+    let { newStatus, user_id, opp_id } = input.params.body;
+
+    await db
+      .any(projectSQL.updateApplicationStatus, { status: newStatus, user_id: user_id, opp_id: opp_id})
+      .then(() => {
+        console.log("successful user status update");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+  }
 
 
 }

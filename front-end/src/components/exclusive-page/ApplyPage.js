@@ -22,28 +22,46 @@ class ApplyPage extends React.Component {
       mobile: "",
       additionalComments: "",
       file: null,
+      file_url: "",
       user_id: 0,
     };
   }
+    // Uploads file and returns link to file
+    async aws_upload(file) {
+      const configs = {
+        bucketName: "innovation-drp-bucket",
+        dirName: "cv",
+        region: "eu-west-2",
+        accessKeyId: "AKIAYSN3QHAZOZLZ7XNB",
+        secretAccessKey: "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",
+      }
+  
+      var result = {};
+  
+      await S3FileUpload.uploadFile(file, configs)
+        .then((data) => {
+          result = data;
+        })
+        .catch(err => console.error(err))
+  
+      return result.location;
+    }
 
-  async addInternships(parameters) {
-    await axios
-      .post(`${config.API_URL}/apply`, {
-        params: {
-          body: parameters,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     e.preventDefault();
-    this.addInternships(this.state);
+    this.setState({ file_url: await this.aws_upload(this.state.file) },
+    async () => {
+        await axios
+          .post(`${config.API_URL}/apply`, {
+            params: {
+              body: this.state,
+            },
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      });
     window.location.replace("/my-applications");
   };
 

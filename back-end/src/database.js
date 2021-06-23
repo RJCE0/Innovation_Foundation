@@ -300,10 +300,8 @@ class Database {
   }
 
   static async addApplication(input) {
-    let { user_id, opp_id, name, email, mobile, additionalComments, file } =
+    let { user_id, opp_id, name, email, mobile, additionalComments, file_url } =
       input.params.body;
-
-    const cv_uploaded = file != null;
 
     await db
       .any(projectSQL.addApplication, {
@@ -313,7 +311,7 @@ class Database {
         email: email,
         mobile: mobile,
         comments: additionalComments,
-        cv_uploaded: cv_uploaded,
+        file_url: file_url,
       })
       .then(() => {
         console.log("successful application insertion");

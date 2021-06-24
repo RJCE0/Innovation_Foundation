@@ -147,9 +147,9 @@ class Landing extends Component {
                         Not your average work experience site
                       </span>
                       <p className="section-desc">
-                        Innovation Foundation is creating a centralised hub for everything
-                        a student needs. Work experience, Internships
-                        Mentorships and more
+                        Innovation Foundation is creating a centralised hub for
+                        everything a student needs. Work experience,
+                        Internships, Mentorships and more
                       </p>
                     </div>
                   </div>
@@ -316,20 +316,24 @@ class Landing extends Component {
                           <div className="content-type-overlay">
                             <div className="content-bottom-gradient" />
                             <div className="content-top-leftContainer">
-                              <button id="content-heart" className="content-btn">
+                              <button
+                                id="content-heart"
+                                className="content-btn"
+                              >
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" className="content-btn">
+                              <button
+                                id="content-share"
+                                className="content-btn"
+                              >
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
 
-                            <span className="content-special excl">Exclusive</span>
+                            <span className="content-special excl">
+                              Exclusive
+                            </span>
                             <span className="content-view">
-                              <img
-                                className="content-vertified"
-                                src="./img/vertified.svg"
-                              />
                               <span>24 Views</span>
                             </span>
                           </div>
@@ -380,10 +384,16 @@ class Landing extends Component {
                           <div className="content-type-overlay">
                             <div className="content-bottom-gradient" />
                             <div className="content-top-leftContainer">
-                              <button id="content-heart" className="content-btn">
+                              <button
+                                id="content-heart"
+                                className="content-btn"
+                              >
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" className="content-btn">
+                              <button
+                                id="content-share"
+                                className="content-btn"
+                              >
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
@@ -437,10 +447,16 @@ class Landing extends Component {
                           <div className="content-type-overlay">
                             <div className="content-bottom-gradient" />
                             <div className="content-top-leftContainer">
-                              <button id="content-heart" className="content-btn">
+                              <button
+                                id="content-heart"
+                                className="content-btn"
+                              >
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" className="content-btn">
+                              <button
+                                id="content-share"
+                                className="content-btn"
+                              >
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
@@ -494,19 +510,25 @@ class Landing extends Component {
                           <div className="content-type-overlay">
                             <div className="content-bottom-gradient" />
                             <div className="content-top-leftContainer">
-                              <button id="content-heart" className="content-btn">
+                              <button
+                                id="content-heart"
+                                className="content-btn"
+                              >
                                 <img src="./img/empty-heart.svg" />
                               </button>
-                              <button id="content-share" className="content-btn">
+                              <button
+                                id="content-share"
+                                className="content-btn"
+                              >
                                 <img src="./img/share.svg" />
                               </button>
                             </div>
 
                             <span className="content-view">
-                              <img
+                              {/* <img
                                 className="content-vertified"
                                 src="./img/vertified.svg"
-                              />
+                              /> */}
                               <span>96 Views</span>
                             </span>
                           </div>
@@ -528,7 +550,9 @@ class Landing extends Component {
               <div className="containerWrapper">
                 <div className="contentHeader">
                   <span className="header">Innovation Foundation Blog</span>
-                  <p className="sub-header">Uncover stories from our community</p>
+                  <p className="sub-header">
+                    Uncover stories from our community
+                  </p>
                 </div>
                 <div className="blog-container">
                   <a href="#">

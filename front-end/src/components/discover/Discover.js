@@ -8,6 +8,7 @@ import "react-bootstrap";
 import "../../css/discover.css";
 import { DiscoverNavbar } from "./DiscoverNavbar";
 import { CardsWithFilter } from "../common/CardsWithFilter";
+import { StudentSideNavOptions } from "../../constants.js";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-        <DiscoverNavbar />
+        <DiscoverNavbar links={StudentSideNavOptions} student />
         <div className="top">
           <div className="swirly-background">
             <svg

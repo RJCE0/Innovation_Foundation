@@ -3,6 +3,7 @@ import { DiscoverNavbar } from "../discover/DiscoverNavbar";
 import Footer from "../layout/Footer";
 import { CardsWithFilter } from "../common/CardsWithFilter";
 import styled from "styled-components";
+import { StudentSideNavOptions } from "../../constants.js";
 
 const FavouritesContainer = styled.div`
   min-height: 700px;
@@ -23,7 +24,7 @@ export class FavouritesPage extends React.Component {
   render() {
     return (
       <>
-        <DiscoverNavbar />
+        <DiscoverNavbar links={StudentSideNavOptions} student />
         <FavouritesContainer>
           <h1 style={{ textAlign: "center" }}>My Favourites</h1>
           <FavouritesWrapper>

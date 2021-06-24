@@ -1,7 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({ name, placeholder, value, error, onChange, styles, area }) => {
+const Input = ({
+  name,
+  placeholder,
+  value,
+  error,
+  onChange,
+  styles,
+  area,
+  maxLength,
+}) => {
   return (
     <div className="">
       {area ? (
@@ -11,6 +20,7 @@ const Input = ({ name, placeholder, value, error, onChange, styles, area }) => {
           value={value}
           onChange={onChange}
           style={styles ? styles : null}
+          maxLength={maxLength}
         />
       ) : (
         <input

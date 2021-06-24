@@ -68,6 +68,30 @@ app.post("/apply", async (req, res) => {
   }
 });
 
+app.post("/create", async (req, res) => {
+  try {
+    await Database.addInternship(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+app.post("/status", async (req, res) => {
+  try {
+    await Database.updateApplicationStatus(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
+app.post("/deleteApplication", async (req, res) => {
+  try {
+    await Database.deleteApplication(req.body);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 app.get("/apply", async (req, res) => {
   try {
     const applications = await Database.getAllApplications();
@@ -165,6 +189,17 @@ app.get("/recent", async (req, res) => {
     res.body = "Error: " + error;
   }
 });
+
+app.get("/userApplications", async (req, res) => {
+  try {
+    console.log("HERE in server!");
+    const applications = await Database.getUserApplications(req.query.body);
+    res.json(applications);
+  } catch (error) {
+    res.body = "Error: " + error;
+  }
+});
+
 
 app.get("/locations", async (req, res) => {
   try {

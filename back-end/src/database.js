@@ -3,6 +3,7 @@ import { projectSQL } from "./sql";
 const pgp = require("pg-promise")({});
 require("dotenv").config();
 
+// To connect to database
 const dbInfo = {
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -179,12 +180,10 @@ class Database {
   }
 
   static async getSortedFav(input) {
-    console.log("FAV INPUT", input);
 
     var condition = `AND fav=true `;
     var result = {};
     let { sortByValue } = JSON.parse(input);
-    console.log(sortByValue);
 
     // Sort by
     if (sortByValue != null) {
@@ -211,7 +210,6 @@ class Database {
       .catch((error) => {
         console.log("ERROR:", error);
       });
-    console.log("RESULT:", result);
     return result;
   }
 
@@ -257,7 +255,6 @@ class Database {
   }
 
   static async isApplied(input) {
-    console.log(input)
     var result = {};
     let { user_id, oppId } = JSON.parse(input);
 
@@ -272,11 +269,26 @@ class Database {
         console.log("ERROR:", error);
       });
 
-    console.log("Applications?", result)
-    console.log("HAVE YOU APPLIED:", result != 0)
     return result.length != 0;
   }
 
+
+static async getUserApplications(input) {
+    var result = {};
+
+    // execute query
+    await db
+      .any(projectSQL.getUserApplications, { opp_id: input})
+      .then((data) => {
+        console.log("successful student Application data retrieval");
+        result = data;
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+
+    return result;
+  }
 
   static async updateViews(input) {
     let { id, views } = input.params.body;
@@ -305,12 +317,8 @@ class Database {
   }
 
   static async addApplication(input) {
-    let { user_id, opp_id, name, email, mobile, additionalComments, file } =
+    let { user_id, opp_id, name, email, mobile, additionalComments, file_url } =
       input.params.body;
-
-    const cv_uploaded = file != null;
-    console.log(input.params.body);
-    console.log(cv_uploaded);
 
     await db
       .any(projectSQL.addApplication, {
@@ -320,7 +328,7 @@ class Database {
         email: email,
         mobile: mobile,
         comments: additionalComments,
-        cv_uploaded: cv_uploaded,
+        file_url: file_url,
       })
       .then(() => {
         console.log("successful application insertion");
@@ -329,6 +337,98 @@ class Database {
         console.log("ERROR:", error);
       });
   }
+
+  // Business side database functions
+  static async addInternship(input) {
+    let {title, location, summary, pay, start_date,
+       role, c_description, skills_gained,
+     requirements, image_url} = input.params.body;
+     console.log(input.params.body);
+
+    var new_opp_id = null;
+
+    // Get today's date in correct format
+    const posted_date = new Date();
+    const resDate =
+    `${posted_date.getFullYear()}-` +
+    `${posted_date.getMonth() + 1}-` +
+    `${posted_date.getDate()}`;
+
+    // Add to internships table
+   await db
+     .any(projectSQL.addOpportunity, {
+       title: title,
+       location: location,
+       description: summary,
+       pay: pay,
+       date: this.formatQueryDate(start_date),
+       image_url: image_url,
+       date_posted: resDate,
+     })
+     .then((data) => {
+       new_opp_id = data["0"].id
+       console.log("successful opportunity creation");
+     })
+     .catch((error) => {
+       console.log("ERROR:", error);
+     });
+
+    const exclusive_info = {
+      id: new_opp_id,
+      role: role,
+      c_description: c_description,
+      skills_gained: skills_gained,
+      requirements: requirements,
+    }
+
+    // Add to exclusive internships table
+    this.addExclusiveOpportunity(exclusive_info);
+  }
+
+  // Add internship into exclusive table
+  static async addExclusiveOpportunity(exclusive_info) {
+
+    await db
+      .any(projectSQL.addExclusive, {...exclusive_info})
+      .then(() => {
+        console.log("successful exclusive internship insertion");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+
+  }
+
+  static async updateApplicationStatus(input) {
+    let { newStatus, user_id, opp_id } = input.params.body;
+
+
+    await db
+      .any(projectSQL.updateApplicationStatus, { status: newStatus, user_id: user_id, opp_id: opp_id})
+      .then(() => {
+        console.log("successful user status update");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+  }
+
+  static async deleteApplication(input) {
+    let { user_id, opp_id } = input.params.body;
+    console.log(user_id);
+    console.log(opp_id);
+
+    await db
+      .any(projectSQL.deleteApplication, { user_id: user_id, opp_id: opp_id})
+      .then(() => {
+        console.log("successful application deletion");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+  }
+
+
 }
 
 export default Database;

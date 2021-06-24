@@ -5,11 +5,7 @@ import { DiscoverNavbar } from "../../../components/discover/DiscoverNavbar";
 import Footer from "../../../components/layout/Footer";
 import { withRouter } from "react-router";
 import axios from "axios";
-import {
-  aws_logo_config,
-  BusinessSideNavOptions,
-  config,
-} from "../../../constants";
+import { BusinessSideNavOptions, config } from "../../../constants";
 import Input from "../../../components/common/Input";
 import Select from "react-select";
 import { filterOptions } from "../../../components/discover/ModalElements";
@@ -96,7 +92,6 @@ class ApplyPage extends React.Component {
           });
       }
     );
-    // window.location.replace("/my-applications"); TO CHANGE
   };
 
   onChangeLocation = (e) => {
@@ -113,12 +108,11 @@ class ApplyPage extends React.Component {
     this.setState({ [e.target.name]: e.target.files[0] });
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
     const locationList = await this.getlocations();
     for (let i in locationList) {
       locationList[i] = { label: locationList[i], value: i + 1, key: i + 1 };
     }
-    // locationList.unshift({ label: "Select Location", value: 0, key: 0 });
     this.locations = locationList;
     this.forceUpdate();
   }

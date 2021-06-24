@@ -180,7 +180,6 @@ class Database {
   }
 
   static async getSortedFav(input) {
-
     var condition = `AND fav=true `;
     var result = {};
     let { sortByValue } = JSON.parse(input);
@@ -237,12 +236,20 @@ class Database {
     return this.anyQueries(projectSQL.getRecent);
   }
 
-  static async getAllApplications() {
+  static async getAllApplications(input) {
+    console.log("Hello again");
     var result = {};
+    var condition = "";
+    console.log(input);
+
+    if (input) {
+      condition = "WHERE user_id=0";
+    }
+    console.log("HERE NOW");
 
     // execute query
     await db
-      .any(projectSQL.getAllApplications)
+      .any(projectSQL.getAllApplications, { condition: condition })
       .then((data) => {
         console.log("successful Application data retrieval");
         result = data;
@@ -250,7 +257,6 @@ class Database {
       .catch((error) => {
         console.log("ERROR:", error);
       });
-
     return result;
   }
 
@@ -260,7 +266,7 @@ class Database {
 
     // execute query
     await db
-      .any(projectSQL.isApplied, {user_id: user_id, opp_id: oppId})
+      .any(projectSQL.isApplied, { user_id: user_id, opp_id: oppId })
       .then((data) => {
         console.log("successful Application data retrieval");
         result = data;
@@ -272,13 +278,12 @@ class Database {
     return result.length != 0;
   }
 
-
-static async getUserApplications(input) {
+  static async getUserApplications(input) {
     var result = {};
 
     // execute query
     await db
-      .any(projectSQL.getUserApplications, { opp_id: input})
+      .any(projectSQL.getUserApplications, { opp_id: input })
       .then((data) => {
         console.log("successful student Application data retrieval");
         result = data;
@@ -340,38 +345,47 @@ static async getUserApplications(input) {
 
   // Business side database functions
   static async addInternship(input) {
-    let {title, location, summary, pay, start_date,
-       role, c_description, skills_gained,
-     requirements, image_url} = input.params.body;
-     console.log(input.params.body);
+    let {
+      title,
+      location,
+      summary,
+      pay,
+      start_date,
+      role,
+      c_description,
+      skills_gained,
+      requirements,
+      image_url,
+    } = input.params.body;
+    console.log(input.params.body);
 
     var new_opp_id = null;
 
     // Get today's date in correct format
     const posted_date = new Date();
     const resDate =
-    `${posted_date.getFullYear()}-` +
-    `${posted_date.getMonth() + 1}-` +
-    `${posted_date.getDate()}`;
+      `${posted_date.getFullYear()}-` +
+      `${posted_date.getMonth() + 1}-` +
+      `${posted_date.getDate()}`;
 
     // Add to internships table
-   await db
-     .any(projectSQL.addOpportunity, {
-       title: title,
-       location: location,
-       description: summary,
-       pay: pay,
-       date: this.formatQueryDate(start_date),
-       image_url: image_url,
-       date_posted: resDate,
-     })
-     .then((data) => {
-       new_opp_id = data["0"].id
-       console.log("successful opportunity creation");
-     })
-     .catch((error) => {
-       console.log("ERROR:", error);
-     });
+    await db
+      .any(projectSQL.addOpportunity, {
+        title: title,
+        location: location,
+        description: summary,
+        pay: pay,
+        date: this.formatQueryDate(start_date),
+        image_url: image_url,
+        date_posted: resDate,
+      })
+      .then((data) => {
+        new_opp_id = data["0"].id;
+        console.log("successful opportunity creation");
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
 
     const exclusive_info = {
       id: new_opp_id,
@@ -379,7 +393,7 @@ static async getUserApplications(input) {
       c_description: c_description,
       skills_gained: skills_gained,
       requirements: requirements,
-    }
+    };
 
     // Add to exclusive internships table
     this.addExclusiveOpportunity(exclusive_info);
@@ -387,24 +401,25 @@ static async getUserApplications(input) {
 
   // Add internship into exclusive table
   static async addExclusiveOpportunity(exclusive_info) {
-
     await db
-      .any(projectSQL.addExclusive, {...exclusive_info})
+      .any(projectSQL.addExclusive, { ...exclusive_info })
       .then(() => {
         console.log("successful exclusive internship insertion");
       })
       .catch((error) => {
         console.log("ERROR:", error);
       });
-
   }
 
   static async updateApplicationStatus(input) {
     let { newStatus, user_id, opp_id } = input.params.body;
 
-
     await db
-      .any(projectSQL.updateApplicationStatus, { status: newStatus, user_id: user_id, opp_id: opp_id})
+      .any(projectSQL.updateApplicationStatus, {
+        status: newStatus,
+        user_id: user_id,
+        opp_id: opp_id,
+      })
       .then(() => {
         console.log("successful user status update");
       })
@@ -419,7 +434,7 @@ static async getUserApplications(input) {
     console.log(opp_id);
 
     await db
-      .any(projectSQL.deleteApplication, { user_id: user_id, opp_id: opp_id})
+      .any(projectSQL.deleteApplication, { user_id: user_id, opp_id: opp_id })
       .then(() => {
         console.log("successful application deletion");
       })
@@ -427,8 +442,6 @@ static async getUserApplications(input) {
         console.log("ERROR:", error);
       });
   }
-
-
 }
 
 export default Database;

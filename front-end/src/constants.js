@@ -19,7 +19,7 @@ export const aws_cv_config = {
   region: "eu-west-2",
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY,
-}
+};
 
 export const aws_logo_config = {
   bucketName: process.env.BUCKET_NAME,
@@ -27,7 +27,7 @@ export const aws_logo_config = {
   region: "eu-west-2",
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY,
-}
+};
 
 function getConfig() {
   if (process.env.REACT_APP_NODE_ENV === "production") {
@@ -57,12 +57,12 @@ export const StudentSideNavOptions = [
 
 export const BusinessSideNavOptions = [
   { text: "Home", dest: "/business-home" },
-  { text: "Posted", dest: "/posted" },
-  { text: "Review", dest: "/review" },
+  { text: "Analytics", dest: "/analytics" },
+  { text: "Edit Posts", dest: "/edit" },
   {
     text: (
       <div style={{ display: "flex", gap: "10px" }}>
-        New
+        Post
         <FaPlusSquare fontSize="1.5em" />{" "}
       </div>
     ),

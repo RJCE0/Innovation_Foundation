@@ -62,7 +62,6 @@ const PostedOppsWrapper = styled.div`
 const AppliedInformationWrapper = styled.div`
   flex: 1;
   height: 100%;
-  overflow: scroll;
   align-items: center;
   border: none;
   border-left: 1px solid black;
@@ -70,17 +69,13 @@ const AppliedInformationWrapper = styled.div`
   flex-direction: column;
   gap: 30px;
   padding: 30px 20px 30px 20px;
-
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 const IconNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 100px;
 `;
 
 const StudentInfoWrapper = styled.div`
@@ -89,6 +84,12 @@ const StudentInfoWrapper = styled.div`
   padding: 40px 0 40px 0;
   overflow: hidden;
   text-align: center;
+  overflow: scroll;
+
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Avatar = styled.img`
@@ -114,7 +115,9 @@ const MenuItem = ({ user }) => {
     <div className={`menu-item`}>
       <IconNameWrapper>
         <Avatar src={AvatarIcon} clr={colours[user.user_id]} />
-        <h3 style={{ textAlign: "center" }}>{user.name}</h3>
+        <h3 style={{ textAlign: "center" }}>
+          {user.name.length > 6 ? `${user.name.substring(0, 6)}..` : user.name}
+        </h3>
       </IconNameWrapper>
     </div>
   );
@@ -136,24 +139,28 @@ const StatusButton = styled.button`
 
 class PostedOpps extends Component {
   render() {
-    return this.props.opps.map((obj, index) => {
-      return (
-        <ApplicationsCard
-          key={index}
-          act={this.props.selectedOppId == obj.opp_id}
-          onClick={() => this.props.onChangeSelectedOppId(obj.opp_id)}
-        >
-          <h3>{obj.title}</h3>
-          <h6 style={{ color: "#256de1" }}>
-            Starting Date: {new Date(obj.date).toLocaleDateString("en-GB")}
-          </h6>
-          <h6>{obj.description}</h6>
-        </ApplicationsCard>
-      );
-    });
+    return (
+      <>
+        <h1 style={{ textAlign: "center" }}>Your Posted Opportunities</h1>
+        {this.props.opps.map((obj, index) => {
+          return (
+            <ApplicationsCard
+              key={index}
+              act={this.props.selectedOppId == obj.opp_id}
+              onClick={() => this.props.onChangeSelectedOppId(obj.opp_id)}
+            >
+              <h3>{obj.title}</h3>
+              <h6 style={{ color: "#256de1" }}>
+                Starting Date: {new Date(obj.date).toLocaleDateString("en-GB")}
+              </h6>
+              <h6>{obj.description}</h6>
+            </ApplicationsCard>
+          );
+        })}
+      </>
+    );
   }
 }
-
 class PostedPage extends Component {
   constructor(props) {
     super(props);
@@ -303,6 +310,16 @@ class PostedPage extends Component {
               />
             </PostedOppsWrapper>
             <AppliedInformationWrapper>
+              {this.state.postedOpps.map((opp, idx) => {
+                if (opp.opp_id == this.state.selectedOppId) {
+                  return (
+                    <h1 style={{ textAlign: "center" }} key={idx}>
+                      Responses for {opp.title}
+                    </h1>
+                  );
+                }
+                return null;
+              })}
               {this.state.menuItems.length ? (
                 <ScrollMenu
                   alignCenter={true}
@@ -331,20 +348,24 @@ class PostedPage extends Component {
                       this.state.studentsArray[this.state.selectedStudentIdx]
                         .name
                     }
+                    's Application
                   </h2>
                   <h4>
+                    Email:{" "}
                     {
                       this.state.studentsArray[this.state.selectedStudentIdx]
                         .email
                     }
                   </h4>
                   <h4>
+                    Phone:{" "}
                     {
                       this.state.studentsArray[this.state.selectedStudentIdx]
                         .mobile
                     }
                   </h4>
                   <h4>
+                    Additional Comments:{" "}
                     {
                       this.state.studentsArray[this.state.selectedStudentIdx]
                         .comments

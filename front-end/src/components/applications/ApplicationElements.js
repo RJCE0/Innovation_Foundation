@@ -28,15 +28,21 @@ export const ApplicationsCardsWrapper = styled.div`
   }
 `;
 
-export const RemoveButton = styled.button`
+export const Button = styled.button`
   padding: 15px 5px 15px 5px;
-  background: #ff0000;
+  background: ${(props) => props.bg};
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
-  border: none;
+  border: 1px solid ${(props) => props.bg};
   border-radius: 10px;
   width: 75%;
+  margin-bottom: 10px;
+
+  &:hover {
+    color: ${(props) => props.bg};
+    background: white;
+  }
 `;
 
 export const ApplicationsCard = styled.div`
@@ -44,7 +50,7 @@ export const ApplicationsCard = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-  padding: 5% 5% 5% 5%;
+  padding: 20px 20px 20px 20px;
   display: flex;
   flex-direction: row;
   transition: all 0.2s ease-in-out;
@@ -60,30 +66,42 @@ export const ApplicationsCard = styled.div`
   }
 `;
 
-export const LinkR = styled(Link)`
+export const LinkL = styled(Link)`
   text-decoration: none;
   user-select: none;
   color: inherit;
-
-  &:hover {
-    color: inherit;
-  }
-`;
-
-export const ApplicationsCardLogoContainer = styled.div`
-  width: 25%;
   height: 100%;
+  width: 25%;
+  align-self: center;
+  align-items: center;
+  display: flex;
 
   @media screen and (max-width: 768px) {
     width: 100%;
     border-bottom: 2px solid rgba(0, 0, 0, 1);
     height: 50%;
   }
+
+  &:hover {
+    color: inherit;
+  }
+`;
+
+export const LinkR = styled(Link)`
+  text-decoration: none;
+  user-select: none;
+  color: inherit;
+  height: 100%;
+
+  &:hover {
+    color: inherit;
+  }
 `;
 
 export const ApplicationsCardLogo = styled.img`
   width: 100%;
   height: 90%;
+  max-height: 200px;
 
   @media screen and (max-width: 768px) {
     margin-bottom: 10px;

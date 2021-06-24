@@ -94,7 +94,8 @@ app.post("/deleteApplication", async (req, res) => {
 
 app.get("/apply", async (req, res) => {
   try {
-    const applications = await Database.getAllApplications();
+    console.log("Hello")
+    const applications = await Database.getAllApplications(req.query.body);
     res.json(applications);
   } catch (error) {
     res.body = "Error: " + error;

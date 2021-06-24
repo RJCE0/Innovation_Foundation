@@ -77,7 +77,13 @@ const ShareModal = ({
               onClick={() => {
                 setCopy(true);
                 return navigator.clipboard.writeText(
-                  clipboardStatement + opportunity.link
+                  clipboardStatement +
+                    (opportunity.exclusive
+                      ? `https://innovation-drp.herokuapp.com/discover/${opportunity.title
+                          .trim()
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()}&id=${opportunity.id}`
+                      : opportunity.link)
                 );
               }}
               variant={copy ? "success" : "primary"}

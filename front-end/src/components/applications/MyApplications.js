@@ -7,10 +7,10 @@ import {
   ApplicationsCardsWrapper,
   ApplicationsCard,
   ApplicationsCardLogo,
-  ApplicationsCardLogoContainer,
   ApplicationsCardInfo,
   LinkR,
-  RemoveButton,
+  LinkL,
+  Button,
 } from "./ApplicationElements";
 import axios from "axios";
 import { config } from "../../constants.js";
@@ -29,7 +29,11 @@ export class MyApplications extends React.Component {
   async getApplications() {
     var result = [];
     await axios
-      .get(`${config.API_URL}/apply`)
+      .get(`${config.API_URL}/apply`, {
+        params: {
+          body: true,
+        },
+      })
       .then((res) => {
         const applications = res.data;
         result = applications;
@@ -122,27 +126,22 @@ export class MyApplications extends React.Component {
                       >
                         {appliedOpp.status}
                       </h5>
-                      <h5>Your Comments: {appliedOpp.comments}</h5>
+                      <h5 style={{ wordBreak: "break-all" }}>
+                        Your Comments: {appliedOpp.comments}
+                      </h5>
                       {appliedOpp.file_url ? (
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            marginBottom: "10px",
-                            borderRadius: "10px",
-                            boxShadow: "none",
-                            width: "75%",
-                            padding: "15px 5px 15px 5px",
-                            fontSize: "1.2rem",
-                          }}
+                        <Button
+                          bg="#256de1"
                           onClick={() => window.open(appliedOpp.file_url)}
                         >
                           View CV
-                        </button>
+                        </Button>
                       ) : (
                         <h5>No CV Uploaded.</h5>
                       )}
                       {appliedOpp.status == "Rejected" ? (
-                        <RemoveButton
+                        <Button
+                          bg="red"
                           onClick={() =>
                             this.removeOpp(
                               appliedOpp.opp_id,
@@ -151,21 +150,19 @@ export class MyApplications extends React.Component {
                           }
                         >
                           Remove
-                        </RemoveButton>
+                        </Button>
                       ) : null}
                     </ApplicationsCardInfo>
-                    <ApplicationsCardLogoContainer>
-                      <LinkR
-                        to={{
-                          pathname: `/discover/${appliedOpp.title
-                            .trim()
-                            .replace(/\s+/g, "-")
-                            .toLowerCase()}&id=${appliedOpp.opp_id}`,
-                        }}
-                      >
-                        <ApplicationsCardLogo src={appliedOpp.image_url} />
-                      </LinkR>
-                    </ApplicationsCardLogoContainer>
+                    <LinkL
+                      to={{
+                        pathname: `/discover/${appliedOpp.title
+                          .trim()
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()}&id=${appliedOpp.opp_id}`,
+                      }}
+                    >
+                      <ApplicationsCardLogo src={appliedOpp.image_url} />
+                    </LinkL>
                   </ApplicationsCard>
                 ))}
               </ApplicationsCardsWrapper>

@@ -177,6 +177,7 @@ class ApplyPage extends React.Component {
                 fontWeight: "bolder",
                 fontSize: 18,
               }}
+              maxLength={500}
               area
             />
             <div

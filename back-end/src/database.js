@@ -237,15 +237,12 @@ class Database {
   }
 
   static async getAllApplications(input) {
-    console.log("Hello again");
     var result = {};
     var condition = "";
-    console.log(input);
 
     if (input) {
       condition = "WHERE user_id=0";
     }
-    console.log("HERE NOW");
 
     // execute query
     await db

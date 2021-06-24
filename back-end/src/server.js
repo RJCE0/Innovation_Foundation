@@ -94,7 +94,6 @@ app.post("/deleteApplication", async (req, res) => {
 
 app.get("/apply", async (req, res) => {
   try {
-    console.log("Hello")
     const applications = await Database.getAllApplications(req.query.body);
     res.json(applications);
   } catch (error) {
@@ -193,7 +192,6 @@ app.get("/recent", async (req, res) => {
 
 app.get("/userApplications", async (req, res) => {
   try {
-    console.log("HERE in server!");
     const applications = await Database.getUserApplications(req.query.body);
     res.json(applications);
   } catch (error) {

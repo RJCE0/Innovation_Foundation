@@ -45,12 +45,18 @@ export class MyApplications extends React.Component {
   }
 
   async componentDidMount() {
-    const appliedOpportunities = await this.getApplications();
-    this.setState(() => {
-      return {
-        appliedOpps: appliedOpportunities,
-      };
-    });
+    this.interval = setInterval(async () => {
+      const appliedOpportunities = await this.getApplications();
+      this.setState(() => {
+        return {
+          appliedOpps: appliedOpportunities,
+        };
+      });
+    }, 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   getStatusColour = (status) => {

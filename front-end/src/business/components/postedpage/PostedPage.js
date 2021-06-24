@@ -178,7 +178,11 @@ class PostedPage extends Component {
   async getApplications() {
     var result = [];
     await axios
-      .get(`${config.API_URL}/apply`)
+      .get(`${config.API_URL}/apply`, {
+        params: {
+          body: false,
+        },
+      })
       .then((res) => {
         const applications = res.data;
         result = applications;
@@ -225,29 +229,43 @@ class PostedPage extends Component {
   }
 
   async componentDidMount() {
-    const apps = await this.getApplications();
-    this.setState(
-      () => {
-        return {
-          postedOpps: apps,
-          selectedOppId: apps.length ? apps[0].opp_id : 0,
-        };
-      },
-      async () => {
-        const userApps = await this.getUserApplication(
-          this.state.selectedOppId
-        );
-        this.setState(() => {
+    this.interval = setInterval(async () => {
+      const apps = await this.getApplications();
+      this.setState(
+        ({ selectedOppId }) => {
           return {
-            studentsArray: userApps,
-            selectedStudentIdx: userApps.length ? 0 : null,
-            menuItems: userApps.map((user, userIdx) => {
-              return <MenuItem user={user} key={userIdx} />;
-            }),
+            postedOpps: apps,
+            selectedOppId: selectedOppId
+              ? selectedOppId
+              : apps.length
+              ? apps[0].opp_id
+              : null,
           };
-        });
-      }
-    );
+        },
+        async () => {
+          const userApps = await this.getUserApplication(
+            this.state.selectedOppId
+          );
+          this.setState(({ selectedStudentIdx }) => {
+            return {
+              studentsArray: userApps,
+              selectedStudentIdx: selectedStudentIdx
+                ? selectedStudentIdx
+                : userApps.length
+                ? 0
+                : null,
+              menuItems: userApps.map((user, userIdx) => {
+                return <MenuItem user={user} key={userIdx} />;
+              }),
+            };
+          });
+        }
+      );
+    }, 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   onChangeSelectedOppId = (newId) => {

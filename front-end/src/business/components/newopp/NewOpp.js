@@ -37,6 +37,7 @@ class ApplyPage extends React.Component {
       image: null,
       image_url: "",
       start_date: null,
+      posted: false,
     };
     this.locations = [];
   }
@@ -79,7 +80,7 @@ class ApplyPage extends React.Component {
   onSubmit = async (e) => {
     e.preventDefault();
     this.setState(
-      { image_url: await this.aws_upload(this.state.image) },
+      { image_url: await this.aws_upload(this.state.image), posted: true },
       async () => {
         await axios
           .post(`${config.API_URL}/create`, {
@@ -349,8 +350,9 @@ class ApplyPage extends React.Component {
             style={{ width: "100%" }}
             type="Submit"
             className="btn flat-btn fill-btn"
+            disabled={this.state.posted}
           >
-            Post Opportunity
+            {this.state.posted ? "Posted!" : "Post Opportunity"}
           </button>
         </form>
         <Footer />

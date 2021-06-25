@@ -231,6 +231,7 @@ class PostedPage extends Component {
   async componentDidMount() {
     this.interval = setInterval(async () => {
       const apps = await this.getApplications();
+      console.log(apps);
       this.setState(
         ({ selectedOppId }) => {
           return {

@@ -240,7 +240,8 @@ class Database {
     var result = {};
     var condition = "";
 
-    if (input) {
+    if (input == "true") {
+      console.log(input);
       condition = "WHERE user_id=0";
     }
 
